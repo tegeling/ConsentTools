@@ -320,11 +320,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Individual.GlobalPartyId</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Individual.HasOptedOutGeoTracking</field>
         <readable>true</readable>
     </fieldPermissions>
