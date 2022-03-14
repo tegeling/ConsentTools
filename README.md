@@ -46,10 +46,10 @@ Enrich your user interface with a Lightning Web Component to easily change conse
    sfdx force:source:push
    ```
 
-1. Assign the **ConsentPerm** permission set to the default user:
+1. Assign the **ConsentSettings** permission set to the default user:
 
    ```
-   sfdx force:user:permset:assign -n ConsentPerm
+   sfdx force:user:permset:assign -n ConsentSettings
    ```
 
 1. Open the scratch org:
@@ -66,8 +66,9 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t5I000001eeyOQAQ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t5I000001eeyOQAQ) to install the MarketingCloudAssetConnector unlocked package in your org.
+1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DdZjQAK
+   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DdZjQAK) to install the Consent Tools unlocked package in your org.
 
 1. Select **Install for All Users**
 
-1. In App Launcher, click **View All** then select the **Creative Assets** tab.
+1. In App Launcher.

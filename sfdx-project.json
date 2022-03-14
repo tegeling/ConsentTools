@@ -14,5 +14,9 @@
   "name": "ConsentTools",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "54.0"
+  "sourceApiVersion": "54.0",
+  "packageAliases": {
+    "Consent Tools": "0Ho7Q000000GmhtSAC",
+    "Consent Tools@1.0.0-1": "04t7Q000000DdZjQAK"
+  }
 }
