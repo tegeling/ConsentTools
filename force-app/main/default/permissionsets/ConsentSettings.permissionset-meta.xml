@@ -300,11 +300,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Individual.Cleanup__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Individual.ConsumerCreditScore</field>
         <readable>true</readable>
     </fieldPermissions>
