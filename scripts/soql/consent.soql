@@ -1,0 +1,1 @@
+SELECT Name, Source, Description FROM DataUseLegalBasis
