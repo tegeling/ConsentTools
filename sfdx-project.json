@@ -2,11 +2,17 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "package": "Consent Tools",
+      "versionName": "Spring '22 v1.0",
+      "versionDescription": "Spring '22 v1.0 Release - initial release",
+      "versionNumber": "1.0.0.NEXT",
+      "releaseNotesUrl": "https://github.com/tegeling/ConsentTools",
+      "postInstallUrl": "https://github.com/tegeling/ConsentTools"
     }
   ],
   "name": "ConsentTools",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "52.0"
+  "sourceApiVersion": "54.0"
 }
