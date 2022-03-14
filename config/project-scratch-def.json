@@ -1,6 +1,8 @@
 {
-  "orgName": "tegeling company",
-  "edition": "Developer",
+  "orgName": "Consent Tools",
+  "edition": "Enterprise",
+  "country": "US",
+  "language": "en_US",
   "features": ["EnableSetPasswordInApi"],
   "settings": {
     "lightningExperienceSettings": {

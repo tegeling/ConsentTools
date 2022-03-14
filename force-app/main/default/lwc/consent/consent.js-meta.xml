@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Consent Settings</masterLabel>
+    <description
+  >Based on Contact Id or User Id show and edit Contact Point Consent.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig
+      targets="lightning__RecordPage,lightning__FlowScreen,lightningCommunity__Default"
+    >
+            <property
+        name="recordId"
+        label="Contact or User Id"
+        type="String"
+      />
+      <property
+        name="rgbaEmail"
+        label="Email Background Color"
+        type="String"
+        description="Set RGBA color code for email background"
+        placeholder="rgba(0,0,0,0.1)"
+        default="rgba(0,0,0,0.1)"
+      />
+      <property
+        name="rgbaPhone"
+        label="Phone Background Color"
+        type="String"
+        description="Set RGBA color code for phone background"
+        placeholder="rgba(0,0,0,0.2)"
+        default="rgba(0,0,0,0.2)"
+      />
+      <property
+        name="rgbaAddress"
+        label="Address Background Color"
+        type="String"
+        description="Set RGBA color code for address background"
+        placeholder="rgba(0,0,0,0.3)"
+        default="rgba(0,0,0,0.3)"
+      />
+
+        </targetConfig>
+ </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,16 @@
+<template>
+  <c-consent-data-use-purpose cpts={cpts}></c-consent-data-use-purpose>
+  <lightning-layout
+    for:each={dup}
+    for:item="p"
+    class="around-small"
+    key={p.label}
+  >
+    <lightning-layout-item size="12">
+      <c-consent-data-use-purpose
+        dup={p}
+        cpts={cpts}
+      ></c-consent-data-use-purpose>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

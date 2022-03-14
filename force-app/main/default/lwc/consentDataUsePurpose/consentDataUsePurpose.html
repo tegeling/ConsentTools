@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : dirk.gronert@salesforce.com
+  @group             : 
+  @last modified on  : 03-09-2022
+  @last modified by  : tegeling
+-->
+<template>
+  <lightning-layout>
+    <lightning-layout-item size="2"> {dup.label} </lightning-layout-item>
+    <lightning-layout-item size="10">
+      <lightning-layout>
+        <lightning-layout-item
+          size={cpt._size}
+          for:each={cpts}
+          for:item="cpt"
+          class="around-small"
+          key={cpt.id}
+          style={cpt.color}
+        >
+          <c-consent-contact-point-type
+            cpt={cpt}
+            dup={dup}
+          ></c-consent-contact-point-type>
+        </lightning-layout-item>
+      </lightning-layout>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

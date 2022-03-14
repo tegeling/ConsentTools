@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : dirk.gronert@salesforce.com
+  @group             : 
+  @last modified on  : 03-09-2022
+  @last modified by  : tegeling
+-->
+<template>
+  <lightning-layout>
+    <lightning-layout-item size="2"> </lightning-layout-item>
+    <lightning-layout-item size="10">
+      <lightning-layout>
+        <lightning-layout-item
+          size={cpt._size}
+          for:each={cpts}
+          for:item="cpt"
+          key={cpt.id}
+          class="slds-text-align_center"
+        >
+          <c-consent-contact-point-type
+            cpt={cpt}
+            is-header="true"
+          ></c-consent-contact-point-type>
+        </lightning-layout-item>
+      </lightning-layout>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

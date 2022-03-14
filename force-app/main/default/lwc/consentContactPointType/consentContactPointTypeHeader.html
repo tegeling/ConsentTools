@@ -1,0 +1,20 @@
+<template>
+  <p class="slds-has-flexi-truncate" title={cpt.label}>
+    <lightning-icon icon-name={cpt.icon} size="x-small"></lightning-icon>
+    {label}
+  </p>
+  <lightning-layout>
+    <lightning-layout-item
+      size={colSize}
+      for:each={cpt.cps}
+      for:item="cp"
+      class={classes}
+      key={cp.id}
+    >
+      <c-consent-contact-point
+        cp={cp}
+        is-header="true"
+      ></c-consent-contact-point>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

@@ -1,0 +1,20 @@
+<!--
+  @description       : 
+  @author            : dirk.gronert@salesforce.com
+  @group             : 
+  @last modified on  : 03-09-2022
+  @last modified by  : tegeling
+-->
+<template>
+  <lightning-layout>
+    <lightning-layout-item
+      size={colSize}
+      for:each={cpt.cps}
+      for:item="cp"
+      class={classes}
+      key={cp.id}
+    >
+      <c-consent-contact-point cp={cp} dup={dup}></c-consent-contact-point>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>
