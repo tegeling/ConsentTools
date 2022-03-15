@@ -6,7 +6,44 @@
 Manage consent settings and view historical consent data.
 Enrich your user interface with a Lightning Web Component to easily change consent setting and opt in or opt out. Supports both internal and external access.
 
-# ConsentSettings web component
+# Package Components
+
+## Consent Setup App
+
+This app groups all privacy objects that are relevant for the setup and configuration of consent settings like Data Use Legal Basis and Data Use Purpose.
+
+## Consent Management App
+
+This app groups all privacy objects that are relevant for the management of consent settings like Contacts, Individuals, Contact Point Consents.
+
+## Flows
+
+There are several Flows that support the consent automation.
+
+### ContactTriggerSetIndividual
+
+This flow checks if Contact records have an Individual record assigned. If missing, this flow creates a new Inndividual record and all related Contact Points, Contact Point Type Consent and Contact Point Consent records for each Data Use Purpose. The Privacy Consent Status is set to Opt Out.
+
+### IndividualTriggerCleanup
+
+To easily cleanup an Individual record, this flow iterates through all related privacy objects and removes related records. The flow can be started via a Record Update (like a button action).
+
+### ContactPointEditor and ContactPointEditorExternal
+
+This screen flow can be placed on Contact record pages or Community pages to either create new Contact Point records or delete existing records.
+
+## Lightning Web Components
+
+This package contains various LWC to support consent management.
+
+### Consent Settings
+
+Thic LWC can be placed on Lead or Contact records pages or on community pages. It dynamically shows a grid of toggles to either opt in or opt out per Contact Point and Data Use Purpose. It can be deployed as a preference center on a community page.
+
+![Contact Record Page](./images/ConsentSettingsContactRecordPage.png)
+
+The properties contain the record id of either User (community use case) or Contact/Lead records and color codes for the background colors per contact point type.
+![Consent Settings Properties](./images/ConsentSettingsProperties.png)
 
 # Setup and Configuration Steps
 
