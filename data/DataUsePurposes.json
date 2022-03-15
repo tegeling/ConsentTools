@@ -1,0 +1,34 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "DataUsePurpose",
+        "referenceId": "DataUsePurposeRef1"
+      },
+      "Name": "Event Invitations",
+      "Description": "We send invitations to our events.",
+      "CanDataSubjectOptOut": true,
+      "LegalBasisId": "@DataUseLegalBasisRef1"
+    },
+    {
+      "attributes": {
+        "type": "DataUsePurpose",
+        "referenceId": "DataUsePurposeRef2"
+      },
+      "Name": "Technical Newsletters",
+      "Description": "We inform about our technical product updates.",
+      "CanDataSubjectOptOut": true,
+      "LegalBasisId": "@DataUseLegalBasisRef1"
+    },
+    {
+      "attributes": {
+        "type": "DataUsePurpose",
+        "referenceId": "DataUsePurposeRef3"
+      },
+      "Name": "Commercial Newsletters",
+      "Description": "We inform about our current commercial offers.",
+      "CanDataSubjectOptOut": true,
+      "LegalBasisId": "@DataUseLegalBasisRef1"
+    }
+  ]
+}

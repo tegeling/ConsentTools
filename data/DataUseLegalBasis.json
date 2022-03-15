@@ -5,6 +5,15 @@
         "type": "DataUseLegalBasis",
         "referenceId": "DataUseLegalBasisRef1"
       },
+      "Name": "Consent",
+      "Source": "Art. 6 Para. 1 lit. a) GDPR",
+      "Description": "The data subject has given consent to the processing of his or her personal data for one or more specific purposes"
+    },
+    {
+      "attributes": {
+        "type": "DataUseLegalBasis",
+        "referenceId": "DataUseLegalBasisRef2"
+      },
       "Name": "Legitimate Interests",
       "Source": "Art. 6 Para. 1 lit. f) GDPR",
       "Description": "Processing is necessary for the purposes of the legitimate interests pursued by the controller or by a third party"
@@ -12,20 +21,11 @@
     {
       "attributes": {
         "type": "DataUseLegalBasis",
-        "referenceId": "DataUseLegalBasisRef2"
+        "referenceId": "DataUseLegalBasisRef3"
       },
       "Name": "Legal Obligation",
       "Source": "Art. 6 Para. 1 lit. c) GDPR",
       "Description": "Processing is necessary for compliance with a legal obligation to which the controller is subject"
-    },
-    {
-      "attributes": {
-        "type": "DataUseLegalBasis",
-        "referenceId": "DataUseLegalBasisRef3"
-      },
-      "Name": "Consent",
-      "Source": "Art. 6 Para. 1 lit. a) GDPR",
-      "Description": "The data subject has given consent to the processing of his or her personal data for one or more specific purposes"
     },
     {
       "attributes": {

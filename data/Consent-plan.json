@@ -1,0 +1,26 @@
+[
+  {
+    "sobject": "DataUseLegalBasis",
+    "saveRefs": true,
+    "resolveRefs": false,
+    "files": ["DataUseLegalBasis.json"]
+  },
+  {
+    "sobject": "DataUsePurpose",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["DataUsePurposes.json"]
+  },
+  {
+    "sobject": "Account",
+    "saveRefs": true,
+    "resolveRefs": false,
+    "files": ["Accounts.json"]
+  },
+  {
+    "sobject": "Contact",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["Contacts.json"]
+  }
+]

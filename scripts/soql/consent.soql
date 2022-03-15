@@ -1,1 +1,3 @@
 SELECT Name, Source, Description FROM DataUseLegalBasis
+
+SELECT Name, LegalBasisId, Description, CanDataSubjectOptOut FROM DataUsePurpose
