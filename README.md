@@ -52,16 +52,18 @@ Privacy objects are Salesforce standard objects with sharing settings for intern
 
 ## Default Sharing Settings
 
-| Object                     | Default Internal Access | Default External Access |
-| -------------------------- | ----------------------- | ----------------------- |
-| Data Use Legal Basis       | Private                 | Private                 |
-| Data Use Purpose           | Private                 | Private                 |
-| Individual                 | Public Read/Write       | Private                 |
-| Contact Point Type Consent | Private                 | Private                 |
-| Contact Point Email        | Controlled by Parent    | Controlled by Parent    |
-| Contact Point Phone        | Controlled by Parent    | Controlled by Parent    |
-| Contact Point Address      | Controlled by Parent    | Controlled by Parent    |
-| Contact Point Consent      | Private                 | Private                 |
+Configure your Salesforce organization-wide sharing defaults (OWD) so that your users can see records properly. Alternatively use other sharing mechanisms (role-based, public groups, etc.).
+
+| Object                     | Recommended Internal Access | Recommended External Access | Default Internal Access | Default External Access  |
+| -------------------------- | --------------------------- | --------------------------- | ----------------------- | ------------------------ |
+| Data Use Legal Basis       | Public Read Only            | not applicable              | Private                 | not applicable (Private) |
+| Data Use Purpose           | Public Read Only            | Public Read Only            | Private                 | Private                  |
+| Individual                 | Private                     | Private                     | Public Read/Write       | Private                  |
+| Contact Point Type Consent | Private                     | Private                     | Private                 | Private                  |
+| Contact Point Email        | Controlled by Parent        | Controlled by Parent        | Controlled by Parent    | Controlled by Parent     |
+| Contact Point Phone        | Controlled by Parent        | Controlled by Parent        | Controlled by Parent    | Controlled by Parent     |
+| Contact Point Address      | Controlled by Parent        | Controlled by Parent        | Controlled by Parent    | Controlled by Parent     |
+| Contact Point Consent      | Private                     | Private                     | Private                 | Private                  |
 
 Internal users who need access to privacy records owned by external users (service agent edits consent details of a customer), need to have a record sharing based on role hierarchy (must be owner of the Account record).
 
