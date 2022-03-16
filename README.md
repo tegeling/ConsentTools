@@ -95,10 +95,10 @@ The following table compares the access permissions with the defaults for Custom
 | Data Use Purpose           | R                 | R                                         | No Access                       | R                                        | No Access                      |
 | Individual                 | CRE               | CRE                                       | No Access                       | CRE                                      | RE                             |
 | Contact Point Type Consent | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Email        | CRED              | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Phone        | CRED              | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Address      | CRED              | CRED                                      | No Access                       | CRE                                      | No Access                      |
-| Contact Point Consent      | CRED              | CRE                                       | No Access                       | CRE                                      | No Access                      |
+| Contact Point Email        | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Phone        | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Address      | CRE               | CRED                                      | No Access                       | CRE                                      | No Access                      |
+| Contact Point Consent      | CRE               | CRE                                       | No Access                       | CRE                                      | No Access                      |
 
 # Setup and Configuration Steps
 
