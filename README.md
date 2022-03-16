@@ -45,6 +45,61 @@ Thic LWC can be placed on Lead or Contact records pages or on community pages. I
 The properties contain the record id of either User (community use case, like `{!CurrentUser.id}`) or Contact/Lead records and color codes for the background colors per contact point type.
 ![Consent Settings Properties](./images/ConsentSettingsProperties.png)
 
+# Permissions and Record Sharing
+
+Privacy objects are Salesforce standard objects with sharing settings for internal and external access.
+
+## Default Sharing Settings
+
+| Object                     | Default Internal Access | Default External Access |
+| -------------------------- | ----------------------- | ----------------------- |
+| Data Use Legal Basis       | Private                 | Private                 |
+| Data Use Purpose           | Private                 | Private                 |
+| Individual                 | Public Read/Write       | Private                 |
+| Contact Point Type Consent | Private                 | Private                 |
+| Contact Point Email        | Controlled by Parent    | Controlled by Parent    |
+| Contact Point Phone        | Controlled by Parent    | Controlled by Parent    |
+| Contact Point Address      | Controlled by Parent    | Controlled by Parent    |
+| Contact Point Consent      | Private                 | Private                 |
+
+Internal users who need access to privacy records owned by external users (service agent edits consent details of a customer), need to have a record sharing based on role hierarchy (must be owner of the Account record).
+
+## Permission Set for internal users
+
+This package contains a custom permission set for internal users. It contains access to Consent Setup and Consent Management apps, custom fields and Apex classes where required.
+The following table compares the access permissions with the defaults for Standard User Profile.
+
+### Consent Settings Internal Permission Set
+
+| Object                     | Object Permission | Standard User Profile |
+| -------------------------- | ----------------- | --------------------- |
+| Data Use Legal Basis       | CRED              | CRED                  |
+| Data Use Purpose           | CRED              | RED                   |
+| Individual                 | CRED              | CRED                  |
+| Contact Point Type Consent | CRED              | CRED                  |
+| Contact Point Email        | CRED              | CRED                  |
+| Contact Point Phone        | CRED              | CRED                  |
+| Contact Point Address      | CRED              | CRED                  |
+| Contact Point Consent      | CRED              | CRED                  |
+
+## Permission Set for external users
+
+This package contains a custom permission set for external users. It contains access to custom fields and Apex classes where required.
+The following table compares the access permissions with the defaults for Customer Community User and External User Profile.
+
+### Consent Settings External Permission Set
+
+| Object                     | Object Permission | Customer Community User Object Permission | Customer Community User Default | External Identity User Object Permission | External Identity User Default |
+| -------------------------- | ----------------- | ----------------------------------------- | ------------------------------- | ---------------------------------------- | ------------------------------ |
+| Data Use Legal Basis       | No Access         | Object not available                      |                                 | Object not available                     |                                |
+| Data Use Purpose           | R                 | R                                         | No Access                       | R                                        | No Access                      |
+| Individual                 | CRE               | CRE                                       | No Access                       | CRE                                      | RE                             |
+| Contact Point Type Consent | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Email        | CRED              | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Phone        | CRED              | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Address      | CRED              | CRED                                      | No Access                       | CRE                                      | No Access                      |
+| Contact Point Consent      | CRED              | CRE                                       | No Access                       | CRE                                      | No Access                      |
+
 # Setup and Configuration Steps
 
 ## Deploy Metadata

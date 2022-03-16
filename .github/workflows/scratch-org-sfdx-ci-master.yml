@@ -47,7 +47,7 @@ jobs:
 
       # Assign permissionset
       - name: "Assign permissionset to default user"
-        run: "sfdx force:user:permset:assign -n ConsentSettings"
+        run: "sfdx force:user:permset:assign -n ConsentSettingsInternal"
 
       # Run Apex tests in scratch org
       - name: "Run Apex tests"

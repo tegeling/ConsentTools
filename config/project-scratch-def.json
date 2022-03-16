@@ -11,7 +11,9 @@
     "FieldAuditTrail",
     "MarketingUser",
     "PersonAccounts",
-    "SalesforceIdentityForCommunities"
+    "SalesforceIdentityForCommunities",
+    "CustomerCommunity",
+    "CustomerCommunityLogin"
   ],
   "settings": {
     "communitiesSettings": { "enableNetworksEnabled": true },

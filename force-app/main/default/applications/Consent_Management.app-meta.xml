@@ -10,11 +10,12 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Consent Management</label>
     <navType>Standard</navType>
     <tabs>standard-Lead</tabs>
+    <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
-    <tabs>standard-Campaign</tabs>
     <tabs>standard-Individual</tabs>
     <tabs>standard-ContactPointConsent</tabs>
     <tabs>standard-ContactPointTypeConsent</tabs>
