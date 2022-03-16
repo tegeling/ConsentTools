@@ -3,8 +3,18 @@
   "edition": "Enterprise",
   "country": "US",
   "language": "en_US",
-  "features": ["EnableSetPasswordInApi"],
+  "hasSampleData": true,
+  "features": [
+    "Communities",
+    "EnableSetPasswordInApi",
+    "ExternalIdentityLogin",
+    "FieldAuditTrail",
+    "MarketingUser",
+    "PersonAccounts",
+    "SalesforceIdentityForCommunities"
+  ],
   "settings": {
+    "communitiesSettings": { "enableNetworksEnabled": true },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
