@@ -43,7 +43,8 @@ Thic LWC can be placed on Lead or Contact records pages or on community pages. I
 ![Contact Record Page](./images/ConsentSettingsContactRecordPage.png)
 
 The properties contain the record id of either User (community use case, like `{!CurrentUser.id}`) or Contact/Lead records and color codes for the background colors per contact point type.
-<img src="./images/ConsentSettingsProperties.png" alt="Consent Settings Properties" width="50%" align="left"/>
+
+![Consent Settings Properties](./images/ConsentSettingsProperties.png)
 
 # Permissions and Record Sharing
 
