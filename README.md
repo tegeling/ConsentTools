@@ -28,6 +28,10 @@ These flows check if Contact or PersonAccount records have an Individual record 
 
 To easily cleanup an Individual record, this flow iterates through all related privacy objects and removes related records. The flow can be started via a Record Update (like a button action).
 
+### IndividualTriggerChangeOwner
+
+This flow triggers after update of Individual records and sets record owner of related privacy records (Contact Point Consent) to the new Individual record owner.
+
 ### ContactPointEditor and ContactPointEditorExternal
 
 This screen flow can be placed on Contact record pages or Community pages to either create new Contact Point records or delete existing records.
@@ -50,6 +54,9 @@ The properties contain the record id of either User (community use case, like `{
 # Permissions and Record Sharing
 
 Privacy objects are Salesforce standard objects with sharing settings for internal and external access.
+External users have access to records based on record ownership and sharing settings.
+Records of Objects with Private external access (Individual and Contact Point Consent) need to be assigned to the external user as owner.
+The flow `IndividualTriggerChangeOwner` updates related privacy records if the Individual record owner is changed.
 
 ## Default Sharing Settings
 
