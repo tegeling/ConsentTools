@@ -2,14 +2,14 @@
  * @description       :
  * @author            : dirk.gronert@salesforce.com
  * @group             :
- * @last modified on  : 03-09-2022
+ * @last modified on  : 03-17-2022
  * @last modified by  : tegeling
  **/
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import { updateRecord } from "lightning/uiRecordApi";
-
+import { refreshApex } from "@salesforce/apex";
 import getContactPointConsent from "@salesforce/apex/ConsentController.getContactPointConsent";
+import updateContactPointConsent from "@salesforce/apex/ConsentController.updateContactPointConsent";
 
 export default class ConsentCell extends LightningElement {
   @api cpId;
@@ -26,26 +26,30 @@ export default class ConsentCell extends LightningElement {
   }
 
   async $insertUpdateCPC() {
-    updateRecord({ fields: this.cpc })
-      .then(() => {
-        this.dispatchEvent(
-          new ShowToastEvent({
-            title: "Success",
-            message: "Consent updated",
-            variant: "success"
-          })
-        );
-      })
-      .catch((error) => {
-        console.log(JSON.stringify(error));
-        this.dispatchEvent(
-          new ShowToastEvent({
-            title: "Error creating consent",
-            message: error.body.message,
-            variant: "error"
-          })
-        );
+    try {
+      // Pass edited fields to the updateContacts Apex controller
+      await updateContactPointConsent({
+        contactPointConsentId: this.cpc.Id,
+        privacyConsentStatus: this.cpc.PrivacyConsentStatus
       });
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Success",
+          message: "Consent updated",
+          variant: "success"
+        })
+      );
+      // Display fresh data in the datatable
+      await refreshApex(this.cpc);
+    } catch (error) {
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Error creating consent",
+          message: error.body.message,
+          variant: "error"
+        })
+      );
+    }
   }
 
   async $fetchContactPointConsent() {

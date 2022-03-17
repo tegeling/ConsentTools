@@ -5,7 +5,7 @@
  * @last modified on  : 03-17-2022
  * @last modified by  : tegeling
  **/
-public without sharing class ConsentController {
+public with sharing class ConsentController {
   @AuraEnabled(cacheable=true)
   public static ConsentWrapper getConsent(
     String recordId,
@@ -138,15 +138,38 @@ public without sharing class ConsentController {
     String contactPointId,
     String dataUsePurposeId
   ) {
-    ContactPointConsent cpc = [
+    List<ContactPointConsent> cpc = [
       SELECT Id, PrivacyConsentStatus
       FROM ContactPointConsent
       WHERE
         ContactPointId = :contactPointId
         AND DataUsePurposeId = :dataUsePurposeId
       WITH SECURITY_ENFORCED
+    ];
+    if (cpc.size() == 1) {
+      return cpc[0];
+    }
+    return null;
+  }
+  @AuraEnabled
+  public static void updateContactPointConsent(
+    String contactPointConsentId,
+    String privacyConsentStatus
+  ) {
+    // Make sure we can update the database before trying to update
+    if (!Schema.sObjectType.ContactPointConsent.isUpdateable()) {
+      throw new SecurityException(
+        'Insufficient permissions to update contacts'
+      );
+    }
+    ContactPointConsent cpc = [
+      SELECT Id, PrivacyConsentStatus
+      FROM ContactPointConsent
+      WHERE Id = :contactPointConsentId
+      WITH SECURITY_ENFORCED
       LIMIT 1
     ];
-    return cpc;
+    cpc.PrivacyConsentStatus = privacyConsentStatus;
+    update cpc;
   }
 }
