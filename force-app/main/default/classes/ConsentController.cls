@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-14-2022
+ * @last modified on  : 03-17-2022
  * @last modified by  : tegeling
  **/
 public without sharing class ConsentController {
@@ -47,6 +47,17 @@ public without sharing class ConsentController {
         WITH SECURITY_ENFORCED
       ];
       individualId = c.IndividualId;
+    } else if (
+      Id.valueOf(recordId).getSobjectType() == Account.getSObjectType()
+    ) {
+      // check PersonAccount
+      Account a = [
+        SELECT PersonIndividualId
+        FROM Account
+        WHERE Id = :recordId
+        WITH SECURITY_ENFORCED
+      ];
+      individualId = a.PersonIndividualId;
     } else {
       // Object is not supported
       return new ConsentWrapper();
