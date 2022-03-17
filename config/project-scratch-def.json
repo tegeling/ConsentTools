@@ -23,5 +23,16 @@
     "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
     }
+  },
+  "objectSettings": {
+    "dataUseLegalBasis": {
+      "sharingModel": "read"
+    },
+    "dataUsePurpose": {
+      "sharingModel": "read"
+    },
+    "individual": {
+      "sharingModel": "private"
+    }
   }
 }
