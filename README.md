@@ -3,7 +3,7 @@
 [![Github Workflow](https://github.com/tegeling/ConsentTools/actions/workflows/scratch-org-sfdx-ci-master.yml/badge.svg?branch=main)](https://github.com/tegeling/ConsentTools/actions/workflows/scratch-org-sfdx-ci-master.yml)
 [![codecov](https://codecov.io/gh/tegeling/ConsentTools/branch/main/graph/badge.svg?token=LEWOTO1743)](https://codecov.io/gh/tegeling/ConsentTools)
 
-Manage consent settings and view historical consent data.
+Manage consent settings in Salesforce.
 Enrich your user interface with a Lightning Web Component to easily change consent setting and opt in or opt out. Supports both internal and external access.
 
 # Package Components
@@ -162,8 +162,8 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DdvaQAC
-   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DdvaQAC) to install the Consent Tools unlocked package in your org.
+1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DeR9QAK
+   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DeR9QAK) to install the Consent Tools unlocked package in your org.
 
 1. Select **Install for All Users**
 
