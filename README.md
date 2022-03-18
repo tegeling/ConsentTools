@@ -73,7 +73,10 @@ Configure your Salesforce organization-wide sharing defaults (OWD) so that your 
 | Contact Point Address      | Controlled by Parent        | Controlled by Parent        | Controlled by Parent    | Controlled by Parent     |
 | Contact Point Consent      | Private                     | Private                     | Private                 | Private                  |
 
-Internal users who need access to privacy records owned by external users (service agent edits consent details of a customer), need to have a record sharing based on role hierarchy (must be owner of the Account record).
+To allow internal users access to privacy records owned by external users (service agent edits consent details of a customer), record sharing must be enabled. Here are example Sharing Rules for Individual and Contact Point Consent:
+
+![Individual Sharing Rules](./images/SharingRulesIndividual.png)
+![Contact Point Consent Sharing Rules](./images/SharingRulesContactPointConsent.png)
 
 ## Permission Set for internal users
 
