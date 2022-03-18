@@ -252,3 +252,7 @@ force-app/main/default/objects/Contact/webLinks/YahooWeather.webLink-meta.xml
 force-app/main/default/flexipages/Account_Record_Page.flexipage-meta.xml
 force-app/main/default/flexipages/Contact_Record_Page.flexipage-meta.xml
 force-app/main/default/layouts/PersonAccount-Person Account Layout.layout-meta.xml
+force-app/main/default/layouts/Individual-Individual Layout.layout-meta.xml
+force-app/main/default/objects/ContactPointConsent/listViews/All_ContactPointConsents.listView-meta.xml
+force-app/main/default/objects/Individual/listViews/All_Individuals.listView-meta.xml
+force-app/main/default/sharingRules/Account.sharingRules-meta.xml
