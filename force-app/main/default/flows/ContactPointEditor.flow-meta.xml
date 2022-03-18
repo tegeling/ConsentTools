@@ -305,7 +305,7 @@
         <name>calcCPCEmail</name>
         <dataType>String</dataType>
         <expression
-    >{!Get_Contact.FirstName} + &apos; &apos; + {!Get_Contact.LastName} + &apos; - &apos; + {!cpNewEmail.value} + &apos; - &apos;</expression>
+    >{!Get_Individual.FirstName} + &apos; &apos; + {!Get_Individual.LastName} + &apos; - &apos; + {!cpNewEmail.value} + &apos; - &apos;</expression>
     </formulas>
     <formulas>
         <name>calcCPCName</name>
@@ -316,7 +316,7 @@
         <name>calcCPCPhone</name>
         <dataType>String</dataType>
         <expression
-    >{!Get_Contact.FirstName} + &apos; &apos; + {!Get_Contact.LastName} + &apos; - &apos; + {!cpNewPhone.value} + &apos; - &apos;</expression>
+    >{!Get_Individual.FirstName} + &apos; &apos; + {!Get_Individual.LastName} + &apos; - &apos; + {!cpNewPhone.value} + &apos; - &apos;</expression>
     </formulas>
     <interviewLabel>ContactPointEditor {!$Flow.CurrentDateTime}</interviewLabel>
     <label>ContactPointEditor</label>
@@ -399,6 +399,12 @@
             <field>Name</field>
             <value>
                 <elementReference>calcCPCName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Individual.OwnerId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>

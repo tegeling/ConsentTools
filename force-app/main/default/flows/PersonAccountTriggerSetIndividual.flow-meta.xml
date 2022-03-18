@@ -196,7 +196,7 @@
         <name>calcCPCMobileName</name>
         <dataType>String</dataType>
         <expression
-    >{!$Record.PersonContact.FirstName} + &apos; &apos; + {!$Record.PersonContact.LastName} + &apos; - &apos; + {!$Record.PersonContact.MobilePhone} + &apos; - &apos; + &apos; - &apos; + {!For_each_DUP.Name}</expression>
+    >{!$Record.PersonContact.FirstName} + &apos; &apos; + {!$Record.PersonContact.LastName} + &apos; - &apos; + {!$Record.PersonContact.MobilePhone} + &apos; - &apos; + {!For_each_DUP.Name}</expression>
     </formulas>
     <formulas>
         <name>calcCPCPhoneName</name>
