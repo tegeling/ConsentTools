@@ -20,7 +20,7 @@ This app groups all privacy objects that are relevant for the management of cons
 
 There are several Flows that support the consent automation.
 
-### ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual
+### LeadTriggerSetIndividual, ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual
 
 These flows check if Contact or PersonAccount records have an Individual record assigned. If missing, this flow creates a new Individual record and all related Contact Points, Contact Point Type Consent and Contact Point Consent records for each Data Use Purpose. The Privacy Consent Status is set to default Opt Out.
 
