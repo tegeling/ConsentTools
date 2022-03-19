@@ -4,9 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "Consent Tools",
-      "versionName": "Spring '22 v1.1.2",
-      "versionDescription": "Spring '22 v1.1.2 Release - includes Consent Settings LWC and flows",
-      "versionNumber": "1.1.2.NEXT",
+      "versionName": "Spring '22 v1.1.3",
+      "versionDescription": "Spring '22 v1.1.3 Release - supports Lead, PersonAccount and Contacts",
+      "versionNumber": "1.1.3.NEXT",
       "definitionFile": "config/project-scratch-def.json",
       "releaseNotesUrl": "https://github.com/tegeling/ConsentTools",
       "postInstallUrl": "https://github.com/tegeling/ConsentTools"
@@ -18,6 +18,7 @@
   "sourceApiVersion": "54.0",
   "packageAliases": {
     "Consent Tools": "0Ho7Q000000GmhtSAC",
-    "Consent Tools@1.1.2-1": "04t7Q000000DeR9QAK"
+    "Consent Tools@1.1.2-1": "04t7Q000000DeR9QAK",
+    "Consent Tools@1.1.3-1": "04t7Q000000Deo3QAC"
   }
 }

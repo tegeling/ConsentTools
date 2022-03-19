@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-17-2022
+ * @last modified on  : 03-19-2022
  * @last modified by  : tegeling
  **/
 @isTest(SeeAllData=false)
@@ -70,6 +70,109 @@ public with sharing class Test_ConsentController {
     Test.stopTest();
   }
   @isTest
+  static void doContactNoCPSTest() {
+    // setup test data
+    Account a = new Account(Name = 'TestAccount');
+    insert a;
+    Individual i = new Individual(
+      FirstName = 'TestFirstname',
+      LastName = 'TestLastname'
+    );
+    insert i;
+    Contact c = new Contact(
+      AccountId = a.Id,
+      FirstName = i.FirstName,
+      LastName = i.LastName,
+      IndividualId = i.Id
+    );
+    insert c;
+    DataUsePurpose dup = new DataUsePurpose(
+      Name = 'DUP',
+      CanDataSubjectOptOut = true
+    );
+    insert dup;
+
+    Test.startTest();
+    ConsentWrapper response = ConsentController.getConsent(
+      c.Id,
+      'rgba(0,0,0,0.1)',
+      'rgba(0,0,0,0.1)',
+      'rgba(0,0,0,0.1)'
+    );
+    Test.stopTest();
+  }
+  @isTest
+  static void doUnsupportedObjectTest() {
+    // setup test data
+    DataUsePurpose dup = new DataUsePurpose(
+      Name = 'DUP',
+      CanDataSubjectOptOut = true
+    );
+    insert dup;
+
+    Test.startTest();
+    ConsentWrapper response = ConsentController.getConsent(
+      dup.Id,
+      'rgba(0,0,0,0.1)',
+      'rgba(0,0,0,0.1)',
+      'rgba(0,0,0,0.1)'
+    );
+    Test.stopTest();
+  }
+  @isTest
+  static void doContactUpdateCPCTest() {
+    // setup test data
+    Account a = new Account(Name = 'TestAccount');
+    insert a;
+    Individual i = new Individual(
+      FirstName = 'TestFirstname',
+      LastName = 'TestLastname'
+    );
+    insert i;
+    Contact c = new Contact(
+      AccountId = a.Id,
+      FirstName = i.FirstName,
+      LastName = i.LastName,
+      IndividualId = i.Id
+    );
+    insert c;
+    ContactPointEmail cpEmail = new ContactPointEmail(
+      ParentId = i.Id,
+      EmailAddress = 'test@gmail.com',
+      IsPrimary = true
+    );
+    insert cpEmail;
+    ContactPointPhone cpPhone = new ContactPointPhone(
+      ParentId = i.Id,
+      TelephoneNumber = '0123456',
+      IsPrimary = true
+    );
+    insert cpPhone;
+    DataUsePurpose dup = new DataUsePurpose(
+      Name = 'DUP',
+      CanDataSubjectOptOut = true
+    );
+    insert dup;
+    ContactPointConsent cpcEmail = new ContactPointConsent(
+      ContactPointId = cpEmail.Id,
+      DataUsePurposeId = dup.Id,
+      Name = 'Email Consent',
+      PrivacyConsentStatus = 'OptOut'
+    );
+    insert cpcEmail;
+    ContactPointConsent cpcPhone = new ContactPointConsent(
+      ContactPointId = cpPhone.Id,
+      DataUsePurposeId = dup.Id,
+      Name = 'Phone Consent',
+      PrivacyConsentStatus = 'OptOut'
+    );
+    insert cpcPhone;
+
+    Test.startTest();
+    ConsentController.updateContactPointConsent(cpcEmail.Id, 'OptIn');
+    Test.stopTest();
+  }
+  @isTest
   static void doPersonAccountTest() {
     // setup test data
     // Check if PersonAccount record types exist
@@ -133,9 +236,60 @@ public with sharing class Test_ConsentController {
       'rgba(0,0,0,0.1)',
       'rgba(0,0,0,0.1)'
     );
-    ContactPointConsent cpcEmailResponse = ConsentController.getContactPointConsent(
-      cpEmail.Id,
-      dup.Id
+    Test.stopTest();
+  }
+  @isTest
+  static void doLeadTest() {
+    // setup test data
+    Individual i = new Individual(
+      FirstName = 'TestFirstname',
+      LastName = 'TestLastname'
+    );
+    insert i;
+    Lead l = new Lead(
+      FirstName = i.FirstName,
+      LastName = i.LastName,
+      IndividualId = i.Id
+    );
+    insert l;
+    ContactPointEmail cpEmail = new ContactPointEmail(
+      ParentId = i.Id,
+      EmailAddress = 'test@gmail.com',
+      IsPrimary = true
+    );
+    insert cpEmail;
+    ContactPointPhone cpPhone = new ContactPointPhone(
+      ParentId = i.Id,
+      TelephoneNumber = '0123456',
+      IsPrimary = true
+    );
+    insert cpPhone;
+    DataUsePurpose dup = new DataUsePurpose(
+      Name = 'DUP',
+      CanDataSubjectOptOut = true
+    );
+    insert dup;
+    ContactPointConsent cpcEmail = new ContactPointConsent(
+      ContactPointId = cpEmail.Id,
+      DataUsePurposeId = dup.Id,
+      Name = 'Email Consent',
+      PrivacyConsentStatus = 'OptOut'
+    );
+    insert cpcEmail;
+    ContactPointConsent cpcPhone = new ContactPointConsent(
+      ContactPointId = cpPhone.Id,
+      DataUsePurposeId = dup.Id,
+      Name = 'Phone Consent',
+      PrivacyConsentStatus = 'OptOut'
+    );
+    insert cpcPhone;
+
+    Test.startTest();
+    ConsentWrapper response = ConsentController.getConsent(
+      l.Id,
+      'rgba(0,0,0,0.1)',
+      'rgba(0,0,0,0.1)',
+      'rgba(0,0,0,0.1)'
     );
     Test.stopTest();
   }
