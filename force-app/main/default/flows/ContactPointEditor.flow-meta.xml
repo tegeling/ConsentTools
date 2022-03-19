@@ -7,7 +7,7 @@
     <assignments>
         <name>Set_CP_Id_from_New_Email</name>
         <label>Set CP Id from New Email</label>
-        <locationX>314</locationX>
+        <locationX>336</locationX>
         <locationY>1694</locationY>
         <assignmentItems>
             <assignToReference>newCPId</assignToReference>
@@ -30,7 +30,7 @@
     <assignments>
         <name>Set_CP_Id_from_New_Phone</name>
         <label>Set CP Id from New Phone</label>
-        <locationX>50</locationX>
+        <locationX>72</locationX>
         <locationY>1694</locationY>
         <assignmentItems>
             <assignToReference>newCPId</assignToReference>
@@ -53,7 +53,7 @@
     <assignments>
         <name>Set_CP_to_Delete</name>
         <label>Set CP to Delete</label>
-        <locationX>930</locationX>
+        <locationX>952</locationX>
         <locationY>1694</locationY>
         <assignmentItems>
             <assignToReference>varCPEmailDelete</assignToReference>
@@ -76,7 +76,7 @@
     <assignments>
         <name>Set_IndividualId_from_Contact</name>
         <label>Set IndividualId from Contact</label>
-        <locationX>160</locationX>
+        <locationX>50</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>individualId</assignToReference>
@@ -92,7 +92,7 @@
     <assignments>
         <name>Set_IndividualId_from_Lead</name>
         <label>Set IndividualId from Lead</label>
-        <locationX>688</locationX>
+        <locationX>578</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>individualId</assignToReference>
@@ -108,7 +108,7 @@
     <assignments>
         <name>Set_IndividualId_from_PersonAccount</name>
         <label>Set IndividualId from PersonAccount</label>
-        <locationX>424</locationX>
+        <locationX>314</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>individualId</assignToReference>
@@ -116,6 +116,23 @@
             <value>
                 <elementReference
         >Get_PersonAccount.PersonIndividualId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Individual</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_IndividualId_from_User</name>
+        <label>Set IndividualId from User</label>
+        <locationX>842</locationX>
+        <locationY>398</locationY>
+        <assignmentItems>
+            <assignToReference>individualId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference
+        >Get_User.Contact.IndividualId</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -157,7 +174,7 @@
     <decisions>
         <name>Check_Action</name>
         <label>Check Action</label>
-        <locationX>556</locationX>
+        <locationX>578</locationX>
         <locationY>1214</locationY>
         <defaultConnector>
             <targetReference>Get_CP_Email_Delete</targetReference>
@@ -182,7 +199,7 @@
     <decisions>
         <name>Check_CP_Email_Delete_exists</name>
         <label>Check CP Email Delete exists</label>
-        <locationX>1150</locationX>
+        <locationX>1172</locationX>
         <locationY>1934</locationY>
         <defaultConnector>
             <targetReference>For_each_CP_Email_Delete</targetReference>
@@ -208,7 +225,7 @@
     <decisions>
         <name>Check_CP_Phone_Delete_exists</name>
         <label>Check CP Phone Delete exists</label>
-        <locationX>1150</locationX>
+        <locationX>1172</locationX>
         <locationY>2606</locationY>
         <defaultConnector>
             <targetReference>For_each_CP_Phone_Delete</targetReference>
@@ -234,7 +251,7 @@
     <decisions>
         <name>Check_New_CP_Type</name>
         <label>Check New CP Type</label>
-        <locationX>182</locationX>
+        <locationX>204</locationX>
         <locationY>1454</locationY>
         <defaultConnector>
             <targetReference>Create_CP_Email</targetReference>
@@ -259,7 +276,7 @@
     <decisions>
         <name>Check_Object</name>
         <label>Check Object</label>
-        <locationX>556</locationX>
+        <locationX>578</locationX>
         <locationY>158</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -306,6 +323,21 @@
                 <targetReference>Get_Lead</targetReference>
             </connector>
             <label>Is Lead</label>
+        </rules>
+        <rules>
+            <name>Is_User</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>recordId</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>005</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_User</targetReference>
+            </connector>
+            <label>Is User</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -354,7 +386,7 @@
     <loops>
         <name>For_each_CP_Email_Delete</name>
         <label>For each CP Email Delete</label>
-        <locationX>930</locationX>
+        <locationX>952</locationX>
         <locationY>1814</locationY>
         <collectionReference>varCPEmailDelete</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -368,7 +400,7 @@
     <loops>
         <name>For_each_CP_Phone_Delete</name>
         <label>For each CP Phone Delete</label>
-        <locationX>930</locationX>
+        <locationX>952</locationX>
         <locationY>2486</locationY>
         <collectionReference>varCPPhoneDelete</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -379,7 +411,7 @@
     <loops>
         <name>For_each_DUP_New_CP</name>
         <label>For each DUP New CP</label>
-        <locationX>182</locationX>
+        <locationX>204</locationX>
         <locationY>1910</locationY>
         <collectionReference>Get_Data_Use_Purposes</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -409,7 +441,7 @@
     <recordCreates>
         <name>Create_CP_Consent</name>
         <label>Create CP Consent</label>
-        <locationX>270</locationX>
+        <locationX>292</locationX>
         <locationY>2030</locationY>
         <connector>
             <targetReference>For_each_DUP_New_CP</targetReference>
@@ -450,7 +482,7 @@
     <recordCreates>
         <name>Create_CP_Email</name>
         <label>Create CP Email</label>
-        <locationX>314</locationX>
+        <locationX>336</locationX>
         <locationY>1574</locationY>
         <connector>
             <targetReference>Set_CP_Id_from_New_Email</targetReference>
@@ -473,7 +505,7 @@
     <recordCreates>
         <name>Create_CP_Phone</name>
         <label>Create CP Phone</label>
-        <locationX>50</locationX>
+        <locationX>72</locationX>
         <locationY>1574</locationY>
         <connector>
             <targetReference>Set_CP_Id_from_New_Phone</targetReference>
@@ -502,7 +534,7 @@
     <recordDeletes>
         <name>Delete_CP_Email</name>
         <label>Delete CP Email</label>
-        <locationX>1018</locationX>
+        <locationX>1040</locationX>
         <locationY>2174</locationY>
         <connector>
             <targetReference>For_each_CP_Email_Delete</targetReference>
@@ -520,7 +552,7 @@
     <recordDeletes>
         <name>Delete_CP_Phone</name>
         <label>Delete CP Phone</label>
-        <locationX>1018</locationX>
+        <locationX>1040</locationX>
         <locationY>2846</locationY>
         <connector>
             <targetReference>For_each_CP_Phone_Delete</targetReference>
@@ -538,7 +570,7 @@
     <recordDeletes>
         <name>Delete_CPC_Email</name>
         <label>Delete CPC Email</label>
-        <locationX>1018</locationX>
+        <locationX>1040</locationX>
         <locationY>2054</locationY>
         <connector>
             <targetReference>Delete_CP_Email</targetReference>
@@ -556,7 +588,7 @@
     <recordDeletes>
         <name>Delete_CPC_Phone</name>
         <label>Delete CPC Phone</label>
-        <locationX>1018</locationX>
+        <locationX>1040</locationX>
         <locationY>2726</locationY>
         <connector>
             <targetReference>Delete_CP_Phone</targetReference>
@@ -574,7 +606,7 @@
     <recordLookups>
         <name>Get_Contact</name>
         <label>Get Contact</label>
-        <locationX>160</locationX>
+        <locationX>50</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -596,7 +628,7 @@
     <recordLookups>
         <name>Get_Contact_Point_Email</name>
         <label>Get Contact Point Email</label>
-        <locationX>556</locationX>
+        <locationX>578</locationX>
         <locationY>734</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -618,7 +650,7 @@
     <recordLookups>
         <name>Get_Contact_Point_Phone</name>
         <label>Get Contact Point Phone</label>
-        <locationX>556</locationX>
+        <locationX>578</locationX>
         <locationY>854</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -640,7 +672,7 @@
     <recordLookups>
         <name>Get_CP_Email_Delete</name>
         <label>Get CP Email Delete</label>
-        <locationX>930</locationX>
+        <locationX>952</locationX>
         <locationY>1334</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -662,7 +694,7 @@
     <recordLookups>
         <name>Get_CP_Phone_Delete</name>
         <label>Get CP Phone Delete</label>
-        <locationX>930</locationX>
+        <locationX>952</locationX>
         <locationY>1454</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -684,7 +716,7 @@
     <recordLookups>
         <name>Get_Data_Use_Purposes</name>
         <label>Get Data Use Purposes</label>
-        <locationX>556</locationX>
+        <locationX>578</locationX>
         <locationY>974</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -706,7 +738,7 @@
     <recordLookups>
         <name>Get_Individual</name>
         <label>Get Individual</label>
-        <locationX>556</locationX>
+        <locationX>578</locationX>
         <locationY>614</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -728,7 +760,7 @@
     <recordLookups>
         <name>Get_Lead</name>
         <label>Get Lead</label>
-        <locationX>688</locationX>
+        <locationX>578</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -750,7 +782,7 @@
     <recordLookups>
         <name>Get_PersonAccount</name>
         <label>Get PersonAccount</label>
-        <locationX>424</locationX>
+        <locationX>314</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -770,11 +802,33 @@
         <object>Account</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_User</name>
+        <label>Get User</label>
+        <locationX>842</locationX>
+        <locationY>278</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_IndividualId_from_User</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <runInMode>DefaultMode</runInMode>
     <screens>
         <name>screenAction</name>
         <label>Select Action</label>
-        <locationX>556</locationX>
+        <locationX>578</locationX>
         <locationY>1094</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -798,7 +852,7 @@
     <screens>
         <name>screenDelete</name>
         <label>Delete Contact Point</label>
-        <locationX>930</locationX>
+        <locationX>952</locationX>
         <locationY>1574</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -828,7 +882,7 @@
     <screens>
         <name>screenNew</name>
         <label>New Contact Point</label>
-        <locationX>182</locationX>
+        <locationX>204</locationX>
         <locationY>1334</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -908,7 +962,7 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>430</locationX>
+        <locationX>452</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Check_Object</targetReference>

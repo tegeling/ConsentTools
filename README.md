@@ -32,9 +32,9 @@ To easily cleanup an Individual record, this flow iterates through all related p
 
 This flow triggers after update of Individual records and sets record owner of related privacy records (Contact Point Consent) to the new Individual record owner.
 
-### ContactPointEditor and ContactPointEditorExternal
+### ContactPointEditor
 
-This screen flow can be placed on Contact record pages or Community pages to either create new Contact Point records or delete existing records.
+This screen flow can be placed on Lead, PersonAccoount, Contact record pages or Community pages to either create new Contact Point records or delete existing records. When used for Community pages pass in `{!CurrentUser.id}` as record id.
 
 ## Lightning Web Components
 
