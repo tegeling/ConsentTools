@@ -5,7 +5,7 @@
         <name>Check_Contact_Email</name>
         <label>Check Contact Email</label>
         <locationX>224</locationX>
-        <locationY>695</locationY>
+        <locationY>1367</locationY>
         <defaultConnector>
             <targetReference>Check_Contact_Phone</targetReference>
         </defaultConnector>
@@ -30,7 +30,7 @@
         <name>Check_Contact_Mobile</name>
         <label>Check Contact Mobile</label>
         <locationX>224</locationX>
-        <locationY>2039</locationY>
+        <locationY>2711</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP</targetReference>
         </defaultConnector>
@@ -56,7 +56,7 @@
         <name>Check_Contact_Phone</name>
         <label>Check Contact Phone</label>
         <locationX>224</locationX>
-        <locationY>1367</locationY>
+        <locationY>2039</locationY>
         <defaultConnector>
             <targetReference>Check_Contact_Mobile</targetReference>
         </defaultConnector>
@@ -82,7 +82,7 @@
         <name>Check_CPTC_Phone</name>
         <label>Check CPTC Phone</label>
         <locationX>50</locationX>
-        <locationY>2279</locationY>
+        <locationY>2951</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP_CPTC_Mobile</targetReference>
         </defaultConnector>
@@ -108,7 +108,7 @@
         <name>Check_Email</name>
         <label>Check Email</label>
         <locationX>444</locationX>
-        <locationY>3047</locationY>
+        <locationY>4055</locationY>
         <defaultConnector>
             <targetReference>Check_Phone</targetReference>
         </defaultConnector>
@@ -130,10 +130,61 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Check_Lead_Address</name>
+        <label>Check Lead Address</label>
+        <locationX>224</locationX>
+        <locationY>695</locationY>
+        <defaultConnector>
+            <targetReference>Check_Contact_Email</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Lead_has_Address</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference
+        >Create_Contact_Point_Mailing_Address</targetReference>
+            </connector>
+            <label>Lead has Address</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Mailing_Address</name>
+        <label>Check Mailing Address</label>
+        <locationX>444</locationX>
+        <locationY>3719</locationY>
+        <defaultConnector>
+            <targetReference>Check_Email</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Has_Mailing_Address</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.City</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_CPC_Mailing_Address</targetReference>
+            </connector>
+            <label>Has Mailing Address</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Check_Mobile</name>
         <label>Check Mobile</label>
         <locationX>444</locationX>
-        <locationY>3719</locationY>
+        <locationY>4727</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP</targetReference>
         </defaultConnector>
@@ -158,7 +209,7 @@
         <name>Check_Phone</name>
         <label>Check Phone</label>
         <locationX>444</locationX>
-        <locationY>3383</locationY>
+        <locationY>4391</locationY>
         <defaultConnector>
             <targetReference>Check_Mobile</targetReference>
         </defaultConnector>
@@ -181,10 +232,22 @@
     </decisions>
     <description>Create an Individual record</description>
     <formulas>
+        <name>calcCPAddressName</name>
+        <dataType>String</dataType>
+        <expression
+    >{!$Record.FirstName} + &apos; &apos; + {!$Record.LastName} + &apos; - Mailing Address&apos;</expression>
+    </formulas>
+    <formulas>
         <name>calcCPCEmailName</name>
         <dataType>String</dataType>
         <expression
     >{!$Record.FirstName} + &apos; &apos; + {!$Record.LastName} + &apos; - &apos; + {!$Record.Email} + &apos; - &apos; + {!For_each_DUP.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>calcCPCMailingAddressName</name>
+        <dataType>String</dataType>
+        <expression
+    >{!$Record.FirstName} + &apos; &apos; + {!$Record.LastName} + &apos; - MailingAddress - &apos; + {!For_each_DUP.Name}</expression>
     </formulas>
     <formulas>
         <name>calcCPCMobileName</name>
@@ -205,6 +268,12 @@
     >&apos;Email - &apos; + {!$Record.FirstName} + &apos; &apos; + {!$Record.LastName} + &apos; - &apos; + {!For_each_DUP_CPTC_Email.Name}</expression>
     </formulas>
     <formulas>
+        <name>calcCPTCMailingAddress</name>
+        <dataType>String</dataType>
+        <expression
+    >&apos;Mailing Address - &apos; + {!$Record.FirstName} + &apos; &apos; + {!$Record.LastName} + &apos; - &apos; + {!For_each_DUP_CPTC_Mailing_Address.Name}</expression>
+    </formulas>
+    <formulas>
         <name>calcCPTCMobileName</name>
         <dataType>String</dataType>
         <expression
@@ -223,18 +292,18 @@
         <name>For_each_DUP</name>
         <label>For each DUP</label>
         <locationX>224</locationX>
-        <locationY>2927</locationY>
+        <locationY>3599</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Check_Email</targetReference>
+            <targetReference>Check_Mailing_Address</targetReference>
         </nextValueConnector>
     </loops>
     <loops>
         <name>For_each_DUP_CPTC_Email</name>
         <label>For each DUP CPTC Email</label>
         <locationX>92</locationX>
-        <locationY>935</locationY>
+        <locationY>1607</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -245,10 +314,24 @@
         </noMoreValuesConnector>
     </loops>
     <loops>
+        <name>For_each_DUP_CPTC_Mailing_Address</name>
+        <label>For each DUP CPTC Mailing Address</label>
+        <locationX>92</locationX>
+        <locationY>935</locationY>
+        <collectionReference>Get_Data_Use_Purpose</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Create_CPTC_Mailing_Address</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Check_Contact_Email</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>For_each_DUP_CPTC_Mobile</name>
         <label>For each DUP CPTC Mobile</label>
         <locationX>182</locationX>
-        <locationY>2399</locationY>
+        <locationY>3071</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -262,7 +345,7 @@
         <name>For_each_DUP_CPTC_Phone</name>
         <label>For each DUP CPTC Phone</label>
         <locationX>92</locationX>
-        <locationY>1607</locationY>
+        <locationY>2279</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -295,7 +378,7 @@
         <name>Create_Contact_Point_Business_Phone</name>
         <label>Create Contact Point Business Phone</label>
         <locationX>92</locationX>
-        <locationY>1487</locationY>
+        <locationY>2159</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Phone</targetReference>
         </connector>
@@ -330,7 +413,7 @@
         <name>Create_Contact_Point_Email</name>
         <label>Create Contact Point Email</label>
         <locationX>92</locationX>
-        <locationY>815</locationY>
+        <locationY>1487</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Email</targetReference>
         </connector>
@@ -356,10 +439,69 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>Create_Contact_Point_Mailing_Address</name>
+        <label>Create Contact Point Mailing Address</label>
+        <locationX>92</locationX>
+        <locationY>815</locationY>
+        <connector>
+            <targetReference>For_each_DUP_CPTC_Mailing_Address</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>City</field>
+            <value>
+                <elementReference>$Record.City</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Country</field>
+            <value>
+                <elementReference>$Record.Country</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>IsPrimary</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>calcCPAddressName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>Create_Individual</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PostalCode</field>
+            <value>
+                <elementReference>$Record.PostalCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>State</field>
+            <value>
+                <elementReference>$Record.State</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Street</field>
+            <value>
+                <elementReference>$Record.Street</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ContactPointAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_Contact_Point_Mobile_Phone</name>
         <label>Create Contact Point Mobile Phone</label>
         <locationX>50</locationX>
-        <locationY>2159</locationY>
+        <locationY>2831</locationY>
         <connector>
             <targetReference>Check_CPTC_Phone</targetReference>
         </connector>
@@ -394,7 +536,7 @@
         <name>Create_CPC_Email</name>
         <label>Create CPC Email</label>
         <locationX>312</locationX>
-        <locationY>3167</locationY>
+        <locationY>4175</locationY>
         <connector>
             <targetReference>Check_Phone</targetReference>
         </connector>
@@ -426,10 +568,46 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>Create_CPC_Mailing_Address</name>
+        <label>Create CPC Mailing Address</label>
+        <locationX>312</locationX>
+        <locationY>3839</locationY>
+        <connector>
+            <targetReference>Check_Email</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ContactPointId</field>
+            <value>
+                <elementReference
+        >Create_Contact_Point_Mailing_Address</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>DataUsePurposeId</field>
+            <value>
+                <elementReference>For_each_DUP.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>calcCPCMailingAddressName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PrivacyConsentStatus</field>
+            <value>
+                <stringValue>OptOut</stringValue>
+            </value>
+        </inputAssignments>
+        <object>ContactPointConsent</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_CPC_Mobile</name>
         <label>Create CPC Mobile</label>
         <locationX>312</locationX>
-        <locationY>3839</locationY>
+        <locationY>4847</locationY>
         <connector>
             <targetReference>For_each_DUP</targetReference>
         </connector>
@@ -465,7 +643,7 @@
         <name>Create_CPC_Phone</name>
         <label>Create CPC Phone</label>
         <locationX>312</locationX>
-        <locationY>3503</locationY>
+        <locationY>4511</locationY>
         <connector>
             <targetReference>Check_Mobile</targetReference>
         </connector>
@@ -501,7 +679,7 @@
         <name>Create_CPTC_Email</name>
         <label>Create CPTC Email</label>
         <locationX>180</locationX>
-        <locationY>1055</locationY>
+        <locationY>1727</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Email</targetReference>
         </connector>
@@ -539,10 +717,52 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>Create_CPTC_Mailing_Address</name>
+        <label>Create CPTC Mailing Address</label>
+        <locationX>180</locationX>
+        <locationY>1055</locationY>
+        <connector>
+            <targetReference>For_each_DUP_CPTC_Mailing_Address</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ContactPointType</field>
+            <value>
+                <stringValue>MailingAddress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>DataUsePurposeId</field>
+            <value>
+                <elementReference
+        >For_each_DUP_CPTC_Mailing_Address.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>calcCPTCMailingAddress</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PartyId</field>
+            <value>
+                <elementReference>Create_Individual</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PrivacyConsentStatus</field>
+            <value>
+                <stringValue>OptOut</stringValue>
+            </value>
+        </inputAssignments>
+        <object>ContactPointTypeConsent</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_CPTC_Phone</name>
         <label>Create CPTC Phone</label>
         <locationX>180</locationX>
-        <locationY>1727</locationY>
+        <locationY>2399</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Phone</targetReference>
         </connector>
@@ -583,7 +803,7 @@
         <name>Create_CPTC_Phone_0</name>
         <label>Create CPTC Phone</label>
         <locationX>270</locationX>
-        <locationY>2519</locationY>
+        <locationY>3191</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Mobile</targetReference>
         </connector>
@@ -657,7 +877,7 @@
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Check_Contact_Email</targetReference>
+            <targetReference>Check_Lead_Address</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
