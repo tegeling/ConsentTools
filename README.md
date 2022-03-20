@@ -45,7 +45,7 @@ This package contains various LWC to support consent management.
 Thic LWC can be placed on Lead or Contact records pages or on community pages. It dynamically shows a grid of toggles to either opt in or opt out per Contact Point and Data Use Purpose. It can be deployed as a preference center on a community page.
 Data Use Purpose records are filtered by `CanDataSubjectOptOut = TRUE`.
 
-![Contact Record Page](./images/ConsentSettingsContactRecordPage.png)
+![Contact Record Page](./images/ConsentTools.png)
 
 The properties contain the record id of either User (community use case, like `{!CurrentUser.id}`) or Contact/Lead records and color codes for the background colors per contact point type.
 
