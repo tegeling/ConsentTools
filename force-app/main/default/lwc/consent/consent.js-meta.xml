@@ -21,28 +21,28 @@
         type="String"
       />
       <property
+        name="rgbaAddress"
+        label="Address Background Color"
+        type="String"
+        description="Set RGBA color code for address background"
+        placeholder="rgba(0,0,0,0.1)"
+        default="rgba(0,0,0,0.1)"
+      />
+      <property
         name="rgbaEmail"
         label="Email Background Color"
         type="String"
         description="Set RGBA color code for email background"
-        placeholder="rgba(0,0,0,0.1)"
-        default="rgba(0,0,0,0.1)"
+        placeholder="rgba(0,0,0,0.2)"
+        default="rgba(0,0,0,0.2)"
       />
       <property
         name="rgbaPhone"
         label="Phone Background Color"
         type="String"
         description="Set RGBA color code for phone background"
-        placeholder="rgba(0,0,0,0.2)"
-        default="rgba(0,0,0,0.2)"
-      />
-      <property
-        name="rgbaAddress"
-        label="Address Background Color"
-        type="String"
-        description="Set RGBA color code for address background"
-        placeholder="rgba(0,0,0,0.3)"
-        default="rgba(0,0,0,0.3)"
+        placeholder="rgba(0,0,0,0.1)"
+        default="rgba(0,0,0,0.1)"
       />
 
         </targetConfig>
