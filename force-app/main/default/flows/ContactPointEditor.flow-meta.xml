@@ -5,10 +5,33 @@
 >
     <apiVersion>54.0</apiVersion>
     <assignments>
+        <name>Set_CP_Id_from_New_Address</name>
+        <label>Set CP Id from New Address</label>
+        <locationX>314</locationX>
+        <locationY>1814</locationY>
+        <assignmentItems>
+            <assignToReference>newCPId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Create_CP_Address</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>newCPCName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>calcCPCAddress</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>For_each_DUP_New_CP</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_CP_Id_from_New_Email</name>
         <label>Set CP Id from New Email</label>
-        <locationX>336</locationX>
-        <locationY>1694</locationY>
+        <locationX>578</locationX>
+        <locationY>1814</locationY>
         <assignmentItems>
             <assignToReference>newCPId</assignToReference>
             <operator>Assign</operator>
@@ -30,8 +53,8 @@
     <assignments>
         <name>Set_CP_Id_from_New_Phone</name>
         <label>Set CP Id from New Phone</label>
-        <locationX>72</locationX>
-        <locationY>1694</locationY>
+        <locationX>50</locationX>
+        <locationY>1814</locationY>
         <assignmentItems>
             <assignToReference>newCPId</assignToReference>
             <operator>Assign</operator>
@@ -53,8 +76,8 @@
     <assignments>
         <name>Set_CP_to_Delete</name>
         <label>Set CP to Delete</label>
-        <locationX>952</locationX>
-        <locationY>1694</locationY>
+        <locationX>1194</locationX>
+        <locationY>1934</locationY>
         <assignmentItems>
             <assignToReference>varCPEmailDelete</assignToReference>
             <operator>Add</operator>
@@ -69,14 +92,21 @@
                 <elementReference>Select_Phone_to_Delete</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCPAddressDelete</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Select_Address_to_Delete</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
-            <targetReference>For_each_CP_Email_Delete</targetReference>
+            <targetReference>For_each_CP_Address_Delete</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Set_IndividualId_from_Contact</name>
         <label>Set IndividualId from Contact</label>
-        <locationX>50</locationX>
+        <locationX>226</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>individualId</assignToReference>
@@ -92,7 +122,7 @@
     <assignments>
         <name>Set_IndividualId_from_Lead</name>
         <label>Set IndividualId from Lead</label>
-        <locationX>578</locationX>
+        <locationX>754</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>individualId</assignToReference>
@@ -108,7 +138,7 @@
     <assignments>
         <name>Set_IndividualId_from_PersonAccount</name>
         <label>Set IndividualId from PersonAccount</label>
-        <locationX>314</locationX>
+        <locationX>490</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>individualId</assignToReference>
@@ -125,7 +155,7 @@
     <assignments>
         <name>Set_IndividualId_from_User</name>
         <label>Set IndividualId from User</label>
-        <locationX>842</locationX>
+        <locationX>1018</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>individualId</assignToReference>
@@ -156,6 +186,14 @@
         </value>
     </choices>
     <choices>
+        <name>cpTypeAddress</name>
+        <choiceText>Address</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Address</stringValue>
+        </value>
+    </choices>
+    <choices>
         <name>cpTypeEmail</name>
         <choiceText>Email</choiceText>
         <dataType>String</dataType>
@@ -174,10 +212,10 @@
     <decisions>
         <name>Check_Action</name>
         <label>Check Action</label>
-        <locationX>578</locationX>
-        <locationY>1214</locationY>
+        <locationX>754</locationX>
+        <locationY>1334</locationY>
         <defaultConnector>
-            <targetReference>Get_CP_Email_Delete</targetReference>
+            <targetReference>Get_CP_Address_Delete</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Delete</defaultConnectorLabel>
         <rules>
@@ -197,10 +235,36 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Check_CP_Address_Delete_exists</name>
+        <label>Check CP Address Delete exists</label>
+        <locationX>1414</locationX>
+        <locationY>2174</locationY>
+        <defaultConnector>
+            <targetReference>For_each_CP_Address_Delete</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Has_CP_Address_Delete</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference
+        >For_each_CP_Address_Delete</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>8lW</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_CPC_Address</targetReference>
+            </connector>
+            <label>Has CP Address Delete</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Check_CP_Email_Delete_exists</name>
         <label>Check CP Email Delete exists</label>
-        <locationX>1172</locationX>
-        <locationY>1934</locationY>
+        <locationX>1414</locationX>
+        <locationY>2846</locationY>
         <defaultConnector>
             <targetReference>For_each_CP_Email_Delete</targetReference>
         </defaultConnector>
@@ -225,8 +289,8 @@
     <decisions>
         <name>Check_CP_Phone_Delete_exists</name>
         <label>Check CP Phone Delete exists</label>
-        <locationX>1172</locationX>
-        <locationY>2606</locationY>
+        <locationX>1414</locationX>
+        <locationY>3518</locationY>
         <defaultConnector>
             <targetReference>For_each_CP_Phone_Delete</targetReference>
         </defaultConnector>
@@ -251,8 +315,8 @@
     <decisions>
         <name>Check_New_CP_Type</name>
         <label>Check New CP Type</label>
-        <locationX>204</locationX>
-        <locationY>1454</locationY>
+        <locationX>314</locationX>
+        <locationY>1574</locationY>
         <defaultConnector>
             <targetReference>Create_CP_Email</targetReference>
         </defaultConnector>
@@ -272,11 +336,26 @@
             </connector>
             <label>Phone Type</label>
         </rules>
+        <rules>
+            <name>Address_Type</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>newCPType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>cpTypeAddress</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_CP_Address</targetReference>
+            </connector>
+            <label>Address Type</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Check_Object</name>
         <label>Check Object</label>
-        <locationX>578</locationX>
+        <locationX>754</locationX>
         <locationY>158</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -341,6 +420,14 @@
         </rules>
     </decisions>
     <dynamicChoiceSets>
+        <name>cpAddressDeleteRecords</name>
+        <collectionReference>Get_CP_Address_Delete</collectionReference>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <object>ContactPointAddress</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
         <name>cpEmailDeleteRecords</name>
         <collectionReference>Get_CP_Email_Delete</collectionReference>
         <dataType>String</dataType>
@@ -365,6 +452,18 @@
         <picklistObject>ContactPointPhone</picklistObject>
     </dynamicChoiceSets>
     <formulas>
+        <name>calcCPAddressName</name>
+        <dataType>String</dataType>
+        <expression
+    >{!Get_Individual.FirstName} + &apos; &apos; + {!Get_Individual.LastName} + &apos; - &apos; + {!Address_Name}</expression>
+    </formulas>
+    <formulas>
+        <name>calcCPCAddress</name>
+        <dataType>String</dataType>
+        <expression
+    >{!Get_Individual.FirstName} + &apos; &apos; + {!Get_Individual.LastName} + &apos; - &apos; + {!Address_Name} + &apos; - &apos;</expression>
+    </formulas>
+    <formulas>
         <name>calcCPCEmail</name>
         <dataType>String</dataType>
         <expression
@@ -384,10 +483,24 @@
     <interviewLabel>ContactPointEditor {!$Flow.CurrentDateTime}</interviewLabel>
     <label>ContactPointEditor</label>
     <loops>
+        <name>For_each_CP_Address_Delete</name>
+        <label>For each CP Address Delete</label>
+        <locationX>1194</locationX>
+        <locationY>2054</locationY>
+        <collectionReference>varCPAddressDelete</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_CP_Address_Delete_exists</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>For_each_CP_Email_Delete</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>For_each_CP_Email_Delete</name>
         <label>For each CP Email Delete</label>
-        <locationX>952</locationX>
-        <locationY>1814</locationY>
+        <locationX>1194</locationX>
+        <locationY>2726</locationY>
         <collectionReference>varCPEmailDelete</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -400,8 +513,8 @@
     <loops>
         <name>For_each_CP_Phone_Delete</name>
         <label>For each CP Phone Delete</label>
-        <locationX>952</locationX>
-        <locationY>2486</locationY>
+        <locationX>1194</locationX>
+        <locationY>3398</locationY>
         <collectionReference>varCPPhoneDelete</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -411,8 +524,8 @@
     <loops>
         <name>For_each_DUP_New_CP</name>
         <label>For each DUP New CP</label>
-        <locationX>204</locationX>
-        <locationY>1910</locationY>
+        <locationX>314</locationX>
+        <locationY>2030</locationY>
         <collectionReference>Get_Data_Use_Purposes</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -439,10 +552,63 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
+        <name>Create_CP_Address</name>
+        <label>Create CP Address</label>
+        <locationX>314</locationX>
+        <locationY>1694</locationY>
+        <connector>
+            <targetReference>Set_CP_Id_from_New_Address</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>City</field>
+            <value>
+                <elementReference>cpNewAddress.city</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Country</field>
+            <value>
+                <elementReference>cpNewAddress.country</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>calcCPAddressName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>individualId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PostalCode</field>
+            <value>
+                <elementReference>cpNewAddress.postalCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>State</field>
+            <value>
+                <elementReference>cpNewAddress.province</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Street</field>
+            <value>
+                <elementReference>cpNewAddress.street</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ContactPointAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_CP_Consent</name>
         <label>Create CP Consent</label>
-        <locationX>292</locationX>
-        <locationY>2030</locationY>
+        <locationX>402</locationX>
+        <locationY>2150</locationY>
         <connector>
             <targetReference>For_each_DUP_New_CP</targetReference>
         </connector>
@@ -482,8 +648,8 @@
     <recordCreates>
         <name>Create_CP_Email</name>
         <label>Create CP Email</label>
-        <locationX>336</locationX>
-        <locationY>1574</locationY>
+        <locationX>578</locationX>
+        <locationY>1694</locationY>
         <connector>
             <targetReference>Set_CP_Id_from_New_Email</targetReference>
         </connector>
@@ -496,7 +662,7 @@
         <inputAssignments>
             <field>ParentId</field>
             <value>
-                <elementReference>Get_Individual.Id</elementReference>
+                <elementReference>individualId</elementReference>
             </value>
         </inputAssignments>
         <object>ContactPointEmail</object>
@@ -505,15 +671,15 @@
     <recordCreates>
         <name>Create_CP_Phone</name>
         <label>Create CP Phone</label>
-        <locationX>72</locationX>
-        <locationY>1574</locationY>
+        <locationX>50</locationX>
+        <locationY>1694</locationY>
         <connector>
             <targetReference>Set_CP_Id_from_New_Phone</targetReference>
         </connector>
         <inputAssignments>
             <field>ParentId</field>
             <value>
-                <elementReference>Get_Individual.Id</elementReference>
+                <elementReference>individualId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -532,10 +698,28 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordDeletes>
+        <name>Delete_CP_Address</name>
+        <label>Delete CP Address</label>
+        <locationX>1282</locationX>
+        <locationY>2414</locationY>
+        <connector>
+            <targetReference>For_each_CP_Address_Delete</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>For_each_CP_Address_Delete</elementReference>
+            </value>
+        </filters>
+        <object>ContactPointAddress</object>
+    </recordDeletes>
+    <recordDeletes>
         <name>Delete_CP_Email</name>
         <label>Delete CP Email</label>
-        <locationX>1040</locationX>
-        <locationY>2174</locationY>
+        <locationX>1282</locationX>
+        <locationY>3086</locationY>
         <connector>
             <targetReference>For_each_CP_Email_Delete</targetReference>
         </connector>
@@ -552,8 +736,8 @@
     <recordDeletes>
         <name>Delete_CP_Phone</name>
         <label>Delete CP Phone</label>
-        <locationX>1040</locationX>
-        <locationY>2846</locationY>
+        <locationX>1282</locationX>
+        <locationY>3758</locationY>
         <connector>
             <targetReference>For_each_CP_Phone_Delete</targetReference>
         </connector>
@@ -568,10 +752,28 @@
         <object>ContactPointPhone</object>
     </recordDeletes>
     <recordDeletes>
+        <name>Delete_CPC_Address</name>
+        <label>Delete CPC Address</label>
+        <locationX>1282</locationX>
+        <locationY>2294</locationY>
+        <connector>
+            <targetReference>Delete_CP_Address</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactPointId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>For_each_CP_Address_Delete</elementReference>
+            </value>
+        </filters>
+        <object>ContactPointConsent</object>
+    </recordDeletes>
+    <recordDeletes>
         <name>Delete_CPC_Email</name>
         <label>Delete CPC Email</label>
-        <locationX>1040</locationX>
-        <locationY>2054</locationY>
+        <locationX>1282</locationX>
+        <locationY>2966</locationY>
         <connector>
             <targetReference>Delete_CP_Email</targetReference>
         </connector>
@@ -588,8 +790,8 @@
     <recordDeletes>
         <name>Delete_CPC_Phone</name>
         <label>Delete CPC Phone</label>
-        <locationX>1040</locationX>
-        <locationY>2726</locationY>
+        <locationX>1282</locationX>
+        <locationY>3638</locationY>
         <connector>
             <targetReference>Delete_CP_Phone</targetReference>
         </connector>
@@ -606,7 +808,7 @@
     <recordLookups>
         <name>Get_Contact</name>
         <label>Get Contact</label>
-        <locationX>50</locationX>
+        <locationX>226</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -618,7 +820,7 @@
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>contactId</elementReference>
+                <elementReference>recordId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -626,10 +828,32 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_Contact_Point_Address</name>
+        <label>Get Contact Point Address</label>
+        <locationX>754</locationX>
+        <locationY>734</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Contact_Point_Email</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>individualId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Contact_Point_Email</name>
         <label>Get Contact Point Email</label>
-        <locationX>578</locationX>
-        <locationY>734</locationY>
+        <locationX>754</locationX>
+        <locationY>854</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -640,7 +864,7 @@
             <field>ParentId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Individual.Id</elementReference>
+                <elementReference>individualId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -650,8 +874,8 @@
     <recordLookups>
         <name>Get_Contact_Point_Phone</name>
         <label>Get Contact Point Phone</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>754</locationX>
+        <locationY>974</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -662,7 +886,7 @@
             <field>ParentId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Individual.Id</elementReference>
+                <elementReference>individualId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -670,10 +894,32 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_CP_Address_Delete</name>
+        <label>Get CP Address Delete</label>
+        <locationX>1194</locationX>
+        <locationY>1454</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_CP_Email_Delete</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>individualId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_CP_Email_Delete</name>
         <label>Get CP Email Delete</label>
-        <locationX>952</locationX>
-        <locationY>1334</locationY>
+        <locationX>1194</locationX>
+        <locationY>1574</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -684,7 +930,7 @@
             <field>ParentId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Individual.Id</elementReference>
+                <elementReference>individualId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -694,8 +940,8 @@
     <recordLookups>
         <name>Get_CP_Phone_Delete</name>
         <label>Get CP Phone Delete</label>
-        <locationX>952</locationX>
-        <locationY>1454</locationY>
+        <locationX>1194</locationX>
+        <locationY>1694</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -706,7 +952,7 @@
             <field>ParentId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Individual.Id</elementReference>
+                <elementReference>individualId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -716,8 +962,8 @@
     <recordLookups>
         <name>Get_Data_Use_Purposes</name>
         <label>Get Data Use Purposes</label>
-        <locationX>578</locationX>
-        <locationY>974</locationY>
+        <locationX>754</locationX>
+        <locationY>1094</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -738,12 +984,12 @@
     <recordLookups>
         <name>Get_Individual</name>
         <label>Get Individual</label>
-        <locationX>578</locationX>
+        <locationX>754</locationX>
         <locationY>614</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Contact_Point_Email</targetReference>
+            <targetReference>Get_Contact_Point_Address</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -760,7 +1006,7 @@
     <recordLookups>
         <name>Get_Lead</name>
         <label>Get Lead</label>
-        <locationX>578</locationX>
+        <locationX>754</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -782,7 +1028,7 @@
     <recordLookups>
         <name>Get_PersonAccount</name>
         <label>Get PersonAccount</label>
-        <locationX>314</locationX>
+        <locationX>490</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -805,7 +1051,7 @@
     <recordLookups>
         <name>Get_User</name>
         <label>Get User</label>
-        <locationX>842</locationX>
+        <locationX>1018</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -828,8 +1074,8 @@
     <screens>
         <name>screenAction</name>
         <label>Select Action</label>
-        <locationX>578</locationX>
-        <locationY>1094</locationY>
+        <locationX>754</locationX>
+        <locationY>1214</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -852,8 +1098,8 @@
     <screens>
         <name>screenDelete</name>
         <label>Delete Contact Point</label>
-        <locationX>952</locationX>
-        <locationY>1574</locationY>
+        <locationX>1194</locationX>
+        <locationY>1814</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -876,14 +1122,22 @@
             <fieldType>MultiSelectPicklist</fieldType>
             <isRequired>false</isRequired>
         </fields>
+        <fields>
+            <name>Select_Address_to_Delete</name>
+            <choiceReferences>cpAddressDeleteRecords</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Address to Delete</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>screenNew</name>
         <label>New Contact Point</label>
-        <locationX>204</locationX>
-        <locationY>1334</locationY>
+        <locationX>314</locationX>
+        <locationY>1454</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -894,6 +1148,7 @@
             <name>newCPType</name>
             <choiceReferences>cpTypeEmail</choiceReferences>
             <choiceReferences>cpTypePhone</choiceReferences>
+            <choiceReferences>cpTypeAddress</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Select Contact Point Type</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -958,11 +1213,50 @@
                 </conditions>
             </visibilityRule>
         </fields>
+        <fields>
+            <name>Address_Name</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>Mailing Address</stringValue>
+            </defaultValue>
+            <fieldText>Address Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>newCPType</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>cpTypeAddress</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>cpNewAddress</name>
+            <extensionName>flowruntime:address</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputsOnNextNavToAssocScrn
+      >UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>newCPType</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>cpTypeAddress</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>452</locationX>
+        <locationX>628</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Check_Object</targetReference>
@@ -1002,6 +1296,13 @@
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varCPAddressDelete</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
