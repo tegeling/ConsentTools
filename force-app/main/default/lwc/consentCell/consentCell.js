@@ -2,14 +2,14 @@
  * @description       :
  * @author            : dirk.gronert@salesforce.com
  * @group             :
- * @last modified on  : 03-17-2022
+ * @last modified on  : 03-20-2022
  * @last modified by  : tegeling
  **/
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import { refreshApex } from "@salesforce/apex";
 import getContactPointConsent from "@salesforce/apex/ConsentController.getContactPointConsent";
 import updateContactPointConsent from "@salesforce/apex/ConsentController.updateContactPointConsent";
+import createContactPointConsent from "@salesforce/apex/ConsentController.createContactPointConsent";
 
 export default class ConsentCell extends LightningElement {
   @api cpId;
@@ -26,29 +26,56 @@ export default class ConsentCell extends LightningElement {
   }
 
   async $insertUpdateCPC() {
-    try {
-      // Pass edited fields to the updateContacts Apex controller
-      await updateContactPointConsent({
-        contactPointConsentId: this.cpc.Id,
+    if (this.cpc.Id === undefined) {
+      // create new CPC
+      createContactPointConsent({
+        contactPointId: this.cpc.ContactPointId,
+        dataUsePurposeId: this.cpc.DataUsePurposeId,
         privacyConsentStatus: this.cpc.PrivacyConsentStatus
-      });
-      this.dispatchEvent(
-        new ShowToastEvent({
-          title: "Success",
-          message: "Consent updated",
-          variant: "success"
+      })
+        .then((result) => {
+          this.cpc.Id = result;
+          this.dispatchEvent(
+            new ShowToastEvent({
+              title: "Success",
+              message: "Consent updated",
+              variant: "success"
+            })
+          );
         })
-      );
-      // Display fresh data in the datatable
-      await refreshApex(this.cpc);
-    } catch (error) {
-      this.dispatchEvent(
-        new ShowToastEvent({
-          title: "Error creating consent",
-          message: error.body.message,
-          variant: "error"
-        })
-      );
+        .catch((error) => {
+          console.log(JSON.stringify(error));
+          this.dispatchEvent(
+            new ShowToastEvent({
+              title: "Error creating consent",
+              message: error.body.message,
+              variant: "error"
+            })
+          );
+        });
+    } else {
+      // update existing CPC
+      try {
+        await updateContactPointConsent({
+          contactPointConsentId: this.cpc.Id,
+          privacyConsentStatus: this.cpc.PrivacyConsentStatus
+        });
+        this.dispatchEvent(
+          new ShowToastEvent({
+            title: "Success",
+            message: "Consent updated",
+            variant: "success"
+          })
+        );
+      } catch (error) {
+        this.dispatchEvent(
+          new ShowToastEvent({
+            title: "Error creating consent",
+            message: error.body.message,
+            variant: "error"
+          })
+        );
+      }
     }
   }
 

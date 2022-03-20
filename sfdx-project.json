@@ -4,9 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "Consent Tools",
-      "versionName": "Spring '22 v1.1.4",
-      "versionDescription": "Spring '22 v1.1.4 Release - Contact Point Address support added",
-      "versionNumber": "1.1.4.NEXT",
+      "versionName": "Spring '22 v1.1.5",
+      "versionDescription": "Spring '22 v1.1.5 Release - consent tools are more resilient",
+      "versionNumber": "1.1.5.NEXT",
       "definitionFile": "config/project-scratch-def.json",
       "releaseNotesUrl": "https://github.com/tegeling/ConsentTools",
       "postInstallUrl": "https://github.com/tegeling/ConsentTools"
@@ -20,6 +20,7 @@
     "Consent Tools": "0Ho7Q000000GmhtSAC",
     "Consent Tools@1.1.2-1": "04t7Q000000DeR9QAK",
     "Consent Tools@1.1.3-1": "04t7Q000000Deo3QAC",
-    "Consent Tools@1.1.4-1": "04t7Q000000DesGQAS"
+    "Consent Tools@1.1.4-1": "04t7Q000000DesGQAS",
+    "Consent Tools@1.1.5-1": "04t7Q000000DewTQAS"
   }
 }

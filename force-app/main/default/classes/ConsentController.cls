@@ -82,7 +82,7 @@ public with sharing class ConsentController {
     // Init CPT wrapper
     List<ConsentWrapper.ContactPointType> cptsWrapper = new List<ConsentWrapper.ContactPointType>();
 
-    // Get Contact Point Addresses
+    // Get Contact Point Address
     List<ContactPointAddress> cpsAddress = [
       SELECT Id, Name
       FROM ContactPointAddress
@@ -103,9 +103,11 @@ public with sharing class ConsentController {
       cpsAddressWrapper.add(cpWrapper);
     }
     cptAddress.cps = cpsAddressWrapper;
-    cptsWrapper.add(cptAddress);
+    if (cpsAddress.size() > 0) {
+      cptsWrapper.add(cptAddress);
+    }
 
-    // Get Contact Point Emails
+    // Get Contact Point Email
     List<ContactPointEmail> cpsEmail = [
       SELECT Id, EmailAddress
       FROM ContactPointEmail
@@ -126,7 +128,9 @@ public with sharing class ConsentController {
       cpsEmailWrapper.add(cpWrapper);
     }
     cptEmail.cps = cpsEmailWrapper;
-    cptsWrapper.add(cptEmail);
+    if (cpsEmail.size() > 0) {
+      cptsWrapper.add(cptEmail);
+    }
 
     // Get Contact Point Phone
     List<ContactPointPhone> cpsPhone = [
@@ -149,7 +153,9 @@ public with sharing class ConsentController {
       cpsPhonenWrapper.add(cpWrapper);
     }
     cptPhone.cps = cpsPhonenWrapper;
-    cptsWrapper.add(cptPhone);
+    if (cpsPhone.size() > 0) {
+      cptsWrapper.add(cptPhone);
+    }
 
     // compile response
     ConsentWrapper response = new ConsentWrapper();
@@ -181,10 +187,9 @@ public with sharing class ConsentController {
     String contactPointConsentId,
     String privacyConsentStatus
   ) {
-    // Make sure we can update the database before trying to update
     if (!Schema.sObjectType.ContactPointConsent.isUpdateable()) {
       throw new SecurityException(
-        'Insufficient permissions to update contacts'
+        'Insufficient permissions to update ContactPointConsent'
       );
     }
     ContactPointConsent cpc = [
@@ -196,5 +201,92 @@ public with sharing class ConsentController {
     ];
     cpc.PrivacyConsentStatus = privacyConsentStatus;
     update cpc;
+  }
+  @AuraEnabled
+  public static String createContactPointConsent(
+    String contactPointId,
+    String dataUsePurposeId,
+    String privacyConsentStatus
+  ) {
+    if (!Schema.sObjectType.ContactPointConsent.isCreateable()) {
+      throw new SecurityException(
+        'Insufficient permissions to create ContactPointConsent'
+      );
+    }
+    String individualId;
+    String cpName;
+    if (contactPointId.startsWith('8lW')) {
+      // Contact Point Address
+      ContactPointAddress cpAddress = [
+        SELECT ParentId, Name
+        FROM ContactPointAddress
+        WHERE Id = :contactPointId
+        WITH SECURITY_ENFORCED
+        LIMIT 1
+      ];
+      individualId = cpAddress.ParentId;
+      cpName = cpAddress.Name;
+    } else if (contactPointId.startsWith('9Vl')) {
+      // Contact Point Email
+      ContactPointEmail cpEmail = [
+        SELECT ParentId, Name
+        FROM ContactPointEmail
+        WHERE Id = :contactPointId
+        WITH SECURITY_ENFORCED
+        LIMIT 1
+      ];
+      individualId = cpEmail.ParentId;
+      cpName = cpEmail.Name;
+    } else if (contactPointId.startsWith('0Ow')) {
+      // Contact Point Phone
+      ContactPointPhone cpPhone = [
+        SELECT ParentId, Name
+        FROM ContactPointPhone
+        WHERE Id = :contactPointId
+        WITH SECURITY_ENFORCED
+        LIMIT 1
+      ];
+      individualId = cpPhone.ParentId;
+      cpName = cpPhone.Name;
+    } else {
+      // unknown Contact Point
+      throw new ConsentController.ConsentException(
+        'Unknown Contact Point record'
+      );
+    }
+    Individual i = [
+      SELECT FirstName, LastName, OwnerId
+      FROM Individual
+      WHERE Id = :individualId
+      WITH SECURITY_ENFORCED
+      LIMIT 1
+    ];
+    DataUsePurpose dup = [
+      SELECT Name
+      FROM DataUsePurpose
+      WHERE Id = :dataUsePurposeId
+      WITH SECURITY_ENFORCED
+      LIMIT 1
+    ];
+    // compose CPC Name
+    String cpcName =
+      i.FirstName +
+      ' ' +
+      i.LastName +
+      ' - ' +
+      cpName +
+      ' - ' +
+      dup.Name;
+    ContactPointConsent cpc = new ContactPointConsent(
+      Name = cpcName,
+      ContactPointId = contactPointId,
+      DataUsePurposeId = dataUsePurposeId,
+      PrivacyConsentStatus = privacyConsentStatus,
+      OwnerId = i.OwnerId
+    );
+    insert cpc;
+    return cpc.Id;
+  }
+  public class ConsentException extends Exception {
   }
 }
