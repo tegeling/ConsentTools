@@ -125,7 +125,7 @@ public with sharing class Test_ConsentController {
     Test.stopTest();
   }
   @isTest
-  static void doContactUpdateCPCTest() {
+  static void doUpdateContactPointConsentTest() {
     // setup test data
     Account a = new Account(Name = 'TestAccount');
     insert a;
@@ -147,12 +147,6 @@ public with sharing class Test_ConsentController {
       IsPrimary = true
     );
     insert cpEmail;
-    ContactPointPhone cpPhone = new ContactPointPhone(
-      ParentId = i.Id,
-      TelephoneNumber = '0123456',
-      IsPrimary = true
-    );
-    insert cpPhone;
     DataUsePurpose dup = new DataUsePurpose(
       Name = 'DUP',
       CanDataSubjectOptOut = true
@@ -165,16 +159,55 @@ public with sharing class Test_ConsentController {
       PrivacyConsentStatus = 'OptOut'
     );
     insert cpcEmail;
-    ContactPointConsent cpcPhone = new ContactPointConsent(
-      ContactPointId = cpPhone.Id,
-      DataUsePurposeId = dup.Id,
-      Name = 'Phone Consent',
-      PrivacyConsentStatus = 'OptOut'
-    );
-    insert cpcPhone;
 
     Test.startTest();
     ConsentController.updateContactPointConsent(cpcEmail.Id, 'OptIn');
+    Test.stopTest();
+  }
+  @isTest
+  static void doCreateContactPointConsentTest() {
+    // setup test data
+    Account a = new Account(Name = 'TestAccount');
+    insert a;
+    Individual i = new Individual(
+      FirstName = 'TestFirstname',
+      LastName = 'TestLastname'
+    );
+    insert i;
+    Contact c = new Contact(
+      AccountId = a.Id,
+      FirstName = i.FirstName,
+      LastName = i.LastName,
+      IndividualId = i.Id
+    );
+    insert c;
+    ContactPointAddress cpAddress = new ContactPointAddress(
+      ParentId = i.Id,
+      Name = 'Mailing Address'
+    );
+    insert cpAddress;
+    ContactPointEmail cpEmail = new ContactPointEmail(
+      ParentId = i.Id,
+      EmailAddress = 'test@gmail.com',
+      IsPrimary = true
+    );
+    insert cpEmail;
+    ContactPointPhone cpPhone = new ContactPointPhone(
+      ParentId = i.Id,
+      TelephoneNumber = '0123456',
+      IsPrimary = true
+    );
+    insert cpPhone;
+    DataUsePurpose dup = new DataUsePurpose(
+      Name = 'DUP',
+      CanDataSubjectOptOut = true
+    );
+    insert dup;
+
+    Test.startTest();
+    ConsentController.createContactPointConsent(cpAddress.Id, dup.Id, 'OptIn');
+    ConsentController.createContactPointConsent(cpEmail.Id, dup.Id, 'OptIn');
+    ConsentController.createContactPointConsent(cpPhone.Id, dup.Id, 'OptIn');
     Test.stopTest();
   }
   @isTest
