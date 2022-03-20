@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-17-2022
+ * @last modified on  : 03-20-2022
  * @last modified by  : tegeling
  **/
 public with sharing class ConsentController {
@@ -79,6 +79,32 @@ public with sharing class ConsentController {
       dupsWrapper.add(dupWrapper);
     }
 
+    // Init CPT wrapper
+    List<ConsentWrapper.ContactPointType> cptsWrapper = new List<ConsentWrapper.ContactPointType>();
+
+    // Get Contact Point Addresses
+    List<ContactPointAddress> cpsAddress = [
+      SELECT Id, Name
+      FROM ContactPointAddress
+      WHERE ParentId = :individualId
+      WITH SECURITY_ENFORCED
+    ];
+    ConsentWrapper.ContactPointType cptAddress = new ConsentWrapper.ContactPointType();
+    cptAddress.id = 'Address';
+    cptAddress.label = 'Address';
+    cptAddress.icon = 'utility:home';
+    cptAddress.color = 'background-color:' + rgbaAddress + ';';
+    List<ConsentWrapper.ContactPoint> cpsAddressWrapper = new List<ConsentWrapper.ContactPoint>();
+
+    for (ContactPointAddress cpAddress : cpsAddress) {
+      ConsentWrapper.ContactPoint cpWrapper = new ConsentWrapper.ContactPoint();
+      cpWrapper.id = cpAddress.Id;
+      cpWrapper.label = cpAddress.Name;
+      cpsAddressWrapper.add(cpWrapper);
+    }
+    cptAddress.cps = cpsAddressWrapper;
+    cptsWrapper.add(cptAddress);
+
     // Get Contact Point Emails
     List<ContactPointEmail> cpsEmail = [
       SELECT Id, EmailAddress
@@ -86,7 +112,6 @@ public with sharing class ConsentController {
       WHERE ParentId = :individualId
       WITH SECURITY_ENFORCED
     ];
-    List<ConsentWrapper.ContactPointType> cptsWrapper = new List<ConsentWrapper.ContactPointType>();
     ConsentWrapper.ContactPointType cptEmail = new ConsentWrapper.ContactPointType();
     cptEmail.id = 'Email';
     cptEmail.label = 'Email';

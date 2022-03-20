@@ -2,10 +2,26 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>54.0</apiVersion>
     <assignments>
+        <name>Add_CPC_Address_to_CPC_Update</name>
+        <label>Add CPC Address to CPC Update</label>
+        <locationX>314</locationX>
+        <locationY>1295</locationY>
+        <assignmentItems>
+            <assignToReference>cpcUpdate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>For_each_CPC_Address</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>For_each_CPC_Address</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Add_CPC_Email_to_CPC_Update</name>
         <label>Add CPC Email to CPC Update</label>
         <locationX>314</locationX>
-        <locationY>1175</locationY>
+        <locationY>2087</locationY>
         <assignmentItems>
             <assignToReference>cpcUpdate</assignToReference>
             <operator>Add</operator>
@@ -21,7 +37,7 @@
         <name>Add_CPC_Phone_to_CPC_Update</name>
         <label>Add CPC Phone to CPC Update</label>
         <locationX>314</locationX>
-        <locationY>1967</locationY>
+        <locationY>2879</locationY>
         <assignmentItems>
             <assignToReference>cpcUpdate</assignToReference>
             <operator>Add</operator>
@@ -34,10 +50,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Set_CPC_Address_Owner</name>
+        <label>Set CPC Address Owner</label>
+        <locationX>314</locationX>
+        <locationY>1175</locationY>
+        <assignmentItems>
+            <assignToReference>For_each_CPC_Address.OwnerId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_CPC_Address_to_CPC_Update</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_CPC_Email_Owner</name>
         <label>Set CPC Email Owner</label>
         <locationX>314</locationX>
-        <locationY>1055</locationY>
+        <locationY>1967</locationY>
         <assignmentItems>
             <assignToReference>For_each_CPC_Email.OwnerId</assignToReference>
             <operator>Assign</operator>
@@ -53,7 +85,7 @@
         <name>Set_CPC_Phone_Owner</name>
         <label>Set CPC Phone Owner</label>
         <locationX>314</locationX>
-        <locationY>1847</locationY>
+        <locationY>2759</locationY>
         <assignmentItems>
             <assignToReference>For_each_CPC_Phone.OwnerId</assignToReference>
             <operator>Assign</operator>
@@ -82,7 +114,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Get_Contact_Point_Email</targetReference>
+                <targetReference>Get_Contact_Point_Address</targetReference>
             </connector>
             <label>Is changed</label>
         </rules>
@@ -93,10 +125,24 @@
   >IndividualTriggerChangeOwner {!$Flow.CurrentDateTime}</interviewLabel>
     <label>IndividualTriggerChangeOwner</label>
     <loops>
+        <name>For_each_CP_Address</name>
+        <label>For each CP Address</label>
+        <locationX>50</locationX>
+        <locationY>815</locationY>
+        <collectionReference>Get_Contact_Point_Address</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_CPC_Address</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>For_each_CP_Email</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>For_each_CP_Email</name>
         <label>For each CP Email</label>
         <locationX>50</locationX>
-        <locationY>695</locationY>
+        <locationY>1607</locationY>
         <collectionReference>Get_Contact_Point_Email</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -110,7 +156,7 @@
         <name>For_each_CP_Phone</name>
         <label>For each CP Phone</label>
         <locationX>50</locationX>
-        <locationY>1487</locationY>
+        <locationY>2399</locationY>
         <collectionReference>Get_Contact_Point_Phone</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -121,10 +167,24 @@
         </noMoreValuesConnector>
     </loops>
     <loops>
+        <name>For_each_CPC_Address</name>
+        <label>For each CPC Address</label>
+        <locationX>226</locationX>
+        <locationY>1055</locationY>
+        <collectionReference>Get_CPC_Address</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_CPC_Address_Owner</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>For_each_CP_Address</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>For_each_CPC_Email</name>
         <label>For each CPC Email</label>
         <locationX>226</locationX>
-        <locationY>935</locationY>
+        <locationY>1847</locationY>
         <collectionReference>Get_CPC_Email</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -138,7 +198,7 @@
         <name>For_each_CPC_Phone</name>
         <label>For each CPC Phone</label>
         <locationX>226</locationX>
-        <locationY>1727</locationY>
+        <locationY>2639</locationY>
         <collectionReference>Get_CPC_Phone</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -168,10 +228,32 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
+        <name>Get_Contact_Point_Address</name>
+        <label>Get Contact Point Address</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Contact_Point_Email</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointAddress</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Contact_Point_Email</name>
         <label>Get Contact Point Email</label>
         <locationX>50</locationX>
-        <locationY>455</locationY>
+        <locationY>575</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -193,11 +275,11 @@
         <name>Get_Contact_Point_Phone</name>
         <label>Get Contact Point Phone</label>
         <locationX>50</locationX>
-        <locationY>575</locationY>
+        <locationY>695</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>For_each_CP_Email</targetReference>
+            <targetReference>For_each_CP_Address</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -212,10 +294,32 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_CPC_Address</name>
+        <label>Get CPC Address</label>
+        <locationX>226</locationX>
+        <locationY>935</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>For_each_CPC_Address</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactPointId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>For_each_CP_Address.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointConsent</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_CPC_Email</name>
         <label>Get CPC Email</label>
         <locationX>226</locationX>
-        <locationY>815</locationY>
+        <locationY>1727</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -237,7 +341,7 @@
         <name>Get_CPC_Phone</name>
         <label>Get CPC Phone</label>
         <locationX>226</locationX>
-        <locationY>1607</locationY>
+        <locationY>2519</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -259,7 +363,7 @@
         <name>Update_CPC</name>
         <label>Update CPC</label>
         <locationX>50</locationX>
-        <locationY>2279</locationY>
+        <locationY>3191</locationY>
         <inputReference>cpcUpdate</inputReference>
     </recordUpdates>
     <start>

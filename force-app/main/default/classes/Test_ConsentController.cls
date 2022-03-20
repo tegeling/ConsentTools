@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-19-2022
+ * @last modified on  : 03-20-2022
  * @last modified by  : tegeling
  **/
 @isTest(SeeAllData=false)
@@ -24,6 +24,11 @@ public with sharing class Test_ConsentController {
       IndividualId = i.Id
     );
     insert c;
+    ContactPointAddress cpAddress = new ContactPointAddress(
+      ParentId = i.Id,
+      Name = 'Mailing Address'
+    );
+    insert cpAddress;
     ContactPointEmail cpEmail = new ContactPointEmail(
       ParentId = i.Id,
       EmailAddress = 'test@gmail.com',
@@ -197,6 +202,11 @@ public with sharing class Test_ConsentController {
       PersonIndividualId = i.Id
     );
     insert a;
+    ContactPointAddress cpAddress = new ContactPointAddress(
+      ParentId = i.Id,
+      Name = 'Mailing Address'
+    );
+    insert cpAddress;
     ContactPointEmail cpEmail = new ContactPointEmail(
       ParentId = i.Id,
       EmailAddress = 'test@gmail.com',
@@ -252,6 +262,11 @@ public with sharing class Test_ConsentController {
       IndividualId = i.Id
     );
     insert l;
+    ContactPointAddress cpAddress = new ContactPointAddress(
+      ParentId = i.Id,
+      Name = 'Mailing Address'
+    );
+    insert cpAddress;
     ContactPointEmail cpEmail = new ContactPointEmail(
       ParentId = i.Id,
       EmailAddress = 'test@gmail.com',
