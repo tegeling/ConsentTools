@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-20-2022
+ * @last modified on  : 03-21-2022
  * @last modified by  : tegeling
  **/
 public with sharing class ConsentController {
@@ -60,7 +60,7 @@ public with sharing class ConsentController {
       individualId = a.PersonIndividualId;
     } else {
       // Object is not supported
-      return new ConsentWrapper();
+      throw new ConsentController.ConsentException('Unsupported object');
     }
 
     // Get Data Use Purposes
@@ -188,7 +188,7 @@ public with sharing class ConsentController {
     String privacyConsentStatus
   ) {
     if (!Schema.sObjectType.ContactPointConsent.isUpdateable()) {
-      throw new SecurityException(
+      throw new ConsentController.ConsentException(
         'Insufficient permissions to update ContactPointConsent'
       );
     }
@@ -209,7 +209,7 @@ public with sharing class ConsentController {
     String privacyConsentStatus
   ) {
     if (!Schema.sObjectType.ContactPointConsent.isCreateable()) {
-      throw new SecurityException(
+      throw new ConsentController.ConsentException(
         'Insufficient permissions to create ContactPointConsent'
       );
     }
