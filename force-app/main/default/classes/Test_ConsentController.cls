@@ -779,9 +779,16 @@ public with sharing class Test_ConsentController {
   @isTest
   static void doUserGetConsentTest() {
     // setup test data
-    User thisUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
+    User adminUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
+    UserRole userrole = new UserRole(
+      DeveloperName = 'MyCustomRole',
+      Name = 'My Role'
+    );
+    insert userrole;
+    adminUser.UserRoleId = userRole.Id;
+    update adminUser;
     User u1 = null;
-    System.runAs(thisUser) {
+    System.runAs(adminUser) {
       Account a = new Account(Name = 'TestAccount');
       insert a;
       Individual i = new Individual(
@@ -877,6 +884,7 @@ public with sharing class Test_ConsentController {
     }
     Test.stopTest();
     // check results
+    // need manual sharing rules to see DUP record
     System.assertEquals(
       1,
       response?.dups?.size(),
