@@ -285,6 +285,12 @@
         <expression
     >&apos;Phone - &apos; + {!$Record.FirstName} + &apos; &apos; + {!$Record.LastName} + &apos; - &apos; + {!For_each_DUP_CPTC_Phone.Name}</expression>
     </formulas>
+    <formulas>
+        <name>calcEmailConsentStatus</name>
+        <dataType>String</dataType>
+        <expression
+    >if ({!$Record.HasOptedOutOfEmail}, &apos;OptOut&apos;, &apos;OptIn&apos;)</expression>
+    </formulas>
     <interviewLabel>ContactAfter {!$Flow.CurrentDateTime}</interviewLabel>
     <label>ContactTriggerSetIndividual</label>
     <loops>
@@ -560,7 +566,7 @@
         <inputAssignments>
             <field>PrivacyConsentStatus</field>
             <value>
-                <stringValue>OptOut</stringValue>
+                <elementReference>calcEmailConsentStatus</elementReference>
             </value>
         </inputAssignments>
         <object>ContactPointConsent</object>
@@ -709,7 +715,7 @@
         <inputAssignments>
             <field>PrivacyConsentStatus</field>
             <value>
-                <stringValue>OptOut</stringValue>
+                <elementReference>calcEmailConsentStatus</elementReference>
             </value>
         </inputAssignments>
         <object>ContactPointTypeConsent</object>
