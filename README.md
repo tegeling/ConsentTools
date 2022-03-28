@@ -22,7 +22,15 @@ There are several Flows that support the consent automation.
 
 ### LeadTriggerSetIndividual, ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual
 
-These flows check if Lead, Contact or PersonAccount records have an Individual record assigned. If missing, the flows create a new Individual record and all related Contact Points, Contact Point Type Consent and Contact Point Consent records for each Data Use Purpose. The Privacy Consent Status is set to default Opt Out.
+These flows check if Lead, Contact or PersonAccount records have an Individual record assigned. If missing, the flows create a new Individual record and all related Contact Points, Contact Point Type Consent and Contact Point Consent records for each Data Use Purpose. The Privacy Consent Status for address and phone is set to default Opt Out. Email Privacy Consent Status is set to Opt Out if HasOptedOutOfEmail is true, otherwise to Opt In.
+
+### LeadTriggerEmailOptOut, ContactTriggerEmailOptOut and PersonAccountTriggerEmailOptOut
+
+All flows are triggered when HasOptedOutOfEmail field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfEmailSub to update related consent records and set the status either to Opt In or Opt Out.
+
+### LeadTriggerPhoneOptOut, ContactTriggerPhoneOptOut and PersonAccountTriggerPhoneOptOut
+
+All flows are triggered when DoNotCall field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfPhoneSub to update related consent records and set the status either to Opt In or Opt Out.
 
 ### IndividualTriggerCleanup
 
@@ -42,7 +50,7 @@ This package contains various LWC to support consent management.
 
 ### Consent Settings
 
-Thic LWC can be placed on Lead or Contact records pages or on community pages. It dynamically shows a grid of toggles to either opt in or opt out per Contact Point and Data Use Purpose. It can be deployed as a preference center on a community page.
+This LWC can be placed on Lead or Contact records pages or on community pages. It dynamically shows a grid of toggles to either opt in or opt out per Contact Point and Data Use Purpose. It can be deployed as a preference center on a community page.
 Data Use Purpose records are filtered by `CanDataSubjectOptOut = TRUE`.
 
 ![Contact Record Page](./images/ConsentTools.png)
@@ -172,8 +180,8 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DfIUQA0
-   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DfIUQA0) to install the Consent Tools unlocked package in your org.
+1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DgvqQAC
+   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DgvqQAC) to install the Consent Tools unlocked package in your org.
 
 1. Select **Install for All Users**
 
