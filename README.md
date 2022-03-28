@@ -180,8 +180,8 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DfIUQA0
-   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DfIUQA0) to install the Consent Tools unlocked package in your org.
+1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DgvqQAC
+   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DgvqQAC) to install the Consent Tools unlocked package in your org.
 
 1. Select **Install for All Users**
 
