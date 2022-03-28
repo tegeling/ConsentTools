@@ -28,6 +28,10 @@ These flows check if Lead, Contact or PersonAccount records have an Individual r
 
 All flows are triggered when HasOptedOutOfEmail field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfEmailSub to update related consent records and set the status either to Opt In or Opt Out.
 
+### LeadTriggerPhoneOptOut, ContactTriggerPhoneOptOut and PersonAccountTriggerPhoneOptOut
+
+All flows are triggered when DoNotCall field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfPhoneSub to update related consent records and set the status either to Opt In or Opt Out.
+
 ### IndividualTriggerCleanup
 
 To easily cleanup an Individual record, this flow iterates through all related privacy objects and removes related records. The flow can be started via a Record Update (like a button action).
