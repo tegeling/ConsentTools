@@ -20,7 +20,7 @@ public with sharing class ConsentHistoryInvocable {
         r.dupId,
         r.timeStamp
       );
-      consentHistoryList.add(cpc.PrivacyConsentStatus);
+      consentHistoryList.add(cpc?.PrivacyConsentStatus);
     }
     return consentHistoryList;
   }
