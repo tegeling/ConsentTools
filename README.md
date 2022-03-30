@@ -44,6 +44,10 @@ This flow triggers after update of Individual records and sets record owner of r
 
 This screen flow can be placed on Lead, PersonAccoount, Contact record pages or Community pages to either create new Contact Point records or delete existing records. When used for Community pages pass in `{!CurrentUser.id}` as record id.
 
+### LeadButtonCheckConsentHistory, ContactButtonCheckConsentHistory, PersonAccountButtonCheckConsentHistory and ContactPointConsentHistorySub
+
+This screeen flow can be used to check the privacy status of a specific Contact Point Consent record for a given timestamp. It calculates the previous values out of field history tracking.
+
 ## Lightning Web Components
 
 This package contains various LWC to support consent management.

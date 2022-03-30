@@ -208,7 +208,13 @@ public with sharing class ConsentController {
         cpch.add(cpch3);
       } else {
         List<ContactPointConsentHistory> cpchRecords = [
-          SELECT Id, CreatedDate, OldValue, NewValue
+          SELECT
+            Id,
+            ContactPointConsentId,
+            Field,
+            CreatedDate,
+            OldValue,
+            NewValue
           FROM ContactPointConsentHistory
           WHERE
             ContactPointConsentId = :cpc[0].Id
