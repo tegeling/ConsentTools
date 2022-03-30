@@ -294,3 +294,5 @@ force-app/main/default/objects/Lead/webLinks/YahooMaps.webLink-meta.xml
 force-app/main/default/layouts/Lead-Lead Layout.layout-meta.xml
 force-app/main/default/flexipages/Lead_Record_Page.flexipage-meta.xml
 force-app/main/default/layouts/ContactPointAddress-Contact Point Address Layout.layout-meta.xml
+force-app/main/default/layouts/Contact-Contact Layout.layout-meta.xml
+force-app/main/default/layouts/ContactPointConsent-Contact Point Consent Layout.layout-meta.xml

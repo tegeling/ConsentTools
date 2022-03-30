@@ -2,10 +2,10 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-10-2022
+ * @last modified on  : 03-30-2022
  * @last modified by  : tegeling
  **/
-public without sharing class ConsentWrapper {
+public with sharing class ConsentWrapper {
   @TestVisible
   public class DataUsePurpose {
     @AuraEnabled
