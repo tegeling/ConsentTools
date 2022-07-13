@@ -8,12 +8,25 @@
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getContactPointConsent from "@salesforce/apex/ConsentController.getContactPointConsent";
+import getContactPointConsentHistory from "@salesforce/apex/ConsentController.getContactPointConsentHistory";
 import updateContactPointConsent from "@salesforce/apex/ConsentController.updateContactPointConsent";
 import createContactPointConsent from "@salesforce/apex/ConsentController.createContactPointConsent";
 
 export default class ConsentCell extends LightningElement {
+  isDisabled = false;
   @api cpId;
   @api dupId;
+  _getconsentdate;
+  @api set getconsentdate(consentdate){
+    //debugger;
+    this._getconsentdate = consentdate;    
+    if (consentdate != null){
+      this.isDisabled = true;      
+    }
+    this.$fetchContactPointConsent();
+  }
+  get getconsentdate(){return this._getconsentdate}
+  
   cpc;
 
   hdlChange(evt) {
@@ -80,32 +93,69 @@ export default class ConsentCell extends LightningElement {
   }
 
   async $fetchContactPointConsent() {
-    getContactPointConsent({
-      contactPointId: this.cpId,
-      dataUsePurposeId: this.dupId
-    })
-      .then((result) => {
-        this.cpc = result
-          ? JSON.parse(JSON.stringify(result))
-          : {
-              Id: undefined,
-              PrivacyConsentStatus: "OptOut",
-              ContactPointId: this.cpId,
-              DataUsePurposeId: this.dupId
-            };
+    //debugger;
+    if (this.getconsentdate == null)
+    {
+      getContactPointConsent({
+        contactPointId: this.cpId,
+        dataUsePurposeId: this.dupId
       })
-      .catch((error) => {
-        this.cpc = {
-          Id: undefined,
-          PrivacyConsentStatus: "OptOut",
-          ContactPointId: this.cpId,
-          DataUsePurposeId: this.dupId
-        };
-        console.log(JSON.parse(JSON.stringify(error)));
-      });
-  }
+        .then((result) => {
+          this.cpc = result
+            ? JSON.parse(JSON.stringify(result))
+            : {
+                Id: undefined,
+                PrivacyConsentStatus: "OptOut",
+                ContactPointId: this.cpId,
+                DataUsePurposeId: this.dupId
+              };
+        })
+        .catch((error) => {
+          this.cpc = {
+            Id: undefined,
+            PrivacyConsentStatus: "OptOut",
+            ContactPointId: this.cpId,
+            DataUsePurposeId: this.dupId
+          };
+          console.log(JSON.parse(JSON.stringify(error)));
+        });
+    } else {
+      //debugger;
+      getContactPointConsentHistory({
+        contactPointId: this.cpId,
+        dataUsePurposeId: this.dupId,
+        timeStamp: this.getconsentdate
+      })
+        .then((result) => {
+          //debugger;
+          this.cpc = result
+            ? JSON.parse(JSON.stringify(result))
+            : {
+                Id: undefined,
+                PrivacyConsentStatus: "OptOut",
+                ContactPointId: this.cpId,
+                DataUsePurposeId: this.dupId
+              };
+        })
+        .catch((error) => {
+          //debugger;
+          this.cpc = {
+            Id: undefined,
+            PrivacyConsentStatus: "OptOut",
+            ContactPointId: this.cpId,
+            DataUsePurposeId: this.dupId
+          };
+          console.log(JSON.parse(JSON.stringify(error)));
+        });
 
+    }
+
+
+  }
+/*
   connectedCallback() {
+    debugger;
     this.$fetchContactPointConsent();
   }
+  */
 }

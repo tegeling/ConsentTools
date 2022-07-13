@@ -5,13 +5,13 @@
  * @last modified on  : 03-14-2022
  * @last modified by  : tegeling
  **/
-import { LightningElement, api, wire } from "lwc";
+import { LightningElement, api, wire, track } from "lwc";
 import getConsent from "@salesforce/apex/ConsentController.getConsent";
 
 export default class Consent extends LightningElement {
   dups;
   cpts;
-
+  @track consentDate;
   @api recordId;
   @api rgbaEmail;
   @api rgbaPhone;
@@ -37,6 +37,12 @@ export default class Consent extends LightningElement {
     } else if (error) {
       console.log(error);
     }
+  }
+
+  consentdateChange(event){
+    const cd = event.target.value;
+    this.consentDate = cd;
+    console.log('consent.js: consentDate --> ' + this.consentDate)
   }
 
   get ready() {

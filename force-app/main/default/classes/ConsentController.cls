@@ -169,8 +169,10 @@ public with sharing class ConsentController {
   public static ContactPointConsent getContactPointConsentHistory(
     String contactPointId,
     String dataUsePurposeId,
-    Datetime timeStamp
+    DateTime timeStamp
   ) {
+
+    //Datetime timeStamp = DateTime.parse(jstimeStamp);
     ContactPointConsent historicCPC = null;
     List<ContactPointConsent> cpc = [
       SELECT Id, PrivacyConsentStatus
