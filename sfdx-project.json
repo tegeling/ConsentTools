@@ -4,9 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "Consent Tools",
-      "versionName": "Spring '22 v1.1.7",
-      "versionDescription": "Spring '22 v1.1.7 Release - support standard opt out checkbox fields on Lead, Contact, PersonAccount",
-      "versionNumber": "1.1.7.NEXT",
+      "versionName": "Summer '22 v1.2.0",
+      "versionDescription": "Summer '22 v1.2.0 Release - check previous consent settings via time travel",
+      "versionNumber": "1.2.0.NEXT",
       "definitionFile": "config/project-scratch-def.json",
       "releaseNotesUrl": "https://github.com/tegeling/ConsentTools",
       "postInstallUrl": "https://github.com/tegeling/ConsentTools"
@@ -15,7 +15,7 @@
   "name": "ConsentTools",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "54.0",
+  "sourceApiVersion": "55.0",
   "packageAliases": {
     "Consent Tools": "0Ho7Q000000GmhtSAC",
     "Consent Tools@1.1.2-1": "04t7Q000000DeR9QAK",
@@ -23,6 +23,7 @@
     "Consent Tools@1.1.4-1": "04t7Q000000DesGQAS",
     "Consent Tools@1.1.5-1": "04t7Q000000DewTQAS",
     "Consent Tools@1.1.6-1": "04t7Q000000DfIUQA0",
-    "Consent Tools@1.1.7-1": "04t7Q000000DgvqQAC"
+    "Consent Tools@1.1.7-1": "04t7Q000000DgvqQAC",
+    "Consent Tools@1.2.0-1": "04t7Q000000EDdAQAW"
   }
 }
