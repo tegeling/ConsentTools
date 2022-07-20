@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-21-2022
+ * @last modified on  : 03-30-2022
  * @last modified by  : tegeling
  **/
 @isTest(SeeAllData=false)
@@ -203,6 +203,77 @@ public with sharing class Test_ConsentController {
       'No Email Consent should be found'
     );
   }
+  @isTest
+  static void doGetContactPointConsentHistoryTest() {
+    // setup test data
+    Account a = new Account(Name = 'TestAccount');
+    insert a;
+    Individual i = new Individual(
+      FirstName = 'TestFirstname',
+      LastName = 'TestLastname'
+    );
+    insert i;
+    Contact c = new Contact(
+      AccountId = a.Id,
+      FirstName = i.FirstName,
+      LastName = i.LastName,
+      IndividualId = i.Id
+    );
+    insert c;
+    ContactPointEmail cpEmail = new ContactPointEmail(
+      ParentId = i.Id,
+      EmailAddress = 'test@gmail.com',
+      IsPrimary = true
+    );
+    insert cpEmail;
+    DataUsePurpose dup = new DataUsePurpose(
+      Name = 'DUP',
+      CanDataSubjectOptOut = true
+    );
+    insert dup;
+    ContactPointConsent cpcEmail = new ContactPointConsent(
+      ContactPointId = cpEmail.Id,
+      DataUsePurposeId = dup.Id,
+      Name = 'Email Consent',
+      PrivacyConsentStatus = 'OptOut'
+    );
+    insert cpcEmail;
+
+    Test.startTest();
+    ContactPointConsent cpcEmail20200801 = null;
+    ContactPointConsent cpcEmail20200301 = null;
+    try {
+      cpcEmail20200801 = ConsentController.getContactPointConsentHistory(
+        cpEmail.Id,
+        dup.Id,
+        datetime.newInstance(2020, 8, 1)
+      );
+      cpcEmail20200301 = ConsentController.getContactPointConsentHistory(
+        cpEmail.Id,
+        dup.Id,
+        datetime.newInstance(2020, 3, 1)
+      );
+    } catch (Exception e) {
+      system.assert(
+        false,
+        'The getContactPointConsentHistory method fails with exception'
+      );
+    }
+    Test.stopTest();
+
+    // check results
+    System.assertEquals(
+      'OptIn',
+      cpcEmail20200801?.PrivacyConsentStatus,
+      'Historical Email Consent should be OptIn'
+    );
+    System.assertEquals(
+      'OptOut',
+      cpcEmail20200301?.PrivacyConsentStatus,
+      'Historical Email Consent should be OptOut'
+    );
+  }
+
   @isTest
   static void doContactNoCPSTest() {
     // setup test data

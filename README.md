@@ -44,6 +44,10 @@ This flow triggers after update of Individual records and sets record owner of r
 
 This screen flow can be placed on Lead, PersonAccoount, Contact record pages or Community pages to either create new Contact Point records or delete existing records. When used for Community pages pass in `{!CurrentUser.id}` as record id.
 
+### LeadButtonCheckConsentHistory, ContactButtonCheckConsentHistory, PersonAccountButtonCheckConsentHistory and ContactPointConsentHistorySub
+
+This screeen flow can be used to check the privacy status of a specific Contact Point Consent record for a given timestamp. It calculates the previous values out of field history tracking.
+
 ## Lightning Web Components
 
 This package contains various LWC to support consent management.
@@ -180,8 +184,8 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DgvqQAC
-   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000DgvqQAC) to install the Consent Tools unlocked package in your org.
+1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EDdAQAW
+   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EDdAQAW) to install the Consent Tools unlocked package in your org.
 
 1. Select **Install for All Users**
 

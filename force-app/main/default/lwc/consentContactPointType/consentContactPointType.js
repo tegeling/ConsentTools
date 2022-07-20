@@ -14,6 +14,9 @@ export default class ConsentContactPointType extends LightningElement {
   @api cpt;
   @api dup;
   @api isHeader;
+  _getconsentdate;
+  @api set getconsentdate(consentdate){this._getconsentdate = consentdate;}
+  get getconsentdate(){return this._getconsentdate}
 
   get colSize() {
     return Math.floor(12 / this.cpt.cps.length);

@@ -18,10 +18,11 @@
           key={cpt.id}
           style={cpt.color}
         >
-          <c-consent-contact-point-type
-            cpt={cpt}
-            dup={dup}
-          ></c-consent-contact-point-type>
+        <c-consent-contact-point-type
+          cpt={cpt}
+          dup={dup}
+          getconsentdate={getconsentdate}
+        ></c-consent-contact-point-type>
         </lightning-layout-item>
       </lightning-layout>
     </lightning-layout-item>

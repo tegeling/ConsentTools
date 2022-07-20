@@ -6,9 +6,17 @@
   @last modified by  : tegeling
 -->
 <template>
-  <c-consent-data-use-purpose
-    if:true={ready}
-    dup={dups}
-    cpts={cpts}
-  ></c-consent-data-use-purpose>
+  <div class="slds-grid slds-wrap">
+    <div class="slds-col slds-size_4-of-12 slds-p-bottom_medium">
+      <lightning-input type="datetime" name="consentdate" label="Verify the consent status in the past" value={consetDate} onblur={consentdateChange}></lightning-input>
+    </div>
+    <div class="slds-col slds-size_1-of-1">
+        <c-consent-data-use-purpose
+        if:true={ready}
+        dup={dups}
+        cpts={cpts}
+        getconsentdate={consentDate}
+      ></c-consent-data-use-purpose>
+    </div>
+  </div>
 </template>

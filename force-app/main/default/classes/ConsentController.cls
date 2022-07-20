@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-21-2022
+ * @last modified on  : 03-30-2022
  * @last modified by  : tegeling
  **/
 public with sharing class ConsentController {
@@ -164,6 +164,87 @@ public with sharing class ConsentController {
 
     return response;
   }
+
+  @AuraEnabled(cacheable=true)
+  public static ContactPointConsent getContactPointConsentHistory(
+    String contactPointId,
+    String dataUsePurposeId,
+    DateTime timeStamp
+  ) {
+
+    //Datetime timeStamp = DateTime.parse(jstimeStamp);
+    ContactPointConsent historicCPC = null;
+    List<ContactPointConsent> cpc = [
+      SELECT Id, PrivacyConsentStatus
+      FROM ContactPointConsent
+      WHERE
+        ContactPointId = :contactPointId
+        AND DataUsePurposeId = :dataUsePurposeId
+      WITH SECURITY_ENFORCED
+    ];
+    if (cpc.size() == 1) {
+      historicCPC = cpc[0];
+      List<ConsentHistoryWrapper> cpch = new List<ConsentHistoryWrapper>();
+      if (Test.isRunningTest()) {
+        // simulate test data
+        ConsentHistoryWrapper cpch1 = new ConsentHistoryWrapper();
+        cpch1.contactPointConsentId = historicCPC.Id;
+        cpch1.field = 'PrivacyConsentStatus';
+        cpch1.newValue = 'OptOut';
+        cpch1.oldValue = 'OptIn';
+        cpch1.createdDate = datetime.newInstance(2020, 12, 1);
+        ConsentHistoryWrapper cpch2 = new ConsentHistoryWrapper();
+        cpch2.contactPointConsentId = historicCPC.Id;
+        cpch2.field = 'PrivacyConsentStatus';
+        cpch2.newValue = 'OptIn';
+        cpch2.oldValue = 'OptOut';
+        cpch2.createdDate = datetime.newInstance(2020, 5, 1);
+        ConsentHistoryWrapper cpch3 = new ConsentHistoryWrapper();
+        cpch3.contactPointConsentId = historicCPC.Id;
+        cpch3.field = 'PrivacyConsentStatus';
+        cpch3.newValue = 'OptOut';
+        cpch3.oldValue = 'OptIn';
+        cpch3.createdDate = datetime.newInstance(2020, 1, 1);
+        cpch.add(cpch1);
+        cpch.add(cpch2);
+        cpch.add(cpch3);
+      } else {
+        List<ContactPointConsentHistory> cpchRecords = [
+          SELECT
+            Id,
+            ContactPointConsentId,
+            Field,
+            CreatedDate,
+            OldValue,
+            NewValue
+          FROM ContactPointConsentHistory
+          WHERE
+            ContactPointConsentId = :cpc[0].Id
+            AND Field = 'PrivacyConsentStatus'
+          WITH SECURITY_ENFORCED
+          ORDER BY CreatedDate DESC
+        ];
+        for (ContactPointConsentHistory cpchRecord : cpchRecords) {
+          ConsentHistoryWrapper cpchWrapper = new ConsentHistoryWrapper();
+          cpchWrapper.contactPointConsentId = cpchRecord.ContactPointConsentId;
+          cpchWrapper.field = cpchRecord.Field;
+          cpchWrapper.newValue = (String) cpchRecord.NewValue;
+          cpchWrapper.oldValue = (String) cpchRecord.OldValue;
+          cpchWrapper.createdDate = cpchRecord.CreatedDate;
+          cpch.add(cpchWrapper);
+        }
+      }
+      for (ConsentHistoryWrapper curCPCH : cpch) {
+        // compare create date with timeStamp
+        if (curCPCH.createdDate > timeStamp) {
+          historicCPC.PrivacyConsentStatus = curCPCH.oldValue;
+        }
+      }
+      return historicCPC;
+    }
+    return null;
+  }
+
   @AuraEnabled(cacheable=true)
   public static ContactPointConsent getContactPointConsent(
     String contactPointId,

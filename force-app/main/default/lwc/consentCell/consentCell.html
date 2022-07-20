@@ -6,7 +6,8 @@
   @last modified by  : tegeling
 -->
 <template>
-  <lightning-input
+  <template if:false={isDisabled}>
+    <lightning-input
     if:true={cpc}
     variant="label-hidden"
     type="toggle"
@@ -17,4 +18,21 @@
     message-toggle-inactive="Opt Out"
     onchange={hdlChange}
   ></lightning-input>
+  </template>
+
+  <template if:true={isDisabled}>
+    <lightning-input
+    if:true={cpc}
+    variant="label-hidden"
+    type="toggle"
+    label="Consent"
+    name="consent"
+    checked={value}
+    message-toggle-active="Opt In"
+    message-toggle-inactive="Opt Out"
+    onchange={hdlChange}
+    disabled="true"
+  ></lightning-input>
+  </template>
+
 </template>
