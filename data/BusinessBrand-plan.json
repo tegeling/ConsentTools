@@ -1,0 +1,14 @@
+[
+  {
+    "sobject": "BusinessBrand",
+    "saveRefs": true,
+    "resolveRefs": false,
+    "files": ["BusinessBrandsParent.json"]
+  },
+  {
+    "sobject": "BusinessBrand",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["BusinessBrands.json"]
+  }
+]

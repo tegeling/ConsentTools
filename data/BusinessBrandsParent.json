@@ -1,0 +1,12 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "BusinessBrand",
+        "referenceId": "BusinessBrandParent"
+      },
+      "Name": "ABC Industry",
+      "ParentId": null
+    }
+  ]
+}

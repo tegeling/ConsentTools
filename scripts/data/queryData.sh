@@ -1,2 +1,2 @@
-sfdx force:data:soql:query -u bnt --query \
-      "SELECT Name, LegalBasisId, Description, CanDataSubjectOptOut FROM DataUsePurpose"
+sfdx force:data:soql:query --query \
+      "SELECT Name, OrgId, ParentId FROM BusinessBrand"

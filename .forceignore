@@ -82,3 +82,4 @@ force-app/main/default/siteDotComSites/Account_Portal1.site-meta.xml
 force-app/main/default/staticresources/**
 force-app/main/default/audience/Default_Account Portal.audience-meta.xml
 force-app/main/default/navigationMenus/SFDC_Default_Navigation_Account Portal.navigationMenu-meta.xml
+force-app/main/default/fieldRestrictionRules/**

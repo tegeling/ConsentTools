@@ -1,3 +1,5 @@
 SELECT Name, Source, Description FROM DataUseLegalBasis
 
 SELECT Name, LegalBasisId, Description, CanDataSubjectOptOut FROM DataUsePurpose
+
+SELECT Name, OrgId, ParentId FROM BusinessBrand
