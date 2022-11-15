@@ -18,6 +18,5 @@
     <tabs>standard-Contact</tabs>
     <tabs>standard-Individual</tabs>
     <tabs>standard-ContactPointConsent</tabs>
-    <tabs>standard-ContactPointTypeConsent</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
