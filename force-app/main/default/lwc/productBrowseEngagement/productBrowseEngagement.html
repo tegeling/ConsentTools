@@ -1,0 +1,171 @@
+<!--
+  @description       : 
+  @author            : dirk.gronert@salesforce.com
+  @group             : 
+  @last modified on  : 11-16-2022
+  @last modified by  : tegeling@salesforce.com
+-->
+<template>
+  <lightning-card
+    variant="Narrow"
+    title="Product Browse Engagement History"
+    icon-name="standard:marketing_actions"
+  >
+    <!-- lightning-button-icon  icon-name="utility:down" variant="border-filled" alternative-text="Show More" slot="actions"></lightning-button-icon -->
+    <lightning-button-group slot="actions">
+      <lightning-button-stateful
+        name="Product"
+        label-when-off="Product"
+        label-when-on="Product"
+        label-when-hover="Product"
+        icon-name-when-off="utility:products"
+        icon-name-when-on="utility:check"
+        icon-name-when-hover="utility:filter"
+        selected={state.Product}
+        onclick={hdlFilter}
+      >
+      </lightning-button-stateful>
+      <lightning-button-stateful
+        name="Category"
+        label-when-off="Category"
+        label-when-on="Category"
+        label-when-hover="Category"
+        icon-name-when-off="utility:filter"
+        icon-name-when-on="utility:check"
+        icon-name-when-hover="utility:filter"
+        selected={state.Category}
+        onclick={hdlFilter}
+      >
+      </lightning-button-stateful>
+      <lightning-button-stateful
+        name="Blog"
+        label-when-off="Blog"
+        label-when-on="Blog"
+        label-when-hover="Blog"
+        icon-name-when-off="utility:topic2"
+        icon-name-when-on="utility:check"
+        icon-name-when-hover="utility:filter"
+        selected={state.Blog}
+        onclick={hdlFilter}
+      >
+      </lightning-button-stateful>
+    </lightning-button-group>
+    <div class="slds-var-p-horizontal_small">
+      <ul if:true={data} class="slds-timeline">
+        <li for:each={data} for:item="pbe" key={pbe.id}>
+          <div class={pbe.timeline}>
+            <span class="slds-assistive-text">task</span>
+            <div class="slds-media">
+              <div class="slds-media__figure">
+                <lightning-button-icon
+                  variant="bare"
+                  icon-name="utility:switch"
+                  icon-class="slds-timeline__details-action-icon"
+                ></lightning-button-icon>
+                <lightning-icon
+                  icon-name={pbe.icon}
+                  class={pbe.iconClass}
+                  size="x-small"
+                ></lightning-icon>
+              </div>
+              <div class="slds-media__body">
+                <div
+                  class="slds-grid slds-grid_align-spread slds-timeline__trigger"
+                >
+                  <div
+                    class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space"
+                  >
+                    <h3 class="slds-truncate" title={pbe.product}>
+                      <lightning-badge
+                        label={pbe.category}
+                        title={pbe.category}
+                      ></lightning-badge>
+                      <lightning-badge
+                        label={pbe.brand}
+                        title={pbe.brand}
+                      ></lightning-badge>
+                      <a
+                        href={pbe.url}
+                        target="_blank"
+                        class="slds-var-m-left_small"
+                      >
+                        <strong>{pbe.product}</strong>
+                      </a>
+                    </h3>
+                    <div class="slds-no-flex">
+                      <span
+                        class="slds-icon_container slds-icon-utility-rotate"
+                        title="Recurring Task"
+                      >
+                        <svg
+                          class="slds-icon slds-icon_xx-small slds-icon-text-default slds-var-m-left_x-small"
+                          aria-hidden="true"
+                        >
+                          <use
+                            xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#rotate"
+                          ></use>
+                        </svg>
+                        <span class="slds-assistive-text">Recurring Task</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="slds-timeline__actions slds-timeline__actions_inline"
+                  >
+                    <p class="slds-timeline__date">
+                      <lightning-formatted-date-time
+                        value={pbe.eventDateTime}
+                        year="numeric"
+                        month="numeric"
+                        day="numeric"
+                        hour="2-digit"
+                        minute="2-digit"
+                        time-zone-name="short"
+                        hour12="true"
+                      ></lightning-formatted-date-time>
+                    </p>
+                  </div>
+                </div>
+                <!-- p class="slds-m-horizontal_xx-small">
+                                    <a href="#">You</a> created a task with
+                                    <a href="#">Charlie Gomez</a>
+                                </p -->
+                <!-- article
+                                    class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small"
+                                    id="task-item-base-65" aria-hidden="true">
+                                    <ul class="slds-list_horizontal slds-wrap">
+                                        <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                            <span class="slds-text-title slds-p-bottom_x-small">Name</span>
+                                            <span class="slds-text-body_medium slds-truncate" title="Charlie Gomez">
+                                                <a href="#">Charlie Gomez</a>
+                                            </span>
+                                        </li>
+                                        <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                            <span class="slds-text-title slds-p-bottom_x-small">Related To</span>
+                                            <span class="slds-text-body_medium slds-truncate"
+                                                title="Tesla Cloudhub + Anypoint Connectors">
+                                                <a href="#">Tesla Cloudhub + Anypoint Connectors</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <div>
+                                        <span class="slds-text-title">Description</span>
+                                        <p class="slds-p-top_x-small">Need to finalize proposals and brand details before the
+                                            meeting</p>
+                                    </div>
+                                </article -->
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div if:false={data}>
+        <div if:true={error}></div>
+        <div if:false={error}>
+          <lightning-spinner size="small"></lightning-spinner>
+        </div>
+      </div>
+    </div>
+    <!-- p slot="footer">Card Footer</p -->
+  </lightning-card>
+</template>
