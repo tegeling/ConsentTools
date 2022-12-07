@@ -6,6 +6,7 @@ if [ "$#" -eq 1 ]; then
   DURATION=$1
 fi
 
+sfdx force:org:delete -p -u ConsentToolsScratchOrg
 sfdx force:org:create -a ConsentToolsScratchOrg -s -f config/project-scratch-def.json -d $DURATION
 sfdx force:source:push
 sfdx force:user:permset:assign -n ConsentSettingsInternal

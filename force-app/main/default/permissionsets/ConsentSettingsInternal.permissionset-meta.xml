@@ -5,6 +5,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <applicationVisibilities>
+        <application>Consent_Management_Console</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
         <application>Consent_Setup</application>
         <visible>true</visible>
     </applicationVisibilities>

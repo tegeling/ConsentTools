@@ -2,10 +2,20 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-30-2022
- * @last modified by  : tegeling
+ * @last modified on  : 12-07-2022
+ * @last modified by  : tegeling@salesforce.com
  **/
 public with sharing class ConsentController {
+  @AuraEnabled(cacheable=true)
+  public static List<BusinessBrand> getBrandList() {
+    return [
+      SELECT Id, Name
+      FROM BusinessBrand
+      WITH SECURITY_ENFORCED
+      ORDER BY Name
+    ];
+  }
+
   @AuraEnabled(cacheable=true)
   public static ConsentWrapper getConsent(
     String recordId,
@@ -169,9 +179,9 @@ public with sharing class ConsentController {
   public static ContactPointConsent getContactPointConsentHistory(
     String contactPointId,
     String dataUsePurposeId,
+    String brandId,
     DateTime timeStamp
   ) {
-
     //Datetime timeStamp = DateTime.parse(jstimeStamp);
     ContactPointConsent historicCPC = null;
     List<ContactPointConsent> cpc = [
@@ -180,6 +190,7 @@ public with sharing class ConsentController {
       WHERE
         ContactPointId = :contactPointId
         AND DataUsePurposeId = :dataUsePurposeId
+        AND BusinessBrandId = :brandId
       WITH SECURITY_ENFORCED
     ];
     if (cpc.size() == 1) {
@@ -248,7 +259,8 @@ public with sharing class ConsentController {
   @AuraEnabled(cacheable=true)
   public static ContactPointConsent getContactPointConsent(
     String contactPointId,
-    String dataUsePurposeId
+    String dataUsePurposeId,
+    String brandId
   ) {
     List<ContactPointConsent> cpc = [
       SELECT Id, PrivacyConsentStatus
@@ -256,6 +268,7 @@ public with sharing class ConsentController {
       WHERE
         ContactPointId = :contactPointId
         AND DataUsePurposeId = :dataUsePurposeId
+        AND BusinessBrandId = :brandId
       WITH SECURITY_ENFORCED
     ];
     if (cpc.size() == 1) {
@@ -287,7 +300,8 @@ public with sharing class ConsentController {
   public static String createContactPointConsent(
     String contactPointId,
     String dataUsePurposeId,
-    String privacyConsentStatus
+    String privacyConsentStatus,
+    String brandId
   ) {
     if (!Schema.sObjectType.ContactPointConsent.isCreateable()) {
       throw new ConsentController.ConsentException(
@@ -363,6 +377,7 @@ public with sharing class ConsentController {
       ContactPointId = contactPointId,
       DataUsePurposeId = dataUsePurposeId,
       PrivacyConsentStatus = privacyConsentStatus,
+      BusinessBrandId = brandId,
       OwnerId = i.OwnerId
     );
     insert cpc;

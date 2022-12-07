@@ -2,19 +2,37 @@
   @description       : 
   @author            : dirk.gronert@salesforce.com
   @group             : 
-  @last modified on  : 03-09-2022
-  @last modified by  : tegeling
+  @last modified on  : 12-07-2022
+  @last modified by  : tegeling@salesforce.com
 -->
 <template>
   <div class="slds-grid slds-wrap">
     <div class="slds-col slds-size_4-of-12 slds-p-bottom_medium">
-      <lightning-input type="datetime" name="consentdate" label="Verify the consent status in the past" value={consetDate} onblur={consentdateChange}></lightning-input>
+      <template if:true={brandOptions}>
+        <lightning-combobox
+          name="brand"
+          label="Show consent details for Business Brand"
+          placeholder="Select a Business Brand"
+          value={businessBrandId}
+          options={brandOptions}
+          onchange={handleBrandSelected}
+          class="slds-var-m-bottom_medium"
+        ></lightning-combobox>
+      </template>
+      <lightning-input
+        type="datetime"
+        name="consentdate"
+        label="Show consent details for a previous Date and Time"
+        value={consetDate}
+        onblur={consentdateChange}
+      ></lightning-input>
     </div>
     <div class="slds-col slds-size_1-of-1">
-        <c-consent-data-use-purpose
+      <c-consent-data-use-purpose
         if:true={ready}
         dup={dups}
         cpts={cpts}
+        bbid={bbid}
         getconsentdate={consentDate}
       ></c-consent-data-use-purpose>
     </div>

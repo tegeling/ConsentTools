@@ -2,9 +2,14 @@
   @description       : 
   @author            : dirk.gronert@salesforce.com
   @group             : 
-  @last modified on  : 03-09-2022
-  @last modified by  : tegeling
+  @last modified on  : 12-07-2022
+  @last modified by  : tegeling@salesforce.com
 -->
 <template>
-  <c-consent-cell cp-id={cp.id} dup-id={dup.id} getconsentdate={getconsentdate}></c-consent-cell>
+  <c-consent-cell
+    cp-id={cp.id}
+    dup-id={dup.id}
+    bbid={bbid}
+    getconsentdate={getconsentdate}
+  ></c-consent-cell>
 </template>

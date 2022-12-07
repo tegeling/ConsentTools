@@ -4,8 +4,8 @@
     <decisions>
         <name>Check_Address</name>
         <label>Check Address</label>
-        <locationX>704</locationX>
-        <locationY>3839</locationY>
+        <locationX>990</locationX>
+        <locationY>3792</locationY>
         <defaultConnector>
             <targetReference>Check_Email</targetReference>
         </defaultConnector>
@@ -29,8 +29,8 @@
     <decisions>
         <name>Check_CPTC_Phone</name>
         <label>Check CPTC Phone</label>
-        <locationX>310</locationX>
-        <locationY>3071</locationY>
+        <locationX>596</locationX>
+        <locationY>3024</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP_CPTC_Mobile</targetReference>
         </defaultConnector>
@@ -55,8 +55,8 @@
     <decisions>
         <name>Check_Email</name>
         <label>Check Email</label>
-        <locationX>704</locationX>
-        <locationY>4175</locationY>
+        <locationX>990</locationX>
+        <locationY>4128</locationY>
         <defaultConnector>
             <targetReference>Check_Phone</targetReference>
         </defaultConnector>
@@ -80,8 +80,8 @@
     <decisions>
         <name>Check_Individual</name>
         <label>Check Individual</label>
-        <locationX>176</locationX>
-        <locationY>335</locationY>
+        <locationX>462</locationX>
+        <locationY>288</locationY>
         <defaultConnector>
             <targetReference>Create_Individual</targetReference>
         </defaultConnector>
@@ -102,8 +102,8 @@
     <decisions>
         <name>Check_Lead_Address</name>
         <label>Check Lead Address</label>
-        <locationX>484</locationX>
-        <locationY>815</locationY>
+        <locationX>770</locationX>
+        <locationY>768</locationY>
         <defaultConnector>
             <targetReference>Check_Lead_Email</targetReference>
         </defaultConnector>
@@ -128,8 +128,8 @@
     <decisions>
         <name>Check_Lead_Email</name>
         <label>Check Lead Email</label>
-        <locationX>484</locationX>
-        <locationY>1487</locationY>
+        <locationX>770</locationX>
+        <locationY>1440</locationY>
         <defaultConnector>
             <targetReference>Check_Lead_Phone</targetReference>
         </defaultConnector>
@@ -153,8 +153,8 @@
     <decisions>
         <name>Check_Lead_Mobile</name>
         <label>Check Lead Mobile</label>
-        <locationX>484</locationX>
-        <locationY>2831</locationY>
+        <locationX>770</locationX>
+        <locationY>2784</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP</targetReference>
         </defaultConnector>
@@ -179,8 +179,8 @@
     <decisions>
         <name>Check_Lead_Phone</name>
         <label>Check Lead Phone</label>
-        <locationX>484</locationX>
-        <locationY>2159</locationY>
+        <locationX>770</locationX>
+        <locationY>2112</locationY>
         <defaultConnector>
             <targetReference>Check_Lead_Mobile</targetReference>
         </defaultConnector>
@@ -205,8 +205,8 @@
     <decisions>
         <name>Check_Mobile</name>
         <label>Check Mobile</label>
-        <locationX>704</locationX>
-        <locationY>4847</locationY>
+        <locationX>990</locationX>
+        <locationY>4800</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP</targetReference>
         </defaultConnector>
@@ -230,8 +230,8 @@
     <decisions>
         <name>Check_Phone</name>
         <label>Check Phone</label>
-        <locationX>704</locationX>
-        <locationY>4511</locationY>
+        <locationX>990</locationX>
+        <locationY>4464</locationY>
         <defaultConnector>
             <targetReference>Check_Mobile</targetReference>
         </defaultConnector>
@@ -320,8 +320,8 @@
     <loops>
         <name>For_each_DUP</name>
         <label>For each DUP</label>
-        <locationX>484</locationX>
-        <locationY>3719</locationY>
+        <locationX>770</locationX>
+        <locationY>3672</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -331,8 +331,8 @@
     <loops>
         <name>For_each_DUP_CPTC_Email</name>
         <label>For each DUP CPTC Email</label>
-        <locationX>352</locationX>
-        <locationY>1727</locationY>
+        <locationX>638</locationX>
+        <locationY>1680</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -345,8 +345,8 @@
     <loops>
         <name>For_each_DUP_CPTC_Mailing_Address</name>
         <label>For each DUP CPTC Mailing Address</label>
-        <locationX>352</locationX>
-        <locationY>1055</locationY>
+        <locationX>638</locationX>
+        <locationY>1008</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -359,8 +359,8 @@
     <loops>
         <name>For_each_DUP_CPTC_Mobile</name>
         <label>For each DUP CPTC Mobile</label>
-        <locationX>442</locationX>
-        <locationY>3191</locationY>
+        <locationX>728</locationX>
+        <locationY>3144</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -373,8 +373,8 @@
     <loops>
         <name>For_each_DUP_CPTC_Phone</name>
         <label>For each DUP CPTC Phone</label>
-        <locationX>352</locationX>
-        <locationY>2399</locationY>
+        <locationX>638</locationX>
+        <locationY>2352</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -406,8 +406,8 @@
     <recordCreates>
         <name>Create_Contact_Point_Email</name>
         <label>Create Contact Point Email</label>
-        <locationX>352</locationX>
-        <locationY>1607</locationY>
+        <locationX>638</locationX>
+        <locationY>1560</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Email</targetReference>
         </connector>
@@ -435,8 +435,8 @@
     <recordCreates>
         <name>Create_Contact_Point_Home_Phone</name>
         <label>Create Contact Point Home Phone</label>
-        <locationX>352</locationX>
-        <locationY>2279</locationY>
+        <locationX>638</locationX>
+        <locationY>2232</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Phone</targetReference>
         </connector>
@@ -470,8 +470,8 @@
     <recordCreates>
         <name>Create_Contact_Point_Mailing_Address</name>
         <label>Create Contact Point Mailing Address</label>
-        <locationX>352</locationX>
-        <locationY>935</locationY>
+        <locationX>638</locationX>
+        <locationY>888</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Mailing_Address</targetReference>
         </connector>
@@ -529,8 +529,8 @@
     <recordCreates>
         <name>Create_Contact_Point_Mobile_Phone</name>
         <label>Create Contact Point Mobile Phone</label>
-        <locationX>310</locationX>
-        <locationY>2951</locationY>
+        <locationX>596</locationX>
+        <locationY>2904</locationY>
         <connector>
             <targetReference>Check_CPTC_Phone</targetReference>
         </connector>
@@ -564,8 +564,8 @@
     <recordCreates>
         <name>Create_CPC_Address</name>
         <label>Create CPC Address</label>
-        <locationX>572</locationX>
-        <locationY>3959</locationY>
+        <locationX>858</locationX>
+        <locationY>3912</locationY>
         <connector>
             <targetReference>Check_Email</targetReference>
         </connector>
@@ -618,8 +618,8 @@
     <recordCreates>
         <name>Create_CPC_Email</name>
         <label>Create CPC Email</label>
-        <locationX>572</locationX>
-        <locationY>4295</locationY>
+        <locationX>858</locationX>
+        <locationY>4248</locationY>
         <connector>
             <targetReference>Check_Phone</targetReference>
         </connector>
@@ -671,8 +671,8 @@
     <recordCreates>
         <name>Create_CPC_Mobile</name>
         <label>Create CPC Mobile</label>
-        <locationX>572</locationX>
-        <locationY>4967</locationY>
+        <locationX>858</locationX>
+        <locationY>4920</locationY>
         <connector>
             <targetReference>For_each_DUP</targetReference>
         </connector>
@@ -725,8 +725,8 @@
     <recordCreates>
         <name>Create_CPC_Phone</name>
         <label>Create CPC Phone</label>
-        <locationX>572</locationX>
-        <locationY>4631</locationY>
+        <locationX>858</locationX>
+        <locationY>4584</locationY>
         <connector>
             <targetReference>Check_Mobile</targetReference>
         </connector>
@@ -779,8 +779,8 @@
     <recordCreates>
         <name>Create_CPTC_Email</name>
         <label>Create CPTC Email</label>
-        <locationX>440</locationX>
-        <locationY>1847</locationY>
+        <locationX>726</locationX>
+        <locationY>1800</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Email</targetReference>
         </connector>
@@ -838,8 +838,8 @@
     <recordCreates>
         <name>Create_CPTC_Mailing_Address</name>
         <label>Create CPTC Mailing Address</label>
-        <locationX>440</locationX>
-        <locationY>1175</locationY>
+        <locationX>726</locationX>
+        <locationY>1128</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Mailing_Address</targetReference>
         </connector>
@@ -898,8 +898,8 @@
     <recordCreates>
         <name>Create_CPTC_Phone</name>
         <label>Create CPTC Phone</label>
-        <locationX>440</locationX>
-        <locationY>2519</locationY>
+        <locationX>726</locationX>
+        <locationY>2472</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Phone</targetReference>
         </connector>
@@ -957,8 +957,8 @@
     <recordCreates>
         <name>Create_CPTC_Phone_0</name>
         <label>Create CPTC Phone</label>
-        <locationX>530</locationX>
-        <locationY>3311</locationY>
+        <locationX>816</locationX>
+        <locationY>3264</locationY>
         <connector>
             <targetReference>For_each_DUP_CPTC_Mobile</targetReference>
         </connector>
@@ -1016,8 +1016,8 @@
     <recordCreates>
         <name>Create_Individual</name>
         <label>Create Individual</label>
-        <locationX>484</locationX>
-        <locationY>455</locationY>
+        <locationX>770</locationX>
+        <locationY>408</locationY>
         <connector>
             <targetReference>Update_Lead</targetReference>
         </connector>
@@ -1045,8 +1045,8 @@
     <recordLookups>
         <name>Get_Data_Use_Purpose</name>
         <label>Get Data Use Purpose</label>
-        <locationX>484</locationX>
-        <locationY>695</locationY>
+        <locationX>770</locationX>
+        <locationY>648</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -1067,8 +1067,8 @@
     <recordUpdates>
         <name>Update_Lead</name>
         <label>Update Lead</label>
-        <locationX>484</locationX>
-        <locationY>575</locationY>
+        <locationX>770</locationX>
+        <locationY>528</locationY>
         <connector>
             <targetReference>Get_Data_Use_Purpose</targetReference>
         </connector>
@@ -1083,11 +1083,14 @@
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
-        <connector>
-            <targetReference>Check_Individual</targetReference>
-        </connector>
         <object>Lead</object>
-        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>Check_Individual</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>

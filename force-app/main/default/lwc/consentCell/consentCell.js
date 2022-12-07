@@ -2,8 +2,8 @@
  * @description       :
  * @author            : dirk.gronert@salesforce.com
  * @group             :
- * @last modified on  : 03-20-2022
- * @last modified by  : tegeling
+ * @last modified on  : 12-07-2022
+ * @last modified by  : tegeling@salesforce.com
  **/
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
@@ -16,17 +16,32 @@ export default class ConsentCell extends LightningElement {
   isDisabled = false;
   @api cpId;
   @api dupId;
+  @api brandId;
   _getconsentdate;
-  @api set getconsentdate(consentdate){
+  _businessbrandid;
+  @api set getconsentdate(consentdate) {
     //debugger;
-    this._getconsentdate = consentdate;    
-    if (consentdate != null){
-      this.isDisabled = true;      
+    this._getconsentdate = consentdate;
+    if (consentdate != null) {
+      this.isDisabled = true;
     }
     this.$fetchContactPointConsent();
   }
-  get getconsentdate(){return this._getconsentdate}
-  
+  get getconsentdate() {
+    return this._getconsentdate;
+  }
+
+  set bbid(businessbrandid) {
+    //debugger;
+    this._businessbrandid = businessbrandid;
+    console.log("**** set ConsentCell.bbid: " + this._businessbrandid);
+    this.$fetchContactPointConsent();
+  }
+
+  @api get bbid() {
+    return this._businessbrandid;
+  }
+
   cpc;
 
   hdlChange(evt) {
@@ -44,7 +59,8 @@ export default class ConsentCell extends LightningElement {
       createContactPointConsent({
         contactPointId: this.cpc.ContactPointId,
         dataUsePurposeId: this.cpc.DataUsePurposeId,
-        privacyConsentStatus: this.cpc.PrivacyConsentStatus
+        privacyConsentStatus: this.cpc.PrivacyConsentStatus,
+        brandId: this._businessbrandid
       })
         .then((result) => {
           this.cpc.Id = result;
@@ -94,11 +110,11 @@ export default class ConsentCell extends LightningElement {
 
   async $fetchContactPointConsent() {
     //debugger;
-    if (this.getconsentdate == null)
-    {
+    if (this.getconsentdate == null) {
       getContactPointConsent({
         contactPointId: this.cpId,
-        dataUsePurposeId: this.dupId
+        dataUsePurposeId: this.dupId,
+        brandId: this._businessbrandid
       })
         .then((result) => {
           this.cpc = result
@@ -124,6 +140,7 @@ export default class ConsentCell extends LightningElement {
       getContactPointConsentHistory({
         contactPointId: this.cpId,
         dataUsePurposeId: this.dupId,
+        brandId: this._businessbrandid,
         timeStamp: this.getconsentdate
       })
         .then((result) => {
@@ -147,12 +164,9 @@ export default class ConsentCell extends LightningElement {
           };
           console.log(JSON.parse(JSON.stringify(error)));
         });
-
     }
-
-
   }
-/*
+  /*
   connectedCallback() {
     debugger;
     this.$fetchContactPointConsent();
