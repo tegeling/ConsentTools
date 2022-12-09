@@ -38,3 +38,46 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+force-app/main/default/fieldRestrictionRules/Rule97c9017d24389699c2907062e0af23a8a980b93576c649afeea7c6b09251bfff.rule-meta.xml
+force-app/main/default/fieldRestrictionRules/Rule9659673b65ad61befdb548ed76ad9418a6c4f214f4049b80ee85acd20de382e6.rule-meta.xml
+force-app/main/default/flexipages/Contact_Record_Page.flexipage-meta.xml
+force-app/main/default/layouts/Individual-Individual Layout.layout-meta.xml
+force-app/main/default/layouts/Lead-Lead Layout.layout-meta.xml
+force-app/main/default/layouts/PersonAccount-Person Account Layout.layout-meta.xml
+force-app/main/default/objects/Contact/Contact.object-meta.xml
+force-app/main/default/objects/Contact/fields/AccountId.field-meta.xml
+force-app/main/default/objects/Contact/fields/AssistantName.field-meta.xml
+force-app/main/default/objects/Contact/fields/AssistantPhone.field-meta.xml
+force-app/main/default/objects/Contact/fields/Birthdate.field-meta.xml
+force-app/main/default/objects/Contact/fields/CanAllowPortalSelfReg.field-meta.xml
+force-app/main/default/objects/Contact/fields/Department.field-meta.xml
+force-app/main/default/objects/Contact/fields/Description.field-meta.xml
+force-app/main/default/objects/Contact/fields/DoNotCall.field-meta.xml
+force-app/main/default/objects/Contact/fields/Email.field-meta.xml
+force-app/main/default/objects/Contact/fields/Fax.field-meta.xml
+force-app/main/default/objects/Contact/fields/HasOptedOutOfEmail.field-meta.xml
+force-app/main/default/objects/Contact/fields/HasOptedOutOfFax.field-meta.xml
+force-app/main/default/objects/Contact/fields/HomePhone.field-meta.xml
+force-app/main/default/objects/Contact/fields/IndividualId.field-meta.xml
+force-app/main/default/objects/Contact/fields/Jigsaw.field-meta.xml
+force-app/main/default/objects/Contact/fields/LastCURequestDate.field-meta.xml
+force-app/main/default/objects/Contact/fields/LastCUUpdateDate.field-meta.xml
+force-app/main/default/objects/Contact/fields/LeadSource.field-meta.xml
+force-app/main/default/objects/Contact/fields/MailingAddress.field-meta.xml
+force-app/main/default/objects/Contact/fields/MobilePhone.field-meta.xml
+force-app/main/default/objects/Contact/fields/Name.field-meta.xml
+force-app/main/default/objects/Contact/fields/OtherAddress.field-meta.xml
+force-app/main/default/objects/Contact/fields/OtherPhone.field-meta.xml
+force-app/main/default/objects/Contact/fields/OwnerId.field-meta.xml
+force-app/main/default/objects/Contact/fields/Phone.field-meta.xml
+force-app/main/default/objects/Contact/fields/ReportsToId.field-meta.xml
+force-app/main/default/objects/Contact/fields/Title.field-meta.xml
+force-app/main/default/objects/Contact/listViews/AllContacts.listView-meta.xml
+force-app/main/default/objects/Contact/listViews/BirthdaysThisMonth.listView-meta.xml
+force-app/main/default/objects/Contact/listViews/NewThisWeek.listView-meta.xml
+force-app/main/default/objects/Contact/webLinks/GoogleMaps.webLink-meta.xml
+force-app/main/default/objects/Contact/webLinks/GoogleSearch.webLink-meta.xml
+force-app/main/default/objects/Contact/webLinks/SendGmail.webLink-meta.xml
+force-app/main/default/objects/Contact/webLinks/YahooMaps.webLink-meta.xml
+force-app/main/default/objects/Contact/webLinks/YahooWeather.webLink-meta.xml
+force-app/main/default/profiles/Admin.profile-meta.xml
