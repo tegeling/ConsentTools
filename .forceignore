@@ -66,7 +66,8 @@ force-app/main/default/classes/SiteRegisterController.cls-meta.xml
 force-app/main/default/classes/SiteRegisterControllerTest.cls
 force-app/main/default/classes/SiteRegisterControllerTest.cls-meta.xml
 force-app/main/default/components/**
-force-app/main/default/flexipages/Contact_Record_Page.flexipage-meta.xml
+force-app/main/default/fieldRestrictionRules/**
+force-app/main/default/flexipages/**
 force-app/main/default/layouts/**
 force-app/main/default/navigationMenus/SFDC_Default_Navigation_Account Portal.navigationMenu-meta.xml
 force-app/main/default/networkBranding/cbAccount_Portal.networkBranding
@@ -80,6 +81,5 @@ force-app/main/default/profiles/Admin.profile-meta.xml
 force-app/main/default/siteDotComSites/Account_Portal1.site
 force-app/main/default/siteDotComSites/Account_Portal1.site-meta.xml
 force-app/main/default/staticresources/**
-force-app/main/default/audience/Default_Account Portal.audience-meta.xml
-force-app/main/default/navigationMenus/SFDC_Default_Navigation_Account Portal.navigationMenu-meta.xml
-force-app/main/default/fieldRestrictionRules/**
+
+

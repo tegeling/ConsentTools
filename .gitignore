@@ -38,7 +38,3 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
-force-app/main/default/profiles/Admin.profile-meta.xml
-force-app/main/default/fieldRestrictionRules/**
-force-app/main/default/layouts/Individual-Individual Layout.layout-meta.xml
-force-app/main/default/layouts/Lead-Lead Layout.layout-meta.xml
