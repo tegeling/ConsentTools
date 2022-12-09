@@ -2,7 +2,7 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 12-07-2022
+ * @last modified on  : 12-09-2022
  * @last modified by  : tegeling@salesforce.com
  **/
 @isTest(SeeAllData=false)
@@ -127,6 +127,7 @@ public with sharing class Test_ConsentController {
     ContactPointConsent cpcEmail = new ContactPointConsent(
       ContactPointId = cpEmail.Id,
       DataUsePurposeId = dup.Id,
+      BusinessBrandId = bb.Id,
       Name = 'Email Consent',
       PrivacyConsentStatus = 'OptOut'
     );
@@ -242,6 +243,7 @@ public with sharing class Test_ConsentController {
     ContactPointConsent cpcEmail = new ContactPointConsent(
       ContactPointId = cpEmail.Id,
       DataUsePurposeId = dup.Id,
+      BusinessBrandId = bb.Id,
       Name = 'Email Consent',
       PrivacyConsentStatus = 'OptOut'
     );
@@ -529,20 +531,20 @@ public with sharing class Test_ConsentController {
       cpcAddressId = ConsentController.createContactPointConsent(
         cpAddress.Id,
         dup.Id,
-        bb.Id,
-        'OptIn'
+        'OptIn',
+        bb.Id
       );
       cpcEmailId = ConsentController.createContactPointConsent(
         cpEmail.Id,
         dup.Id,
-        bb.Id,
-        'OptIn'
+        'OptIn',
+        bb.Id
       );
       cpcPhoneId = ConsentController.createContactPointConsent(
         cpPhone.Id,
         dup.Id,
-        bb.Id,
-        'OptIn'
+        'OptIn',
+        bb.Id
       );
     } catch (Exception e) {
       system.assert(
