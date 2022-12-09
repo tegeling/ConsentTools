@@ -88,6 +88,7 @@ Configure your Salesforce organization-wide sharing defaults (OWD) so that your 
 
 | Object                     | Recommended Internal Access | Recommended External Access | Default Internal Access | Default External Access  |
 | -------------------------- | --------------------------- | --------------------------- | ----------------------- | ------------------------ |
+| Business Brand             | Public Read Only            | Public Read Only            | Private                 | Private                  |
 | Data Use Legal Basis       | Public Read Only            | not applicable              | Private                 | not applicable (Private) |
 | Data Use Purpose           | Public Read Only            | Public Read Only            | Private                 | Private                  |
 | Individual                 | Private                     | Private                     | Public Read/Write       | Private                  |
@@ -109,16 +110,17 @@ The following table compares the access permissions with the defaults for Standa
 
 ### Consent Settings Internal Permission Set
 
-| Object                     | Object Permission | Standard User Profile |
-| -------------------------- | ----------------- | --------------------- |
-| Data Use Legal Basis       | CRED              | CRED                  |
-| Data Use Purpose           | CRED              | RED                   |
-| Individual                 | CRED              | CRED                  |
-| Contact Point Type Consent | CRED              | CRED                  |
-| Contact Point Email        | CRED              | CRED                  |
-| Contact Point Phone        | CRED              | CRED                  |
-| Contact Point Address      | CRED              | CRED                  |
-| Contact Point Consent      | CRED              | CRED                  |
+| Object                     | Permission Set | Standard User Profile |
+| -------------------------- | -------------- | --------------------- |
+| Business Brand             | CRED           | CRED                  |
+| Data Use Legal Basis       | CRED           | CRED                  |
+| Data Use Purpose           | CRED           | RED                   |
+| Individual                 | CRED           | CRED                  |
+| Contact Point Type Consent | CRED           | CRED                  |
+| Contact Point Email        | CRED           | CRED                  |
+| Contact Point Phone        | CRED           | CRED                  |
+| Contact Point Address      | CRED           | CRED                  |
+| Contact Point Consent      | CRED           | CRED                  |
 
 ## Permission Set for external users
 
@@ -127,16 +129,17 @@ The following table compares the access permissions with the defaults for Custom
 
 ### Consent Settings External Permission Set
 
-| Object                     | Object Permission | Customer Community User Object Permission | Customer Community User Default | External Identity User Object Permission | External Identity User Default |
-| -------------------------- | ----------------- | ----------------------------------------- | ------------------------------- | ---------------------------------------- | ------------------------------ |
-| Data Use Legal Basis       | No Access         | Object not available                      |                                 | Object not available                     |                                |
-| Data Use Purpose           | R                 | R                                         | No Access                       | R                                        | No Access                      |
-| Individual                 | CRE               | CRE                                       | No Access                       | CRE                                      | RE                             |
-| Contact Point Type Consent | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Email        | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Phone        | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Address      | CRE               | CRED                                      | No Access                       | CRE                                      | No Access                      |
-| Contact Point Consent      | CRE               | CRE                                       | No Access                       | CRE                                      | No Access                      |
+| Object                     | Permission Set | Customer Community User Object Permission | Customer Community User Default | External Identity User Object Permission | External Identity User Default |
+| -------------------------- | -------------- | ----------------------------------------- | ------------------------------- | ---------------------------------------- | ------------------------------ |
+| Business Brand             | R              |                                           |                                 |                                          |                                |
+| Data Use Legal Basis       | No Access      | Object not available                      |                                 | Object not available                     |                                |
+| Data Use Purpose           | R              | R                                         | No Access                       | R                                        | No Access                      |
+| Individual                 | CRE            | CRE                                       | No Access                       | CRE                                      | RE                             |
+| Contact Point Type Consent | CRE            | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Email        | CRE            | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Phone        | CRE            | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Address      | CRE            | CRED                                      | No Access                       | CRE                                      | No Access                      |
+| Contact Point Consent      | CRE            | CRE                                       | No Access                       | CRE                                      | No Access                      |
 
 # Setup and Configuration Steps
 
