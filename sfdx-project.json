@@ -4,9 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "Consent Tools",
-      "versionName": "Summer '22 v1.2.0",
-      "versionDescription": "Summer '22 v1.2.0 Release - check previous consent settings via time travel",
-      "versionNumber": "1.2.0.NEXT",
+      "versionName": "Winter '23 v1.3.0",
+      "versionDescription": "Winter '23 v1.3.0 Release - support multiple business brands",
+      "versionNumber": "1.3.0.NEXT",
       "definitionFile": "config/project-scratch-def.json",
       "releaseNotesUrl": "https://github.com/tegeling/ConsentTools",
       "postInstallUrl": "https://github.com/tegeling/ConsentTools"
@@ -24,6 +24,7 @@
     "Consent Tools@1.1.5-1": "04t7Q000000DewTQAS",
     "Consent Tools@1.1.6-1": "04t7Q000000DfIUQA0",
     "Consent Tools@1.1.7-1": "04t7Q000000DgvqQAC",
-    "Consent Tools@1.2.0-1": "04t7Q000000EDdAQAW"
+    "Consent Tools@1.2.0-1": "04t7Q000000EDdAQAW",
+    "Consent Tools@1.3.0-1": "04t7Q000000EexpQAC"
   }
 }

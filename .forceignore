@@ -66,13 +66,16 @@ force-app/main/default/classes/SiteRegisterController.cls-meta.xml
 force-app/main/default/classes/SiteRegisterControllerTest.cls
 force-app/main/default/classes/SiteRegisterControllerTest.cls-meta.xml
 force-app/main/default/components/**
-force-app/main/default/flexipages/Contact_Record_Page.flexipage-meta.xml
+force-app/main/default/fieldRestrictionRules/**
+force-app/main/default/flexipages/**
+!force-app/main/default/flexipages/Consent_Management_Console_UtilityBar.flexipage-meta.xml
 force-app/main/default/layouts/**
 force-app/main/default/navigationMenus/SFDC_Default_Navigation_Account Portal.navigationMenu-meta.xml
 force-app/main/default/networkBranding/cbAccount_Portal.networkBranding
 force-app/main/default/networkBranding/cbAccount_Portal.networkBranding-meta.xml
 force-app/main/default/networks/Account Portal.network-meta.xml
 force-app/main/default/objects/Contact/**
+force-app/main/default/objects/Account/**
 force-app/main/default/objects/Individual/listViews/All_Individuals.listView-meta.xml
 force-app/main/default/pages/**
 force-app/main/default/profiles/Account Portal Profile.profile-meta.xml
@@ -80,5 +83,7 @@ force-app/main/default/profiles/Admin.profile-meta.xml
 force-app/main/default/siteDotComSites/Account_Portal1.site
 force-app/main/default/siteDotComSites/Account_Portal1.site-meta.xml
 force-app/main/default/staticresources/**
-force-app/main/default/audience/Default_Account Portal.audience-meta.xml
-force-app/main/default/navigationMenus/SFDC_Default_Navigation_Account Portal.navigationMenu-meta.xml
+
+
+force-app/main/default/layouts/Contact-Contact Layout.layout-meta.xml
+force-app/main/default/flexipages/Lead_Record_Page.flexipage-meta.xml

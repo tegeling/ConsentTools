@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>55.0</apiVersion>
+    <assignments>
+        <name>Add_CP_Email</name>
+        <label>Add CP Email</label>
+        <locationX>264</locationX>
+        <locationY>398</locationY>
+        <assignmentItems>
+            <assignToReference>arrayCPEmail</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>For_each_Email_CP.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>For_each_Email_CP</targetReference>
+        </connector>
+    </assignments>
     <description
   >Sub flow invoked to change the consent status of email related consent records</description>
+    <environments>Default</environments>
     <formulas>
         <name>calcEmailConsentStatus</name>
         <dataType>String</dataType>
@@ -16,12 +33,15 @@
         <name>For_each_Email_CP</name>
         <label>For each Email CP</label>
         <locationX>176</locationX>
-        <locationY>398</locationY>
+        <locationY>278</locationY>
         <collectionReference>Get_Email_CP</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Update_Email_CPC</targetReference>
+            <targetReference>Add_CP_Email</targetReference>
         </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_CPC_Email</targetReference>
+        </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -46,7 +66,7 @@
         <name>Get_Email_CP</name>
         <label>Get Email CP</label>
         <locationX>176</locationX>
-        <locationY>278</locationY>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -65,19 +85,16 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <name>Update_Email_CPC</name>
-        <label>Update Email CPC</label>
-        <locationX>264</locationX>
-        <locationY>518</locationY>
-        <connector>
-            <targetReference>For_each_Email_CP</targetReference>
-        </connector>
+        <name>Update_CPC_Email</name>
+        <label>Update CPC Email</label>
+        <locationX>176</locationX>
+        <locationY>614</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>ContactPointId</field>
-            <operator>EqualTo</operator>
+            <operator>In</operator>
             <value>
-                <elementReference>For_each_Email_CP.Id</elementReference>
+                <elementReference>arrayCPEmail</elementReference>
             </value>
         </filters>
         <inputAssignments>
@@ -88,45 +105,21 @@
         </inputAssignments>
         <object>ContactPointConsent</object>
     </recordUpdates>
-    <recordUpdates>
-        <name>Update_Email_CPTC</name>
-        <label>Update Email CPTC</label>
-        <locationX>176</locationX>
-        <locationY>158</locationY>
-        <connector>
-            <targetReference>Get_Email_CP</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>PartyId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>individualId</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>ContactPointType</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Email</stringValue>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>PrivacyConsentStatus</field>
-            <value>
-                <elementReference>calcEmailConsentStatus</elementReference>
-            </value>
-        </inputAssignments>
-        <object>ContactPointTypeConsent</object>
-    </recordUpdates>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Update_Email_CPTC</targetReference>
+            <targetReference>Get_Email_CP</targetReference>
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>arrayCPEmail</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>hasOptedOutOfEmail</name>
         <dataType>Boolean</dataType>

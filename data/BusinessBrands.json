@@ -1,0 +1,52 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "BusinessBrand",
+        "referenceId": "BusinessBrandRef1"
+      },
+      "Name": "ABC Retail",
+      "ParentId": "@BusinessBrandParent"
+    },
+    {
+      "attributes": {
+        "type": "BusinessBrand",
+        "referenceId": "BusinessBrandRef2"
+      },
+      "Name": "ABC Cloud",
+      "ParentId": "@BusinessBrandParent"
+    },
+    {
+      "attributes": {
+        "type": "BusinessBrand",
+        "referenceId": "BusinessBrandRef3"
+      },
+      "Name": "ABC Manufacturing",
+      "ParentId": "@BusinessBrandParent"
+    },
+    {
+      "attributes": {
+        "type": "BusinessBrand",
+        "referenceId": "BusinessBrandRef4"
+      },
+      "Name": "ABC Travel",
+      "ParentId": "@BusinessBrandParent"
+    },
+    {
+      "attributes": {
+        "type": "BusinessBrand",
+        "referenceId": "BusinessBrandRef5"
+      },
+      "Name": "ABC Comms",
+      "ParentId": "@BusinessBrandParent"
+    },
+    {
+      "attributes": {
+        "type": "BusinessBrand",
+        "referenceId": "BusinessBrandRef6"
+      },
+      "Name": "ABC Auto",
+      "ParentId": "@BusinessBrandParent"
+    }
+  ]
+}

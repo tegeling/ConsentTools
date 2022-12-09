@@ -2,282 +2,293 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>53.0</apiVersion>
     <assignments>
-        <name>Unset_Contact</name>
-        <label>Unset Contact</label>
-        <locationX>270</locationX>
+        <name>Add_Contact_Id</name>
+        <label>Add Contact Id</label>
+        <locationX>424</locationX>
         <locationY>575</locationY>
         <assignmentItems>
-            <assignToReference>For_each_Contact.IndividualId</assignToReference>
-            <operator>Assign</operator>
+            <assignToReference>arrayContactId</assignToReference>
+            <operator>Add</operator>
             <value>
-                <stringValue />
+                <elementReference>For_each_Contact.Id</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Contact</targetReference>
+            <targetReference>For_each_Contact</targetReference>
         </connector>
     </assignments>
     <assignments>
-        <name>Unset_Lead</name>
-        <label>Unset Lead</label>
-        <locationX>270</locationX>
-        <locationY>1151</locationY>
+        <name>Add_CPC_Address</name>
+        <label>Add CPC Address</label>
+        <locationX>600</locationX>
+        <locationY>3551</locationY>
         <assignmentItems>
-            <assignToReference>For_each_Lead.IndividualId</assignToReference>
-            <operator>Assign</operator>
+            <assignToReference>arrayCPC</assignToReference>
+            <operator>Add</operator>
             <value>
-                <stringValue />
+                <elementReference>For_each_CPC_Address.Id</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Lead</targetReference>
+            <targetReference>For_each_CPC_Address</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_CPC_Email</name>
+        <label>Add CPC Email</label>
+        <locationX>600</locationX>
+        <locationY>1967</locationY>
+        <assignmentItems>
+            <assignToReference>arrayCPC</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>For_each_CPC_Email.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>For_each_CPC_Email</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_CPC_Phone</name>
+        <label>Add CPC Phone</label>
+        <locationX>600</locationX>
+        <locationY>2759</locationY>
+        <assignmentItems>
+            <assignToReference>arrayCPC</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>For_each_CPC_Phone.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>For_each_CPC_Phone</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_Lead_Id</name>
+        <label>Add Lead Id</label>
+        <locationX>424</locationX>
+        <locationY>1151</locationY>
+        <assignmentItems>
+            <assignToReference>arrayLeadId</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>For_each_Lead.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>For_each_Lead</targetReference>
         </connector>
     </assignments>
     <decisions>
-        <name>Check_Contact_Point_Address</name>
-        <label>Check Contact Point Address</label>
+        <name>Check_CP_Address</name>
+        <label>Check CP Address</label>
         <locationX>182</locationX>
-        <locationY>4991</locationY>
+        <locationY>4775</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Contact_Point_Address_exist</name>
+            <name>CP_Address_exists</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference
-        >Get_Address_Contact_Point</leftValueReference>
+                <leftValueReference>Get_CP_Address</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Delete_Address_Contact_Point</targetReference>
+                <targetReference>Delete_CP_Address</targetReference>
             </connector>
-            <label>Contact Point Address exist</label>
+            <label>CP Address exists</label>
         </rules>
     </decisions>
     <decisions>
-        <name>Check_Contact_Point_Consent_Address</name>
-        <label>Check Contact Point Consent Address</label>
-        <locationX>402</locationX>
-        <locationY>4559</locationY>
+        <name>Check_CP_Email</name>
+        <label>Check CP Email</label>
+        <locationX>182</locationX>
+        <locationY>4103</locationY>
         <defaultConnector>
-            <targetReference>For_each_Address</targetReference>
+            <targetReference>Check_CP_Phone</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Contact_Point_Consent_Address_exist</name>
+            <name>CP_Email_exists</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Address_Consent</leftValueReference>
+                <leftValueReference>Get_CP_Email</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Delete_Address_Consent</targetReference>
+                <targetReference>Delete_CP_Email</targetReference>
             </connector>
-            <label>Contact Point Consent Address exist</label>
+            <label>CP Email exists</label>
         </rules>
     </decisions>
     <decisions>
-        <name>Check_Contact_Point_Consent_Phone</name>
-        <label>Check Contact Point Consent Phone</label>
-        <locationX>402</locationX>
-        <locationY>3431</locationY>
+        <name>Check_CP_Phone</name>
+        <label>Check CP Phone</label>
+        <locationX>182</locationX>
+        <locationY>4439</locationY>
         <defaultConnector>
-            <targetReference>For_each_Phone</targetReference>
+            <targetReference>Check_CP_Address</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Contact_Point_Consent_Phone_exist</name>
+            <name>CP_Phone_exists</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Phone_Consent</leftValueReference>
+                <leftValueReference>Get_CP_Phone</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Delete_Phone_Consent</targetReference>
+                <targetReference>Delete_CP_Phone</targetReference>
             </connector>
-            <label>Contact Point Consent Phone exist</label>
+            <label>CP Phone exists</label>
         </rules>
     </decisions>
     <decisions>
-        <name>Check_Contact_Point_Email</name>
-        <label>Check Contact Point Email</label>
-        <locationX>182</locationX>
-        <locationY>2735</locationY>
-        <defaultConnector>
-            <targetReference>Get_Phone_Contact_Point</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Contact_Point_Email_exist</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Email_Contact_Point</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Delete_Email_Contact_Point</targetReference>
-            </connector>
-            <label>Contact Point Email exist</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Check_Contact_Point_Phone</name>
-        <label>Check Contact Point Phone</label>
-        <locationX>182</locationX>
+        <name>Check_CPC</name>
+        <label>Check CPC</label>
+        <locationX>336</locationX>
         <locationY>3863</locationY>
-        <defaultConnector>
-            <targetReference>Get_Address_Contact_Point</targetReference>
-        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Contact_Point_Phone_exist</name>
+            <name>CPC_exists</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Phone_Contact_Point</leftValueReference>
+                <leftValueReference>arrayCPC</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Delete_Phone_Contact_Point</targetReference>
+                <targetReference>Delete_CPC</targetReference>
             </connector>
-            <label>Contact Point Phone exist</label>
+            <label>CPC exists</label>
         </rules>
     </decisions>
-    <decisions>
-        <name>Check_Contact_Point_Type_Consent</name>
-        <label>Check Contact Point Type Consent</label>
-        <locationX>182</locationX>
-        <locationY>1607</locationY>
-        <defaultConnector>
-            <targetReference>Get_Email_Contact_Point</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Contact_Point_Type_Consent_exist</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference
-        >Get_Contact_Point_Type_Consent</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Delete_Contact_Type_Consent</targetReference>
-            </connector>
-            <label>Contact Point Type Consent exist</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Check_Content_Point_Consent_Email</name>
-        <label>Check Content Point Consent Email</label>
-        <locationX>402</locationX>
-        <locationY>2303</locationY>
-        <defaultConnector>
-            <targetReference>For_each_Email</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Content_Point_Consent_Email_exist</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Email_Consent</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Delete_Email_Consent</targetReference>
-            </connector>
-            <label>Content Point Consent Email exist</label>
-        </rules>
-    </decisions>
+    <environments>Default</environments>
     <interviewLabel
   >IndividualTriggerCleanup {!$Flow.CurrentDateTime}</interviewLabel>
     <label>IndividualTriggerCleanup</label>
     <loops>
-        <name>For_each_Address</name>
-        <label>For each Address</label>
-        <locationX>182</locationX>
-        <locationY>4319</locationY>
-        <collectionReference>Get_Address_Contact_Point</collectionReference>
-        <iterationOrder>Asc</iterationOrder>
-        <nextValueConnector>
-            <targetReference>Get_Address_Consent</targetReference>
-        </nextValueConnector>
-        <noMoreValuesConnector>
-            <targetReference>Check_Contact_Point_Address</targetReference>
-        </noMoreValuesConnector>
-    </loops>
-    <loops>
         <name>For_each_Contact</name>
         <label>For each Contact</label>
-        <locationX>182</locationX>
+        <locationX>336</locationX>
         <locationY>455</locationY>
         <collectionReference>Get_Contacts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Unset_Contact</targetReference>
+            <targetReference>Add_Contact_Id</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Get_Leads</targetReference>
+            <targetReference>Unset_Individual_on_Contacts</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
-        <name>For_each_Email</name>
-        <label>For each Email</label>
-        <locationX>182</locationX>
-        <locationY>2063</locationY>
-        <collectionReference>Get_Email_Contact_Point</collectionReference>
+        <name>For_each_CP_Address</name>
+        <label>For each CP Address</label>
+        <locationX>336</locationX>
+        <locationY>3191</locationY>
+        <collectionReference>Get_CP_Address</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Get_Email_Consent</targetReference>
+            <targetReference>Get_CPC_Address</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Check_Contact_Point_Email</targetReference>
+            <targetReference>Check_CPC</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>For_each_CP_Email</name>
+        <label>For each CP Email</label>
+        <locationX>336</locationX>
+        <locationY>1607</locationY>
+        <collectionReference>Get_CP_Email</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_CPC_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_CP_Phone</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>For_each_CP_Phone</name>
+        <label>For each CP Phone</label>
+        <locationX>336</locationX>
+        <locationY>2399</locationY>
+        <collectionReference>Get_CP_Phone</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_CPC_Phone</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_CP_Address</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>For_each_CPC_Address</name>
+        <label>For each CPC Address</label>
+        <locationX>512</locationX>
+        <locationY>3431</locationY>
+        <collectionReference>Get_CPC_Address</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Add_CPC_Address</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>For_each_CP_Address</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>For_each_CPC_Email</name>
+        <label>For each CPC Email</label>
+        <locationX>512</locationX>
+        <locationY>1847</locationY>
+        <collectionReference>Get_CPC_Email</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Add_CPC_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>For_each_CP_Email</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>For_each_CPC_Phone</name>
+        <label>For each CPC Phone</label>
+        <locationX>512</locationX>
+        <locationY>2639</locationY>
+        <collectionReference>Get_CPC_Phone</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Add_CPC_Phone</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>For_each_CP_Phone</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
         <name>For_each_Lead</name>
         <label>For each Lead</label>
-        <locationX>182</locationX>
+        <locationX>336</locationX>
         <locationY>1031</locationY>
         <collectionReference>Get_Leads</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Unset_Lead</targetReference>
+            <targetReference>Add_Lead_Id</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Get_Contact_Point_Type_Consent</targetReference>
-        </noMoreValuesConnector>
-    </loops>
-    <loops>
-        <name>For_each_Phone</name>
-        <label>For each Phone</label>
-        <locationX>182</locationX>
-        <locationY>3191</locationY>
-        <collectionReference>Get_Phone_Contact_Point</collectionReference>
-        <iterationOrder>Asc</iterationOrder>
-        <nextValueConnector>
-            <targetReference>Get_Phone_Consent</targetReference>
-        </nextValueConnector>
-        <noMoreValuesConnector>
-            <targetReference>Check_Contact_Point_Phone</targetReference>
+            <targetReference>Unset_Individual_Id_on_Lead</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -300,143 +311,54 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordDeletes>
-        <name>Delete_Address_Consent</name>
-        <label>Delete Address Consent</label>
-        <locationX>270</locationX>
-        <locationY>4679</locationY>
-        <connector>
-            <targetReference>For_each_Address</targetReference>
-        </connector>
-        <inputReference>Get_Address_Consent</inputReference>
-    </recordDeletes>
-    <recordDeletes>
-        <name>Delete_Address_Contact_Point</name>
-        <label>Delete Address Contact Point</label>
+        <name>Delete_CP_Address</name>
+        <label>Delete CP Address</label>
         <locationX>50</locationX>
-        <locationY>5111</locationY>
-        <inputReference>Get_Address_Contact_Point</inputReference>
+        <locationY>4895</locationY>
+        <inputReference>Get_CP_Address</inputReference>
     </recordDeletes>
     <recordDeletes>
-        <name>Delete_Contact_Type_Consent</name>
-        <label>Delete Contact Type Consent</label>
+        <name>Delete_CP_Email</name>
+        <label>Delete CP Email</label>
         <locationX>50</locationX>
-        <locationY>1727</locationY>
+        <locationY>4223</locationY>
         <connector>
-            <targetReference>Get_Email_Contact_Point</targetReference>
+            <targetReference>Check_CP_Phone</targetReference>
         </connector>
-        <inputReference>Get_Contact_Point_Type_Consent</inputReference>
+        <inputReference>Get_CP_Email</inputReference>
     </recordDeletes>
     <recordDeletes>
-        <name>Delete_Email_Consent</name>
-        <label>Delete Email Consent</label>
-        <locationX>270</locationX>
-        <locationY>2423</locationY>
-        <connector>
-            <targetReference>For_each_Email</targetReference>
-        </connector>
-        <inputReference>Get_Email_Consent</inputReference>
-    </recordDeletes>
-    <recordDeletes>
-        <name>Delete_Email_Contact_Point</name>
-        <label>Delete Email Contact Point</label>
+        <name>Delete_CP_Phone</name>
+        <label>Delete CP Phone</label>
         <locationX>50</locationX>
-        <locationY>2855</locationY>
+        <locationY>4559</locationY>
         <connector>
-            <targetReference>Get_Phone_Contact_Point</targetReference>
+            <targetReference>Check_CP_Address</targetReference>
         </connector>
-        <inputReference>Get_Email_Contact_Point</inputReference>
+        <inputReference>Get_CP_Phone</inputReference>
     </recordDeletes>
     <recordDeletes>
-        <name>Delete_Phone_Consent</name>
-        <label>Delete Phone Consent</label>
-        <locationX>270</locationX>
-        <locationY>3551</locationY>
-        <connector>
-            <targetReference>For_each_Phone</targetReference>
-        </connector>
-        <inputReference>Get_Phone_Consent</inputReference>
-    </recordDeletes>
-    <recordDeletes>
-        <name>Delete_Phone_Contact_Point</name>
-        <label>Delete Phone Contact Point</label>
-        <locationX>50</locationX>
+        <name>Delete_CPC</name>
+        <label>Delete CPC</label>
+        <locationX>182</locationX>
         <locationY>3983</locationY>
         <connector>
-            <targetReference>Get_Address_Contact_Point</targetReference>
-        </connector>
-        <inputReference>Get_Phone_Contact_Point</inputReference>
-    </recordDeletes>
-    <recordLookups>
-        <name>Get_Address_Consent</name>
-        <label>Get Address Consent</label>
-        <locationX>402</locationX>
-        <locationY>4439</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference
-      >Check_Contact_Point_Consent_Address</targetReference>
+            <targetReference>Check_CP_Email</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>ContactPointId</field>
-            <operator>EqualTo</operator>
+            <field>Id</field>
+            <operator>In</operator>
             <value>
-                <elementReference>For_each_Address.Id</elementReference>
+                <elementReference>arrayCPC</elementReference>
             </value>
         </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>ContactPointConsent</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_Address_Contact_Point</name>
-        <label>Get Address Contact Point</label>
-        <locationX>182</locationX>
-        <locationY>4199</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>For_each_Address</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>ParentId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>ContactPointAddress</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_Contact_Point_Type_Consent</name>
-        <label>Get Contact Point Type Consent</label>
-        <locationX>182</locationX>
-        <locationY>1487</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Check_Contact_Point_Type_Consent</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>PartyId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>ContactPointTypeConsent</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
+    </recordDeletes>
     <recordLookups>
         <name>Get_Contacts</name>
         <label>Get Contacts</label>
-        <locationX>182</locationX>
+        <locationX>336</locationX>
         <locationY>335</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -456,36 +378,36 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Email_Consent</name>
-        <label>Get Email Consent</label>
-        <locationX>402</locationX>
-        <locationY>2183</locationY>
+        <name>Get_CP_Address</name>
+        <label>Get CP Address</label>
+        <locationX>336</locationX>
+        <locationY>3071</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Check_Content_Point_Consent_Email</targetReference>
+            <targetReference>For_each_CP_Address</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>ContactPointId</field>
+            <field>ParentId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>For_each_Email.Id</elementReference>
+                <elementReference>$Record.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>ContactPointConsent</object>
+        <object>ContactPointAddress</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Email_Contact_Point</name>
-        <label>Get Email Contact Point</label>
-        <locationX>182</locationX>
-        <locationY>1943</locationY>
+        <name>Get_CP_Email</name>
+        <label>Get CP Email</label>
+        <locationX>336</locationX>
+        <locationY>1487</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>For_each_Email</targetReference>
+            <targetReference>For_each_CP_Email</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -500,9 +422,97 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_CP_Phone</name>
+        <label>Get CP Phone</label>
+        <locationX>336</locationX>
+        <locationY>2279</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>For_each_CP_Phone</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointPhone</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_CPC_Address</name>
+        <label>Get CPC Address</label>
+        <locationX>512</locationX>
+        <locationY>3311</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>For_each_CPC_Address</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactPointId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>For_each_CP_Address.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointConsent</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_CPC_Email</name>
+        <label>Get CPC Email</label>
+        <locationX>512</locationX>
+        <locationY>1727</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>For_each_CPC_Email</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactPointId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>For_each_CP_Email.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointConsent</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_CPC_Phone</name>
+        <label>Get CPC Phone</label>
+        <locationX>512</locationX>
+        <locationY>2519</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>For_each_CPC_Phone</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactPointId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>For_each_CP_Phone.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContactPointConsent</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Leads</name>
         <label>Get Leads</label>
-        <locationX>182</locationX>
+        <locationX>336</locationX>
         <locationY>911</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
@@ -521,72 +531,56 @@
         <object>Lead</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <recordLookups>
-        <name>Get_Phone_Consent</name>
-        <label>Get Phone Consent</label>
-        <locationX>402</locationX>
-        <locationY>3311</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Check_Contact_Point_Consent_Phone</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>ContactPointId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>For_each_Phone.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>ContactPointConsent</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_Phone_Contact_Point</name>
-        <label>Get Phone Contact Point</label>
-        <locationX>182</locationX>
-        <locationY>3071</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>For_each_Phone</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>ParentId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>ContactPointPhone</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
     <recordUpdates>
-        <name>Update_Contact</name>
-        <label>Update Contact</label>
-        <locationX>270</locationX>
-        <locationY>695</locationY>
+        <name>Unset_Individual_Id_on_Lead</name>
+        <label>Unset Individual Id on Lead</label>
+        <locationX>336</locationX>
+        <locationY>1367</locationY>
         <connector>
-            <targetReference>For_each_Contact</targetReference>
+            <targetReference>Get_CP_Email</targetReference>
         </connector>
-        <inputReference>For_each_Contact</inputReference>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>arrayLeadId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>IndividualId</field>
+            <value>
+                <stringValue />
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
     </recordUpdates>
     <recordUpdates>
-        <name>Update_Lead</name>
-        <label>Update Lead</label>
-        <locationX>270</locationX>
-        <locationY>1271</locationY>
+        <name>Unset_Individual_on_Contacts</name>
+        <label>Unset Individual on Contacts</label>
+        <locationX>336</locationX>
+        <locationY>791</locationY>
         <connector>
-            <targetReference>For_each_Lead</targetReference>
+            <targetReference>Get_Leads</targetReference>
         </connector>
-        <inputReference>For_each_Lead</inputReference>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>arrayContactId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>IndividualId</field>
+            <value>
+                <stringValue />
+            </value>
+        </inputAssignments>
+        <object>Contact</object>
     </recordUpdates>
     <start>
-        <locationX>56</locationX>
+        <locationX>210</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Contacts</targetReference>
@@ -611,4 +605,25 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <variables>
+        <name>arrayContactId</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>arrayCPC</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>arrayLeadId</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
 </Flow>

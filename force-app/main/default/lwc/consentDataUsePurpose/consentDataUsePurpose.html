@@ -2,8 +2,8 @@
   @description       : 
   @author            : dirk.gronert@salesforce.com
   @group             : 
-  @last modified on  : 03-09-2022
-  @last modified by  : tegeling
+  @last modified on  : 12-07-2022
+  @last modified by  : tegeling@salesforce.com
 -->
 <template>
   <lightning-layout>
@@ -18,11 +18,12 @@
           key={cpt.id}
           style={cpt.color}
         >
-        <c-consent-contact-point-type
-          cpt={cpt}
-          dup={dup}
-          getconsentdate={getconsentdate}
-        ></c-consent-contact-point-type>
+          <c-consent-contact-point-type
+            cpt={cpt}
+            dup={dup}
+            bbid={bbid}
+            getconsentdate={getconsentdate}
+          ></c-consent-contact-point-type>
         </lightning-layout-item>
       </lightning-layout>
     </lightning-layout-item>

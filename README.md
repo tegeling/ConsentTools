@@ -6,15 +6,22 @@
 Manage consent settings in Salesforce.
 Enrich your user interface with a Lightning Web Component to easily change consent setting and opt in or opt out. Supports both internal and external access.
 
+# Release Changes
+
+## Winter '23 v1.3.0
+
+- Removed Contact Point Type Consent support
+- Added support for Business Brand - Contact Point Consent records relationship to Business Brand is now supported
+
 # Package Components
 
 ## Consent Setup App
 
 This app groups all privacy objects that are relevant for the setup and configuration of consent settings like Data Use Legal Basis and Data Use Purpose.
 
-## Consent Management App
+## Consent Management App and Consent Management Console App
 
-This app groups all privacy objects that are relevant for the management of consent settings like Contacts, Individuals, Contact Point Consents.
+These apps group all privacy objects that are relevant for the management of consent settings like Contacts, Individuals, Contact Point Consents.
 
 ## Flows
 
@@ -22,15 +29,19 @@ There are several Flows that support the consent automation.
 
 ### LeadTriggerSetIndividual, ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual
 
-These flows check if Lead, Contact or PersonAccount records have an Individual record assigned. If missing, the flows create a new Individual record and all related Contact Points, Contact Point Type Consent and Contact Point Consent records for each Data Use Purpose. The Privacy Consent Status for address and phone is set to default Opt Out. Email Privacy Consent Status is set to Opt Out if HasOptedOutOfEmail is true, otherwise to Opt In.
+These flows check if Lead, Contact or PersonAccount records have an Individual record assigned. If missing, the flows create a new Individual record and all related Contact Points and Contact Point Consent records for each Data Use Purpose.
+The Privacy Consent Status for address and phone is set to default Opt Out. Email Privacy Consent Status is set to Opt Out if HasOptedOutOfEmail is true, otherwise to Opt In.
+Double Opt In process is not implemented.
+Lead object has a custom lookup field to Business Brand. LeadTriggerSetIndividual assigns Contact Point Consent records to Business Brand if available.
+ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual assign for each Business Brand.
 
 ### LeadTriggerEmailOptOut, ContactTriggerEmailOptOut and PersonAccountTriggerEmailOptOut
 
-All flows are triggered when HasOptedOutOfEmail field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfEmailSub to update related consent records and set the status either to Opt In or Opt Out.
+All flows are triggered when HasOptedOutOfEmail field of a Lead, Contact or PersonAccount is changed. They all invoke the same HasOptedOutOfEmailSub to update related consent records and set the status either to Opt In or Opt Out.
 
 ### LeadTriggerPhoneOptOut, ContactTriggerPhoneOptOut and PersonAccountTriggerPhoneOptOut
 
-All flows are triggered when DoNotCall field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfPhoneSub to update related consent records and set the status either to Opt In or Opt Out.
+All flows are triggered when DoNotCall field of a Lead, Contact or PersonAccount is changed. They all invoke the same HasOptedOutOfPhoneSub to update related consent records and set the status either to Opt In or Opt Out.
 
 ### IndividualTriggerCleanup
 
@@ -43,10 +54,12 @@ This flow triggers after update of Individual records and sets record owner of r
 ### ContactPointEditor
 
 This screen flow can be placed on Lead, PersonAccoount, Contact record pages or Community pages to either create new Contact Point records or delete existing records. When used for Community pages pass in `{!CurrentUser.id}` as record id.
+New contact point consent record are created for all data use purposes for all business brands with default privacy consent status Opt Out.
 
-### LeadButtonCheckConsentHistory, ContactButtonCheckConsentHistory, PersonAccountButtonCheckConsentHistory and ContactPointConsentHistorySub
+### LeadButtonCheckConsentHistory, ContactButtonCheckConsentHistory, PersonAccountButtonCheckConsentHistory
 
-This screeen flow can be used to check the privacy status of a specific Contact Point Consent record for a given timestamp. It calculates the previous values out of field history tracking.
+These screen flows can be used to check the privacy status of a specific Contact Point Consent record for a given timestamp. It calculates the previous values out of field history tracking.
+They all invoke the same ContactPointConsentHistorySub flow.
 
 ## Lightning Web Components
 
@@ -77,6 +90,7 @@ Configure your Salesforce organization-wide sharing defaults (OWD) so that your 
 
 | Object                     | Recommended Internal Access | Recommended External Access | Default Internal Access | Default External Access  |
 | -------------------------- | --------------------------- | --------------------------- | ----------------------- | ------------------------ |
+| Business Brand             | Public Read Only            | Public Read Only            | Private                 | Private                  |
 | Data Use Legal Basis       | Public Read Only            | not applicable              | Private                 | not applicable (Private) |
 | Data Use Purpose           | Public Read Only            | Public Read Only            | Private                 | Private                  |
 | Individual                 | Private                     | Private                     | Public Read/Write       | Private                  |
@@ -98,16 +112,17 @@ The following table compares the access permissions with the defaults for Standa
 
 ### Consent Settings Internal Permission Set
 
-| Object                     | Object Permission | Standard User Profile |
-| -------------------------- | ----------------- | --------------------- |
-| Data Use Legal Basis       | CRED              | CRED                  |
-| Data Use Purpose           | CRED              | RED                   |
-| Individual                 | CRED              | CRED                  |
-| Contact Point Type Consent | CRED              | CRED                  |
-| Contact Point Email        | CRED              | CRED                  |
-| Contact Point Phone        | CRED              | CRED                  |
-| Contact Point Address      | CRED              | CRED                  |
-| Contact Point Consent      | CRED              | CRED                  |
+| Object                     | Permission Set | Standard User Profile |
+| -------------------------- | -------------- | --------------------- |
+| Business Brand             | CRED           | CRED                  |
+| Data Use Legal Basis       | CRED           | CRED                  |
+| Data Use Purpose           | CRED           | RED                   |
+| Individual                 | CRED           | CRED                  |
+| Contact Point Type Consent | CRED           | CRED                  |
+| Contact Point Email        | CRED           | CRED                  |
+| Contact Point Phone        | CRED           | CRED                  |
+| Contact Point Address      | CRED           | CRED                  |
+| Contact Point Consent      | CRED           | CRED                  |
 
 ## Permission Set for external users
 
@@ -116,16 +131,17 @@ The following table compares the access permissions with the defaults for Custom
 
 ### Consent Settings External Permission Set
 
-| Object                     | Object Permission | Customer Community User Object Permission | Customer Community User Default | External Identity User Object Permission | External Identity User Default |
-| -------------------------- | ----------------- | ----------------------------------------- | ------------------------------- | ---------------------------------------- | ------------------------------ |
-| Data Use Legal Basis       | No Access         | Object not available                      |                                 | Object not available                     |                                |
-| Data Use Purpose           | R                 | R                                         | No Access                       | R                                        | No Access                      |
-| Individual                 | CRE               | CRE                                       | No Access                       | CRE                                      | RE                             |
-| Contact Point Type Consent | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Email        | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Phone        | CRE               | CRE                                       | No Access                       | CRE                                      | CRE                            |
-| Contact Point Address      | CRE               | CRED                                      | No Access                       | CRE                                      | No Access                      |
-| Contact Point Consent      | CRE               | CRE                                       | No Access                       | CRE                                      | No Access                      |
+| Object                     | Permission Set | Customer Community User Object Permission | Customer Community User Default | External Identity User Object Permission | External Identity User Default |
+| -------------------------- | -------------- | ----------------------------------------- | ------------------------------- | ---------------------------------------- | ------------------------------ |
+| Business Brand             | R              |                                           |                                 |                                          |                                |
+| Data Use Legal Basis       | No Access      | Object not available                      |                                 | Object not available                     |                                |
+| Data Use Purpose           | R              | R                                         | No Access                       | R                                        | No Access                      |
+| Individual                 | CRE            | CRE                                       | No Access                       | CRE                                      | RE                             |
+| Contact Point Type Consent | CRE            | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Email        | CRE            | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Phone        | CRE            | CRE                                       | No Access                       | CRE                                      | CRE                            |
+| Contact Point Address      | CRE            | CRED                                      | No Access                       | CRE                                      | No Access                      |
+| Contact Point Consent      | CRE            | CRE                                       | No Access                       | CRE                                      | No Access                      |
 
 # Setup and Configuration Steps
 
@@ -185,8 +201,8 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EDdAQAW
-   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EDdAQAW) to install the Consent Tools unlocked package in your org.
+1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EexpQAC
+   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EexpQAC) to install the Consent Tools unlocked package in your org.
 
 1. Select **Install for All Users**
 

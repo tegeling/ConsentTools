@@ -1,3 +1,3 @@
 sfdx force:data:tree:export --query \
-    "SELECT Name, LegalBasisId, Description, CanDataSubjectOptOut FROM DataUsePurpose" \
+    "SELECT Name, ParentId FROM BusinessBrand" \
     --outputdir data --plan

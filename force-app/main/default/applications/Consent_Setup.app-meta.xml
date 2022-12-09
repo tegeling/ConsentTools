@@ -10,10 +10,12 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>Consent Setup</label>
     <navType>Standard</navType>
     <tabs>standard-DataUseLegalBasis</tabs>
     <tabs>standard-DataUsePurpose</tabs>
+    <tabs>standard-BusinessBrand</tabs>
     <tabs>standard-AuthorizationForm</tabs>
     <tabs>standard-AuthorizationFormText</tabs>
     <tabs>standard-AuthorizationFormDataUse</tabs>

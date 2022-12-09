@@ -4,19 +4,36 @@
         <headerColor>#0070D2</headerColor>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
-    <description
-  >Capture, manage and enforce consent to process personal identifiable information</description>
     <formFactors>Small</formFactors>
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
-    <label>Consent Management</label>
-    <navType>Standard</navType>
+    <label>Consent Management Console</label>
+    <navType>Console</navType>
     <tabs>standard-Lead</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>standard-Individual</tabs>
     <tabs>standard-ContactPointConsent</tabs>
     <uiType>Lightning</uiType>
+    <utilityBar>Consent_Management_Console_UtilityBar</utilityBar>
+    <workspaceConfig>
+        <mappings>
+            <tab>standard-Account</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Contact</tab>
+        </mappings>
+        <mappings>
+            <fieldName>ContactPointId</fieldName>
+            <tab>standard-ContactPointConsent</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Individual</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Lead</tab>
+        </mappings>
+    </workspaceConfig>
 </CustomApplication>

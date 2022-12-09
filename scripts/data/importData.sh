@@ -1,1 +1,1 @@
-sfdx force:data:tree:import --plan data/DataUseLegalBasis-plan.json
+sfdx force:data:tree:import --plan data/BusinessBrand-plan.json
