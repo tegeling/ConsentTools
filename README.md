@@ -35,11 +35,11 @@ ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual assign for eac
 
 ### LeadTriggerEmailOptOut, ContactTriggerEmailOptOut and PersonAccountTriggerEmailOptOut
 
-All flows are triggered when HasOptedOutOfEmail field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfEmailSub to update related consent records and set the status either to Opt In or Opt Out.
+All flows are triggered when HasOptedOutOfEmail field of a Lead, Contact or PersonAccount is changed. They all invoke the same HasOptedOutOfEmailSub to update related consent records and set the status either to Opt In or Opt Out.
 
 ### LeadTriggerPhoneOptOut, ContactTriggerPhoneOptOut and PersonAccountTriggerPhoneOptOut
 
-All flows are triggered when DoNotCall field of a Lead, Contact or PersonAccount is changed. They invoke HasOptedOutOfPhoneSub to update related consent records and set the status either to Opt In or Opt Out.
+All flows are triggered when DoNotCall field of a Lead, Contact or PersonAccount is changed. They all invoke the same HasOptedOutOfPhoneSub to update related consent records and set the status either to Opt In or Opt Out.
 
 ### IndividualTriggerCleanup
 
@@ -52,10 +52,12 @@ This flow triggers after update of Individual records and sets record owner of r
 ### ContactPointEditor
 
 This screen flow can be placed on Lead, PersonAccoount, Contact record pages or Community pages to either create new Contact Point records or delete existing records. When used for Community pages pass in `{!CurrentUser.id}` as record id.
+New contact point consent record are created for all data use purposes for all business brands with default privacy consent status Opt Out.
 
-### LeadButtonCheckConsentHistory, ContactButtonCheckConsentHistory, PersonAccountButtonCheckConsentHistory and ContactPointConsentHistorySub
+### LeadButtonCheckConsentHistory, ContactButtonCheckConsentHistory, PersonAccountButtonCheckConsentHistory
 
-This screeen flow can be used to check the privacy status of a specific Contact Point Consent record for a given timestamp. It calculates the previous values out of field history tracking.
+These screen flows can be used to check the privacy status of a specific Contact Point Consent record for a given timestamp. It calculates the previous values out of field history tracking.
+They all invoke the same ContactPointConsentHistorySub flow.
 
 ## Lightning Web Components
 

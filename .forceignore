@@ -88,3 +88,5 @@ force-app/main/default/siteDotComSites/Account_Portal1.site-meta.xml
 force-app/main/default/staticresources/**
 
 
+force-app/main/default/layouts/Contact-Contact Layout.layout-meta.xml
+force-app/main/default/flexipages/Lead_Record_Page.flexipage-meta.xml

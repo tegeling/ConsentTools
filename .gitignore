@@ -81,3 +81,5 @@ force-app/main/default/objects/Contact/webLinks/SendGmail.webLink-meta.xml
 force-app/main/default/objects/Contact/webLinks/YahooMaps.webLink-meta.xml
 force-app/main/default/objects/Contact/webLinks/YahooWeather.webLink-meta.xml
 force-app/main/default/profiles/Admin.profile-meta.xml
+force-app/main/default/layouts/Contact-Contact Layout.layout-meta.xml
+force-app/main/default/flexipages/Lead_Record_Page.flexipage-meta.xml
