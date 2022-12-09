@@ -8,6 +8,8 @@ Enrich your user interface with a Lightning Web Component to easily change conse
 
 # Release Changes
 
+## Winter '23 v1.3.0
+
 - Removed Contact Point Type Consent support
 - Added support for Business Brand - Contact Point Consent records relationship to Business Brand is now supported
 
@@ -199,8 +201,8 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EDdAQAW
-   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EDdAQAW) to install the Consent Tools unlocked package in your org.
+1. Click [https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EexpQAC
+   ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q000000EexpQAC) to install the Consent Tools unlocked package in your org.
 
 1. Select **Install for All Users**
 
