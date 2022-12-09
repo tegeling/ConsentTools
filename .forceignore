@@ -75,6 +75,10 @@ force-app/main/default/networkBranding/cbAccount_Portal.networkBranding
 force-app/main/default/networkBranding/cbAccount_Portal.networkBranding-meta.xml
 force-app/main/default/networks/Account Portal.network-meta.xml
 force-app/main/default/objects/Contact/**
+force-app/main/default/objects/Lead/**
+!force-app/main/default/objects/Lead/fields/Business_Brand__c.field-meta.xml
+!force-app/main/default/objects/Lead/fields/Business_Brand_Web__c.field-meta.xml
+force-app/main/default/objects/Account/**
 force-app/main/default/objects/Individual/listViews/All_Individuals.listView-meta.xml
 force-app/main/default/pages/**
 force-app/main/default/profiles/Account Portal Profile.profile-meta.xml
