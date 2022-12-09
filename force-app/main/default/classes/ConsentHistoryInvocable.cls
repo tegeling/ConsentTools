@@ -2,8 +2,8 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-30-2022
- * @last modified by  : tegeling
+ * @last modified on  : 12-07-2022
+ * @last modified by  : tegeling@salesforce.com
  **/
 public with sharing class ConsentHistoryInvocable {
   @InvocableMethod(
@@ -18,6 +18,7 @@ public with sharing class ConsentHistoryInvocable {
       ContactPointConsent cpc = ConsentController.getContactPointConsentHistory(
         r.cpId,
         r.dupId,
+        r.bbId,
         r.timeStamp
       );
       consentHistoryList.add(cpc?.PrivacyConsentStatus);
@@ -38,6 +39,13 @@ public with sharing class ConsentHistoryInvocable {
       required=true
     )
     public String dupId;
+
+    @InvocableVariable(
+      label='Business Brand Id'
+      description='Record Id of Business Brand'
+      required=true
+    )
+    public String bbId;
 
     @InvocableVariable(
       label='Timestamp'

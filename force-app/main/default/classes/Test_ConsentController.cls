@@ -2,8 +2,8 @@
  * @description       :
  * @author            : tegeling
  * @group             :
- * @last modified on  : 03-30-2022
- * @last modified by  : tegeling
+ * @last modified on  : 12-07-2022
+ * @last modified by  : tegeling@salesforce.com
  **/
 @isTest(SeeAllData=false)
 public with sharing class Test_ConsentController {
@@ -122,6 +122,8 @@ public with sharing class Test_ConsentController {
       CanDataSubjectOptOut = true
     );
     insert dup;
+    BusinessBrand bb = new BusinessBrand(Name = 'ABC Brand');
+    insert bb;
     ContactPointConsent cpcEmail = new ContactPointConsent(
       ContactPointId = cpEmail.Id,
       DataUsePurposeId = dup.Id,
@@ -135,7 +137,8 @@ public with sharing class Test_ConsentController {
     try {
       cpcEmailResponse = ConsentController.getContactPointConsent(
         cpEmail.Id,
-        dup.Id
+        dup.Id,
+        bb.Id
       );
     } catch (Exception e) {
       system.assert(
@@ -180,13 +183,16 @@ public with sharing class Test_ConsentController {
       CanDataSubjectOptOut = true
     );
     insert dup;
+    BusinessBrand bb = new BusinessBrand(Name = 'ABC Brand');
+    insert bb;
 
     Test.startTest();
     ContactPointConsent cpcEmailResponse = null;
     try {
       cpcEmailResponse = ConsentController.getContactPointConsent(
         cpEmail.Id,
-        dup.Id
+        dup.Id,
+        bb.Id
       );
     } catch (Exception e) {
       system.assert(
@@ -231,6 +237,8 @@ public with sharing class Test_ConsentController {
       CanDataSubjectOptOut = true
     );
     insert dup;
+    BusinessBrand bb = new BusinessBrand(Name = 'ABC Brand');
+    insert bb;
     ContactPointConsent cpcEmail = new ContactPointConsent(
       ContactPointId = cpEmail.Id,
       DataUsePurposeId = dup.Id,
@@ -246,11 +254,13 @@ public with sharing class Test_ConsentController {
       cpcEmail20200801 = ConsentController.getContactPointConsentHistory(
         cpEmail.Id,
         dup.Id,
+        bb.Id,
         datetime.newInstance(2020, 8, 1)
       );
       cpcEmail20200301 = ConsentController.getContactPointConsentHistory(
         cpEmail.Id,
         dup.Id,
+        bb.Id,
         datetime.newInstance(2020, 3, 1)
       );
     } catch (Exception e) {
@@ -508,6 +518,8 @@ public with sharing class Test_ConsentController {
       CanDataSubjectOptOut = true
     );
     insert dup;
+    BusinessBrand bb = new BusinessBrand(Name = 'ABC Brand');
+    insert bb;
 
     Test.startTest();
     String cpcAddressId = null;
@@ -517,16 +529,19 @@ public with sharing class Test_ConsentController {
       cpcAddressId = ConsentController.createContactPointConsent(
         cpAddress.Id,
         dup.Id,
+        bb.Id,
         'OptIn'
       );
       cpcEmailId = ConsentController.createContactPointConsent(
         cpEmail.Id,
         dup.Id,
+        bb.Id,
         'OptIn'
       );
       cpcPhoneId = ConsentController.createContactPointConsent(
         cpPhone.Id,
         dup.Id,
+        bb.Id,
         'OptIn'
       );
     } catch (Exception e) {
@@ -601,6 +616,8 @@ public with sharing class Test_ConsentController {
       CanDataSubjectOptOut = true
     );
     insert dup;
+    BusinessBrand bb = new BusinessBrand(Name = 'ABC Brand');
+    insert bb;
     User u1 = createUser('Minimum Access - Salesforce');
     System.runAs(u1) {
       Test.startTest();
@@ -608,6 +625,7 @@ public with sharing class Test_ConsentController {
         ConsentController.createContactPointConsent(
           cpAddress.Id,
           dup.Id,
+          bb.Id,
           'OptIn'
         );
       } catch (ConsentController.ConsentException e) {
@@ -649,9 +667,16 @@ public with sharing class Test_ConsentController {
       CanDataSubjectOptOut = true
     );
     insert dup;
+    BusinessBrand bb = new BusinessBrand(Name = 'ABC Brand');
+    insert bb;
     Test.startTest();
     try {
-      ConsentController.createContactPointConsent(dup.Id, dup.Id, 'OptIn');
+      ConsentController.createContactPointConsent(
+        dup.Id,
+        dup.Id,
+        bb.Id,
+        'OptIn'
+      );
     } catch (ConsentController.ConsentException e) {
       // check results
       String errorMsg = e.getMessage();

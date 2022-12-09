@@ -6,15 +6,20 @@
 Manage consent settings in Salesforce.
 Enrich your user interface with a Lightning Web Component to easily change consent setting and opt in or opt out. Supports both internal and external access.
 
+# Release Changes
+
+- Removed Contact Point Type Consent support
+- Added support for Business Brand - Contact Point Consent records relationship to Business Brand is now supported
+
 # Package Components
 
 ## Consent Setup App
 
 This app groups all privacy objects that are relevant for the setup and configuration of consent settings like Data Use Legal Basis and Data Use Purpose.
 
-## Consent Management App
+## Consent Management App and Consent Management Console App
 
-This app groups all privacy objects that are relevant for the management of consent settings like Contacts, Individuals, Contact Point Consents.
+These apps group all privacy objects that are relevant for the management of consent settings like Contacts, Individuals, Contact Point Consents.
 
 ## Flows
 
@@ -22,7 +27,11 @@ There are several Flows that support the consent automation.
 
 ### LeadTriggerSetIndividual, ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual
 
-These flows check if Lead, Contact or PersonAccount records have an Individual record assigned. If missing, the flows create a new Individual record and all related Contact Points, Contact Point Type Consent and Contact Point Consent records for each Data Use Purpose. The Privacy Consent Status for address and phone is set to default Opt Out. Email Privacy Consent Status is set to Opt Out if HasOptedOutOfEmail is true, otherwise to Opt In.
+These flows check if Lead, Contact or PersonAccount records have an Individual record assigned. If missing, the flows create a new Individual record and all related Contact Points and Contact Point Consent records for each Data Use Purpose.
+The Privacy Consent Status for address and phone is set to default Opt Out. Email Privacy Consent Status is set to Opt Out if HasOptedOutOfEmail is true, otherwise to Opt In.
+Double Opt In process is not implemented.
+Lead object has a custom lookup field to Business Brand. LeadTriggerSetIndividual assigns Contact Point Consent records to Business Brand if available.
+ContactTriggerSetIndividual and PersonAccountTriggerSetIndividual assign for each Business Brand.
 
 ### LeadTriggerEmailOptOut, ContactTriggerEmailOptOut and PersonAccountTriggerEmailOptOut
 
