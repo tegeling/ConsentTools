@@ -5,7 +5,7 @@
         <name>Check_Address</name>
         <label>Check Address</label>
         <locationX>990</locationX>
-        <locationY>2232</locationY>
+        <locationY>2688</locationY>
         <defaultConnector>
             <targetReference>Check_Email</targetReference>
         </defaultConnector>
@@ -27,10 +27,35 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Check_Campaign</name>
+        <label>Check Campaign</label>
+        <locationX>616</locationX>
+        <locationY>1464</locationY>
+        <defaultConnector>
+            <targetReference>Check_Lead_Phone</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Campaign_exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_DOI_Campaign</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_DOI_Campaign_Member</targetReference>
+            </connector>
+            <label>Campaign exists</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Check_Email</name>
         <label>Check Email</label>
         <locationX>990</locationX>
-        <locationY>2568</locationY>
+        <locationY>3024</locationY>
         <defaultConnector>
             <targetReference>Check_Phone</targetReference>
         </defaultConnector>
@@ -128,7 +153,7 @@
         <name>Check_Lead_Mobile</name>
         <label>Check Lead Mobile</label>
         <locationX>770</locationX>
-        <locationY>1776</locationY>
+        <locationY>2232</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP</targetReference>
         </defaultConnector>
@@ -154,7 +179,7 @@
         <name>Check_Lead_Phone</name>
         <label>Check Lead Phone</label>
         <locationX>770</locationX>
-        <locationY>1440</locationY>
+        <locationY>1896</locationY>
         <defaultConnector>
             <targetReference>Check_Lead_Mobile</targetReference>
         </defaultConnector>
@@ -180,7 +205,7 @@
         <name>Check_Mobile</name>
         <label>Check Mobile</label>
         <locationX>990</locationX>
-        <locationY>3240</locationY>
+        <locationY>3696</locationY>
         <defaultConnector>
             <targetReference>For_each_DUP</targetReference>
         </defaultConnector>
@@ -205,7 +230,7 @@
         <name>Check_Phone</name>
         <label>Check Phone</label>
         <locationX>990</locationX>
-        <locationY>2904</locationY>
+        <locationY>3360</locationY>
         <defaultConnector>
             <targetReference>Check_Mobile</targetReference>
         </defaultConnector>
@@ -259,10 +284,14 @@
     >{!$Record.FirstName} + &apos; &apos; + {!$Record.LastName} + &apos; - &apos; + {!$Record.Phone} + &apos; - &apos; + {!$Record.Business_Brand__r.Name} + &apos; - &apos; + {!For_each_DUP.Name}</expression>
     </formulas>
     <formulas>
+        <name>calcDoNotCall</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT({!$Record.Mobile_Opt_In__c})</expression>
+    </formulas>
+    <formulas>
         <name>calcEmailConsentStatus</name>
         <dataType>String</dataType>
-        <expression
-    >if ({!$Record.HasOptedOutOfEmail}, &apos;OptOut&apos;, &apos;OptIn&apos;)</expression>
+        <expression>&apos;Seen&apos;</expression>
     </formulas>
     <formulas>
         <name>calcPhoneConsentStatus</name>
@@ -277,7 +306,7 @@
         <name>For_each_DUP</name>
         <label>For each DUP</label>
         <locationX>770</locationX>
-        <locationY>2112</locationY>
+        <locationY>2568</locationY>
         <collectionReference>Get_Data_Use_Purpose</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -304,12 +333,41 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
-        <name>Create_Contact_Point_Email</name>
-        <label>Create Contact Point Email</label>
-        <locationX>638</locationX>
-        <locationY>1224</locationY>
+        <name>Add_DOI_Campaign_Member</name>
+        <label>Add DOI Campaign Member</label>
+        <locationX>484</locationX>
+        <locationY>1584</locationY>
         <connector>
             <targetReference>Check_Lead_Phone</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>CampaignId</field>
+            <value>
+                <elementReference>Get_DOI_Campaign.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LeadId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Added</stringValue>
+            </value>
+        </inputAssignments>
+        <object>CampaignMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Contact_Point_Email</name>
+        <label>Create Contact Point Email</label>
+        <locationX>616</locationX>
+        <locationY>1224</locationY>
+        <connector>
+            <targetReference>Get_DOI_Campaign</targetReference>
         </connector>
         <inputAssignments>
             <field>EmailAddress</field>
@@ -336,7 +394,7 @@
         <name>Create_Contact_Point_Home_Phone</name>
         <label>Create Contact Point Home Phone</label>
         <locationX>638</locationX>
-        <locationY>1560</locationY>
+        <locationY>2016</locationY>
         <connector>
             <targetReference>Check_Lead_Mobile</targetReference>
         </connector>
@@ -430,7 +488,7 @@
         <name>Create_Contact_Point_Mobile_Phone</name>
         <label>Create Contact Point Mobile Phone</label>
         <locationX>638</locationX>
-        <locationY>1896</locationY>
+        <locationY>2352</locationY>
         <connector>
             <targetReference>For_each_DUP</targetReference>
         </connector>
@@ -465,7 +523,7 @@
         <name>Create_CPC_Address</name>
         <label>Create CPC Address</label>
         <locationX>858</locationX>
-        <locationY>2352</locationY>
+        <locationY>2808</locationY>
         <connector>
             <targetReference>Check_Email</targetReference>
         </connector>
@@ -519,7 +577,7 @@
         <name>Create_CPC_Email</name>
         <label>Create CPC Email</label>
         <locationX>858</locationX>
-        <locationY>2688</locationY>
+        <locationY>3144</locationY>
         <connector>
             <targetReference>Check_Phone</targetReference>
         </connector>
@@ -572,7 +630,7 @@
         <name>Create_CPC_Mobile</name>
         <label>Create CPC Mobile</label>
         <locationX>858</locationX>
-        <locationY>3360</locationY>
+        <locationY>3816</locationY>
         <connector>
             <targetReference>For_each_DUP</targetReference>
         </connector>
@@ -626,7 +684,7 @@
         <name>Create_CPC_Phone</name>
         <label>Create CPC Phone</label>
         <locationX>858</locationX>
-        <locationY>3024</locationY>
+        <locationY>3480</locationY>
         <connector>
             <targetReference>Check_Mobile</targetReference>
         </connector>
@@ -727,6 +785,37 @@
         <object>DataUsePurpose</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_DOI_Campaign</name>
+        <label>Get DOI Campaign</label>
+        <locationX>616</locationX>
+        <locationY>1344</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Campaign</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>New Lead Registration</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Campaign</object>
+        <sortField>StartDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>Update_Lead</name>
         <label>Update Lead</label>
@@ -735,6 +824,18 @@
         <connector>
             <targetReference>Get_Data_Use_Purpose</targetReference>
         </connector>
+        <inputAssignments>
+            <field>DoNotCall</field>
+            <value>
+                <elementReference>calcDoNotCall</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>HasOptedOutOfEmail</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
         <inputAssignments>
             <field>IndividualId</field>
             <value>
@@ -757,4 +858,5 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <triggerOrder>300</triggerOrder>
 </Flow>

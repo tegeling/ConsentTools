@@ -8,6 +8,10 @@ Enrich your user interface with a Lightning Web Component to easily change conse
 
 # Release Changes
 
+## Winter '23 v1.3.1
+
+- Add Double Opt In (DOI) utility flow CampaignMemberTriggerAfterOptIn
+
 ## Winter '23 v1.3.0
 
 - Removed Contact Point Type Consent support
@@ -61,6 +65,8 @@ New contact point consent record are created for all data use purposes for all b
 These screen flows can be used to check the privacy status of a specific Contact Point Consent record for a given timestamp. It calculates the previous values out of field history tracking.
 They all invoke the same ContactPointConsentHistorySub flow.
 
+### CampaignMemberTriggerAfterOptIn
+
 ## Lightning Web Components
 
 This package contains various LWC to support consent management.
@@ -71,11 +77,19 @@ This LWC can be placed on Lead or Contact records pages or on community pages. I
 Data Use Purpose records are filtered by `CanDataSubjectOptOut = TRUE`.
 A datetime picker can be used to get consent settings from previous datetime. It uses Salesforce field history tracking of `ContactPointConsentHistory`.
 
-![Contact Record Page](./images/ConsentTools.png)
+<img src="https://raw.githubusercontent.com/tegeling/ConsentTools/main/images/ConsentTools.png" height="200">
 
 The properties contain the record id of either User (community use case, like `{!CurrentUser.id}`) or Contact/Lead records and color codes for the background colors per contact point type.
 
-![Consent Settings Properties](./images/ConsentSettingsProperties.png)
+<img src="https://github.com/tegeling/ConsentTools/raw/main/images/ConsentSettingsProperties.png" height="400">
+
+# Double Opt In
+
+Some privacy regulations like GDPR require email opt in status verified by second verification step, called double opt in process (DOI).
+This package uses a Salesforce campaign record to execute the DOI process.
+New Lead records are added as Campaign Members with status `Added`. The actual DOI email verification is not in the scope of this package. When using Salesforce Marketing Cloud, campaign member records can be synchronized with a data extension and new members will trigger DOI email.
+When the recipient confirms this email, the Campaign Member status is updated to `Responded`.
+This status change triggers flow `CampaignMemberTriggerAfterOptIn` to update Contact Point Consent records from status `Seen` to status `Opt In`.
 
 # Permissions and Record Sharing
 
